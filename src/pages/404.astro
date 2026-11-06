@@ -3,15 +3,19 @@ import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
 ---
 <Base
-  title="Page Not Found | Parley"
-  description="The requested page could not be found on the Parley AI agent Astro template site."
+  title="404 页面未找到 | missavaiVPN 评测实验室"
+  description="抱歉，您访问的页面不存在或已被移除。您可以返回 missavaiVPN 首页或查看 42 家机场评测库。"
   path="/404"
   cta={false}
+  noindex={true}
 >
   <section class="nf">
     <img class="nf__mosaic" src="/assets/404-mosaic.webp" alt="" loading="lazy" />
     <p class="nf__code" aria-hidden="true">404</p>
-    <h1 class="nf__title">Oops! The page you’re looking for can’t be found.</h1>
-    <Button href="/" label="Go to Home page" variant="primary" />
+    <h1 class="nf__title">抱歉！您访问的页面不存在或已被移除。</h1>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+      <Button href="/" label="返回首页" variant="primary" />
+      <Button href="/airports" label="查看 42 家机场评测库" variant="secondary" />
+    </div>
   </section>
 </Base>

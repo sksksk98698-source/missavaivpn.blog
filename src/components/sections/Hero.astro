@@ -1,23 +1,22 @@
 ---
 import Button from '../Button.astro';
-// Narrower copies of the hero painting for small screens (hero-800.webp ...). The image is stretched to a tall
-// box below 1200px, so every copy keeps the full 1200px height and only the width is reduced.
 const heroSet = '/assets/hero-800.webp 800w, /assets/hero-1100.webp 1100w, /assets/hero-1600.webp 1600w, /assets/hero.webp 2326w';
 ---
 <section class="hero" id="hero">
   <div class="hero__panel" id="hero-media">
-    <img class="hero__img" src="/assets/hero.webp" srcset={heroSet} sizes="(max-width: 1200px) 148vw, 123vw" alt="" width="2326" height="1200" fetchpriority="high" />
+    <img class="hero__img" src="/assets/hero.webp" srcset={heroSet} sizes="(max-width: 1200px) 148vw, 123vw" alt="MissAvAi VPN 评测实验室" width="2326" height="1200" fetchpriority="high" />
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <h1 class="hero__headline">
-        The AI agent that works <em>with you</em>,&nbsp;not just for you
+        全球 42 家机场评测 <em>真机晚高峰压测</em>&nbsp;选型与雷达指南
       </h1>
       <p class="hero__lede">
-        Parley thinks, plans, and acts alongside you &#8212; handling emails,
-        scheduling, research, and complex workflows so you can focus on
-        the work only you can do.
+        missavaiVPN 评测实验室基于千兆家用宽带晚高峰真机压测，收录全网 42 家主流机场。深度解析 IEPL 专线、ChatGPT / 4K 流媒体解锁实测与专属特惠码。
       </p>
-      <Button href="#pricing" label="Get started free" variant="primary" />
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <Button href="/airports" label="探索 42 家机场评测库" variant="primary" />
+        <Button href="/airports/guangsu" label="★ 查看光速云深度实测 (主推)" variant="secondary" />
+      </div>
     </div>
   </div>
 </section>

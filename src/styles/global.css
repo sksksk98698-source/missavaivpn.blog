@@ -2,12 +2,11 @@
 @import './typography.css';
 @import './nav.css';
 @import './pages.css';
+@import './airports.css';
 
 /* ============================================================
-   PARLEY — single home page
-   Merged from parley-hero, parley-cards-v2, parley-testimonials,
-   parley-pricing + new sections (how-it-works, faq, integrations,
-   cta, footer) matching parley.framer.ai structure.
+   MISSAVAI VPN
+   Core styling and layout structure for MissAvAi VPN.
    ============================================================ */
 
 
@@ -493,7 +492,7 @@ img {
   }
 }
 
-/* ============ WHY PARLEY (expanding cards) ============ */
+/* ============ WHY MISSAVAI (expanding cards) ============ */
 
 .why {
   width: 100%;

@@ -1,5 +1,21 @@
+# https://missavaivpn.blog/robots.txt
+# Standard Robots Policy for missavaiVPN Benchmark Lab
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://parley.startfrom.co/sitemap.xml
+# Explicit search engine crawler allowances
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: yisouspider
+Allow: /
+
+Sitemap: https://missavaivpn.blog/sitemap.xml

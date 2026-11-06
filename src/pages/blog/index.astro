@@ -1,15 +1,35 @@
 ---
 import Base from '../../layouts/Base.astro';
 import BlogIndex from '../../components/sections/BlogIndex.astro';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://missavaivpn.blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "科学上网与网络技术专栏",
+      "item": "https://missavaivpn.blog/blog"
+    }
+  ]
+};
 ---
 <Base
-  title="AI Agent Blog Template | Parley Astro Template"
-  description="Explore the CMS-powered blog included with the Parley AI agent Astro template, built for product updates, use cases, engineering posts, and agent design articles."
+  title="科学上网与网络技术专栏 | missavaiVPN 评测实验室"
+  description="探索 2026 翻墙机场选型指南、IEPL 专线深度解析、ChatGPT 与 4K 原生住宅 IP 解锁，以及全平台代理客户端保姆级配置教程。"
   path="/blog"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <header class="blog__header">
-    <p class="badge">Blog</p>
-    <h1 class="phero__title">The Parley Blog</h1>
+    <p class="badge">missavaiVPN 技术专栏</p>
+    <h1 class="phero__title">机场选型、网络专线与出海实战</h1>
   </header>
   <BlogIndex />
 </Base>

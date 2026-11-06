@@ -1,46 +1,43 @@
 ---
 import Button from '../Button.astro';
 
-/** "Lead enrichment, before and after" — two stacked stat tables, the left
- *  one on the warm surface, the right one bare. */
 const rows = [
-  { label: 'Time per Lead', parley: '~40 sec', manual: '~18 min' },
-  { label: 'Tools touched', parley: '1 trigger', manual: '14' },
-  { label: 'Audit trail', parley: 'Full', manual: 'None' },
-  { label: 'Scales to nights & weekends', parley: 'Yes', manual: 'No' },
+  { label: '晚高峰丢包率 (20:30-22:30)', missavai: '< 0.1% (极度顺畅)', legacy: '> 15% ~ 30% (频繁丢包卡顿)' },
+  { label: '骨干链路架构', missavai: 'IEPL / IPLC 物理光纤专线', legacy: '廉价公网中转 / 普通直连' },
+  { label: 'ChatGPT / Claude 解锁', missavai: '原生住宅 IP，全绿无弹码', legacy: '机房脏 IP，频繁 403 拦截' },
+  { label: '特殊敏感期抗封锁', missavai: '99.9% 稳定不过 GFW', legacy: '节点大面积断流、失联' },
 ];
 ---
 <section class="fcomp">
   <header class="fcomp__header">
     <div class="fcomp__heading">
-      <p class="badge">Featured Workflow</p>
-      <h2 class="h2">Lead enrichment,<br /><em>before and after.</em></h2>
+      <p class="badge">链路架构横评</p>
+      <h2 class="h2">IEPL 企业专线 VS 普通直连，<br /><em>晚高峰性能差异一目了然。</em></h2>
     </div>
     <div class="fcomp__side">
       <p class="fcomp__lede">
-        The same job, run by a human or run by Parley. Same output, very
-        different math
+        相同的目标网站，截然不同的网络体验。物理专线与廉价公网在晚高峰黄金时段的差距不仅是速度，更是生产力的高效保障。
       </p>
-      <Button href="/workflow-1" label="Open this workflow" variant="primary" />
+      <Button href="/workflow-1" label="查看跨境专线方案" variant="primary" />
     </div>
   </header>
 
   <div class="fcomp__cols">
-    <div class="fcol fcol--parley">
-      <h5 class="fcol__title">With Parley</h5>
-      <p class="fcol__sub">One workflow, one trigger</p>
+    <div class="fcol fcol--missavai">
+      <h5 class="fcol__title">IEPL 物理专线 (光速云)</h5>
+      <p class="fcol__sub">内网二层物理专线传输</p>
       <dl class="fcol__rows">
         {rows.map((r) => (
-          <div class="fcol__row"><dt>{r.label}</dt><dd><h5>{r.parley}</h5></dd></div>
+          <div class="fcol__row"><dt>{r.label}</dt><dd><h5>{r.missavai}</h5></dd></div>
         ))}
       </dl>
     </div>
     <div class="fcol fcol--manual">
-      <h5 class="fcol__title">Manual</h5>
-      <p class="fcol__sub">One specialist + 14 browser tabs</p>
+      <h5 class="fcol__title">传统廉价直连 / 公网梯子</h5>
+      <p class="fcol__sub">公网跳板与拥挤骨干网</p>
       <dl class="fcol__rows">
         {rows.map((r) => (
-          <div class="fcol__row"><dt>{r.label}</dt><dd><h5>{r.manual}</h5></dd></div>
+          <div class="fcol__row"><dt>{r.label}</dt><dd><h5>{r.legacy}</h5></dd></div>
         ))}
       </dl>
     </div>

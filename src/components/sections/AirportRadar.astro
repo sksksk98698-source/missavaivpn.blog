@@ -1,0 +1,198 @@
+---
+import airportsData from '../../content/airports.json';
+
+const topAirports = airportsData.slice(0, 6);
+const guangsu = airportsData.find((a) => a.id === 'guangsu') || airportsData[0];
+---
+
+<section class="ap-radar" style="padding: 40px 0 60px;">
+  <header style="text-align: center; max-width: 800px; margin: 0 auto 36px;">
+    <p class="badge">2026 年度真机评测榜单</p>
+    <h2 class="h2" style="margin: 12px 0 10px;">
+      TOP 机场实测雷达 <em>与晚高峰性能榜</em>
+    </h2>
+    <p style="font-size: var(--m-size); color: var(--grey-800); line-height: 1.6; margin: 0;">
+      拒绝盲盒！基于 1000M 宽带晚高峰真机压测，甄别真正具备企业级物理专线与纯净原生 IP 的优质服务商。
+    </p>
+  </header>
+
+  <!-- Spotlight Banner for Guangsu Cloud -->
+  {guangsu && (
+    <div class="ap-spotlight" style="margin-bottom: 36px;">
+      <div class="ap-spotlight__main">
+        <span class="ap-spotlight__badge">★ 2026 综合推荐榜首 #1</span>
+        <h3 class="ap-spotlight__title">{guangsu.name} (Guangsu Cloud)</h3>
+        <p class="ap-spotlight__lede">
+          全线采用 2.5Gbps IEPL/IPLC 企业级物理专线，晚高峰实机丢包率控制在 0.1% 以内。独家提供年付折合约 8 元/月轻量包，以及致敬斯诺克 147 永久不限时 247GB 备用套餐。
+        </p>
+        <div class="ap-spotlight__features">
+          <span class="ap-tag ap-tag--highlight">2.5Gbps 物理专线</span>
+          <span class="ap-tag ap-tag--highlight">晚高峰 0 丢包</span>
+          <span class="ap-tag ap-tag--highlight">ChatGPT / Claude 原生解锁</span>
+          <span class="ap-tag">自研客户端 + 通用订阅</span>
+          <span class="ap-tag">致敬斯诺克 147 永久版</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <a href="/airports/guangsu" class="ap-btn-sub" style="flex: none; padding: 10px 20px;">
+            查看光速云 17 张实机测速报告 →
+          </a>
+        </div>
+      </div>
+
+      <div class="ap-spotlight__aside">
+        <p class="ap-spotlight__price">¥8 <span style="font-size: 15px; font-weight: normal; color: var(--grey-600);">/ 月起</span></p>
+        <p class="ap-spotlight__sub">年付 ¥99 起 · 永久套餐 ¥147</p>
+
+        <div class="ap-coupon-box">
+          <span style="font-size: 12px; color: var(--grey-600);">专属优惠码</span>
+          <span class="ap-coupon-code">AMM</span>
+          <button class="ap-copy-btn" data-code="AMM">复制</button>
+        </div>
+
+        <a
+          href={guangsu.affUrl}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          class="ap-btn-aff"
+          style="display: block; width: 100%; box-sizing: border-box; padding: 12px 0; font-size: 15px;"
+        >
+          立即直达光速云官网开通
+        </a>
+      </div>
+    </div>
+  )}
+
+  <!-- Top 6 Grid -->
+  <div class="ap-grid" style="margin-bottom: 32px;">
+    {topAirports.map((ap) => {
+      const isStar = ap.rank === 1;
+      const isTop10 = ap.rank <= 10;
+      return (
+        <article class={`ap-card ${isStar ? 'ap-card--featured' : ''}`}>
+          <div class="ap-card__top">
+            <span class={`ap-card__rank ${isStar ? 'ap-card__rank--star' : isTop10 ? 'ap-card__rank--top10' : ''}`}>
+              {isStar ? '★ TOP 1' : `#${ap.rank}`}
+            </span>
+            <span class={`ap-card__status ap-card__status--${ap.dataStatus}`}>
+              {ap.dataStatus === 'measured' ? '实机压测' : '官方规格'}
+            </span>
+          </div>
+
+          <h3 class="ap-card__title">
+            <a href={`/airports/${ap.slug}`}>{ap.name}</a>
+          </h3>
+
+          <p class="ap-card__summary">{ap.summary}</p>
+
+          <div class="ap-card__specs">
+            <div class="ap-card__spec-item">
+              <span class="ap-card__spec-label">线路架构</span>
+              <span class="ap-card__spec-value">{ap.lineType}</span>
+            </div>
+            <div class="ap-card__spec-item">
+              <span class="ap-card__spec-label">峰值带宽</span>
+              <span class="ap-card__spec-value">{ap.bandwidth}</span>
+            </div>
+          </div>
+
+          <div class="ap-card__unlocks">
+            {ap.streamingUnlock?.youtube4k && <span class="ap-unlock-badge">YouTube 4K</span>}
+            {ap.streamingUnlock?.chatgpt && <span class="ap-unlock-badge">ChatGPT</span>}
+            {ap.streamingUnlock?.claude && <span class="ap-unlock-badge">Claude</span>}
+            {ap.hasSpeedtest && <span class="ap-unlock-badge" style="background: rgba(244,141,22,0.12); color: rgb(180,80,0);">有测速图</span>}
+          </div>
+
+          {ap.couponCode && (
+            <div class="ap-coupon-box" style="margin-bottom: 12px; padding: 4px 10px;">
+              <span style="font-size: 11px; color: var(--grey-600);">优惠码:</span>
+              <span class="ap-coupon-code" style="font-size: 13px;">{ap.couponCode}</span>
+              <button class="ap-copy-btn" data-code={ap.couponCode} style="padding: 2px 6px; font-size: 11px;">复制</button>
+            </div>
+          )}
+
+          <div class="ap-card__pricing">
+            <span style="font-size: 12px; color: var(--grey-600);">参考价</span>
+            <span class="ap-card__price">{ap.startingPrice}</span>
+          </div>
+
+          <div class="ap-card__actions">
+            <a href={`/airports/${ap.slug}`} class="ap-btn-sub">
+              实测报告
+            </a>
+            <a
+              href={ap.affUrl}
+              target="_blank"
+              rel="nofollow sponsored noopener"
+              class="ap-btn-aff"
+            >
+              官网开通
+            </a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <!-- Benchmarks Showcase Strip -->
+  <div style="background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 32px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 16px;">
+      <div>
+        <h3 style="font-size: 20px; font-weight: 600; margin: 0 0 4px; color: var(--grey-900);">
+          真机压测拓扑图展台
+        </h3>
+        <p style="font-size: 13px; color: var(--grey-600); margin: 0;">
+          千兆宽带晚高峰跑满实录，直击节点下载速度、抖动与流媒体解锁细节
+        </p>
+      </div>
+      <a href="/airports" style="font-size: 13px; color: var(--brand-500); font-weight: 600; text-decoration: none;">
+        查看全部 42 家测速数据 →
+      </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+      <div style="border: 1px solid var(--grey-200); border-radius: var(--radius-md); overflow: hidden;">
+        <img src="/assets/tests/光速云-节点测速实测.png" alt="光速云晚高峰节点测速压测实测" loading="lazy" style="width: 100%; height: auto; display: block;" />
+        <div style="padding: 8px 12px; background: var(--footer); font-size: 12px; color: var(--grey-800);">
+          光速云：2.5Gbps IEPL 专线全节点千兆跑满压测
+        </div>
+      </div>
+      <div style="border: 1px solid var(--grey-200); border-radius: var(--radius-md); overflow: hidden;">
+        <img src="/assets/tests/photo_2026-08-19_12-13-01.jpg" alt="节点流媒体与ChatGPT解锁全绿实测" loading="lazy" style="width: 100%; height: auto; display: block;" />
+        <div style="padding: 8px 12px; background: var(--footer); font-size: 12px; color: var(--grey-800);">
+          解锁验证：OpenAI、Claude 3.5、Netflix 原生住宅 IP 全绿
+        </div>
+      </div>
+      <div style="border: 1px solid var(--grey-200); border-radius: var(--radius-md); overflow: hidden;">
+        <img src="/assets/tests/暮光加速-节点测速实测.png" alt="暮光加速节点测速实测" loading="lazy" style="width: 100%; height: auto; display: block;" />
+        <div style="padding: 8px 12px; background: var(--footer); font-size: 12px; color: var(--grey-800);">
+          暮光加速：IEPL 专线低延迟节点晚高峰实测
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Link to Full 42 Hub -->
+  <div style="text-align: center;">
+    <a href="/airports" class="ap-btn-aff" style="display: inline-block; padding: 14px 36px; font-size: 16px;">
+      进入 42 家机场完整测评库 &amp; 实时搜索筛选 →
+    </a>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.ap-copy-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const code = (btn as HTMLElement).getAttribute('data-code');
+      if (code) {
+        navigator.clipboard.writeText(code).then(() => {
+          const original = btn.textContent;
+          btn.textContent = '已复制!';
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 2000);
+        });
+      }
+    });
+  });
+</script>

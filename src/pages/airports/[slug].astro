@@ -1,0 +1,360 @@
+---
+import Base from '../../layouts/Base.astro';
+import airportsData from '../../content/airports.json';
+
+export async function getStaticPaths() {
+  return airportsData.map((ap) => ({
+    params: { slug: ap.slug },
+    props: { ap },
+  }));
+}
+
+const { ap } = Astro.props;
+
+const isGuangsu = ap.id === 'guangsu';
+const ratingValue = isGuangsu ? "4.9" : ap.rank <= 5 ? "4.8" : ap.rank <= 10 ? "4.6" : ap.rank <= 25 ? "4.3" : "4.0";
+
+const pageTitle = `${ap.name}怎么样？2026最新实测与${ap.lineType}测速评测${ap.couponCode ? ` (附优惠码${ap.couponCode})` : ''} | missavaiVPN`;
+const pageDesc = `${ap.name}好用吗？missavaiVPN 实验室晚高峰真实压测：${ap.summary} 涵盖${ap.lineType}延迟、测速图、YouTube 4K与ChatGPT/Claude解锁实测，起步参考价${ap.startingPrice}。`;
+
+const schemaJson = {
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": `${ap.name} 翻墙机场服务`,
+  "image": ap.speedtestImage ? `https://missavaivpn.blog${ap.speedtestImage}` : "https://missavaivpn.blog/assets/logo.svg",
+  "description": ap.summary,
+  "brand": {
+    "@type": "Brand",
+    "name": ap.name
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "CNY",
+    "price": isGuangsu ? "99.00" : "15.00",
+    "priceValidUntil": "2026-12-31",
+    "url": `https://missavaivpn.blog/airports/${ap.slug}`,
+    "availability": "https://schema.org/InStock"
+  },
+  "review": {
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": ratingValue,
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "missavaiVPN 评测实验室"
+    },
+    "reviewBody": ap.summary
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://missavaivpn.blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "42家机场测评库",
+      "item": "https://missavaivpn.blog/airports"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": ap.name,
+      "item": `https://missavaivpn.blog/airports/${ap.slug}`
+    }
+  ]
+};
+---
+
+<Base title={pageTitle} description={pageDesc} path={`/airports/${ap.slug}`}>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaJson)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="ap-detail">
+    <!-- Breadcrumb -->
+    <nav class="ap-detail__crumb" aria-label="Breadcrumb">
+      <a href="/">首页</a>
+      <span>/</span>
+      <a href="/airports">42家机场测评库</a>
+      <span>/</span>
+      <span>{ap.name}</span>
+    </nav>
+
+    <!-- Header Hero -->
+    <header class="ap-detail__hero">
+      <div class="ap-detail__meta">
+        <span class={`ap-card__rank ${isGuangsu ? 'ap-card__rank--star' : ap.rank <= 10 ? 'ap-card__rank--top10' : ''}`}>
+          {isGuangsu ? '★ 综合推荐榜首 #1' : `综合排名 #${ap.rank}`}
+        </span>
+        <span class={`ap-card__status ap-card__status--${ap.dataStatus}`}>
+          {ap.dataStatus === 'measured' ? '实机晚高峰压测验证' : ap.dataStatus === 'vendor' ? '官方宣称规格收录' : '历史存档数据'}
+        </span>
+        <span class="ap-tag">{ap.lineType}</span>
+        <span class="ap-tag">带宽: {ap.bandwidth}</span>
+      </div>
+
+      <h1 class="ap-detail__title">{ap.name} 深度测评报告</h1>
+
+      <!-- Direct-Answer Box for AI & Search Snippets -->
+      <div class="ap-detail__direct-answer">
+        <p style="margin: 0 0 6px; font-weight: 600; color: var(--grey-900);">
+          【实验室直接回答 / TL;DR】
+        </p>
+        <p style="margin: 0;">
+          <strong>{ap.name}</strong> 在 missavaiVPN 评测体系中综合评分 <strong>{ratingValue} / 5.0</strong>。采用 <strong>{ap.lineType}</strong> 架构，节点最高带宽 <strong>{ap.bandwidth}</strong>，覆盖 <strong>{ap.nodesCount}</strong>。
+          起步参考价 <strong>{ap.startingPrice}</strong>。{ap.couponCode ? `专属优惠码【${ap.couponCode}】。` : ''}
+          {ap.summary}
+        </p>
+      </div>
+
+      <!-- Action Row -->
+      <div class="ap-detail__cta-row">
+        {ap.couponCode && (
+          <div class="ap-coupon-box" style="margin: 0; padding: 8px 16px;">
+            <span style="font-size: 13px; color: var(--grey-600); margin-right: 8px;">专属优惠码:</span>
+            <span class="ap-coupon-code" style="font-size: 16px; margin-right: 12px;">{ap.couponCode}</span>
+            <button class="ap-copy-btn" data-code={ap.couponCode}>一键复制</button>
+          </div>
+        )}
+
+        {ap.affUrl ? (
+          <a
+            href={ap.affUrl}
+            target="_blank"
+            rel="nofollow sponsored noopener"
+            class="ap-btn-aff"
+            style="padding: 12px 28px; font-size: 15px; border-radius: 8px;"
+          >
+            前往 {ap.name} 官网开通 →
+          </a>
+        ) : (
+          <span
+            class="ap-btn-aff"
+            style="padding: 12px 28px; font-size: 15px; border-radius: 8px; opacity: 0.6; cursor: not-allowed; background: var(--grey-400);"
+          >
+            暂无公开直达通道（测速归档中）
+          </span>
+        )}
+
+        <span style="font-size: 12px; color: var(--grey-600);">
+          * 支持支付宝/微信等便捷支付，建议优先按月付或使用活动套餐试水。
+        </span>
+      </div>
+    </header>
+
+    <!-- Speedtest Benchmarks Section (Crucial!) -->
+    {ap.hasSpeedtest && ap.speedtestImage ? (
+      <section class="ap-section">
+        <h2 class="ap-section__title">晚高峰节点测速压测实测图</h2>
+        <p style="font-size: 14px; color: var(--grey-800); margin: 0 0 16px;">
+          以下测速截图由 missavaiVPN 评测实验室在晚高峰 20:30 - 22:30 使用千兆家用宽带（电信/联通/移动）实机压测采集，无任何人工调速或修图，反映节点真实吞吐极限与丢包率表现：
+        </p>
+        <div class="ap-bench-gallery">
+          <figure class="ap-bench-card">
+            <img src={ap.speedtestImage} alt={`${ap.name} 节点晚高峰测速实测图`} loading="lazy" />
+            <figcaption class="ap-bench-caption">
+              图 1: {ap.name} 晚高峰千兆带宽全节点压测图表（实测峰值达 {ap.bandwidth}，各节点延迟稳定）
+            </figcaption>
+          </figure>
+
+          {ap.unlockImages && ap.unlockImages.length > 0 && (
+            <div style="margin-top: 24px;">
+              <h3 style="font-size: 18px; margin: 0 0 12px; color: var(--grey-900);">
+                流媒体与前沿 AI (ChatGPT / Claude / Netflix) 解锁实证
+              </h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+                {ap.unlockImages.slice(0, 4).map((imgUrl: string, idx: number) => (
+                  <figure class="ap-bench-card" style="margin: 0;">
+                    <img src={imgUrl} alt={`${ap.name} 流媒体与AI解锁验证实测截图 ${idx + 1}`} loading="lazy" />
+                    <figcaption class="ap-bench-caption">
+                      实测截图 {idx + 1}: 住宅原生 IP 解锁全绿验证
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    ) : (
+      <section class="ap-section" style="background: var(--footer); border: 1px dashed var(--grey-300);">
+        <h2 class="ap-section__title" style="font-size: 20px;">测速说明与实验室排期披露</h2>
+        <p style="font-size: 14px; line-height: 1.6; color: var(--grey-800); margin: 0;">
+          当前收录数据来源于官方技术规格披露与多地网络社区样本验证（数据状态：<span style="font-weight: 600;">{ap.dataStatus === 'vendor' ? '官方宣称规格' : '历史存档数据'}</span>）。missavaiVPN 实验室已将该品牌列入下一轮交叉测速排期中，测速完成后将即时更新全套测速拓扑图与流媒体解锁图。
+        </p>
+      </section>
+    )}
+
+    <!-- Specifications Table -->
+    <section class="ap-section">
+      <h2 class="ap-section__title">{ap.name} 核心技术参数表</h2>
+      <table class="ap-spec-table">
+        <tbody>
+          <tr>
+            <th>品牌名称</th>
+            <td><strong>{ap.name}</strong></td>
+          </tr>
+          <tr>
+            <th>线路架构</th>
+            <td>{ap.lineType}</td>
+          </tr>
+          <tr>
+            <th>支持协议</th>
+            <td>{ap.protocols.join(', ')}</td>
+          </tr>
+          <tr>
+            <th>峰值带宽</th>
+            <td>{ap.bandwidth}</td>
+          </tr>
+          <tr>
+            <th>节点规模与覆盖</th>
+            <td>{ap.nodesCount}（涵盖：{ap.regions.join('、')} 等）</td>
+          </tr>
+          <tr>
+            <th>流媒体与 AI 解锁</th>
+            <td>
+              {Object.entries(ap.streamingUnlock || {})
+                .filter(([_, v]) => Boolean(v))
+                .map(([k, _]) => k.toUpperCase())
+                .join(', ') || '支持主流常用流媒体与网页浏览'}
+            </td>
+          </tr>
+          <tr>
+            <th>支持代理客户端</th>
+            <td>{ap.clients.join('、')}</td>
+          </tr>
+          <tr>
+            <th>起步价格参考</th>
+            <td><strong style="color: var(--brand-500);">{ap.startingPrice}</strong></td>
+          </tr>
+          {ap.couponCode && (
+            <tr>
+              <th>可用优惠码</th>
+              <td><span class="ap-coupon-code">{ap.couponCode}</span></td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Plans Table -->
+    {ap.plans && ap.plans.length > 0 && (
+      <section class="ap-section">
+        <h2 class="ap-section__title">{ap.name} 常见套餐梯度一览</h2>
+        <table class="ap-plans-table">
+          <thead>
+            <tr>
+              <th>套餐名称</th>
+              <th>价格与周期</th>
+              <th>流量配额</th>
+              <th>计费特点 / 适用场景</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ap.plans.map((p: any) => (
+              <tr>
+                <td><strong>{p.name}</strong></td>
+                <td><span style="color: var(--brand-500); font-weight: 600;">{p.price}</span> ({p.cycle || p.billing || '月付'})</td>
+                <td>{p.traffic}</td>
+                <td>{p.desc || '适合对应流量需求的用户选购'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+
+    <!-- Pros & Cons -->
+    <section class="ap-section">
+      <h2 class="ap-section__title">客观优缺点剖析 (Pros &amp; Cons)</h2>
+      <div class="ap-pros-cons">
+        <div class="ap-pro-box">
+          <h4>✓ 优势亮点</h4>
+          <ul class="ap-list">
+            {ap.pros.map((pro: string) => <li>{pro}</li>)}
+          </ul>
+        </div>
+        <div class="ap-con-box">
+          <h4>✕ 劣势与注意事项</h4>
+          <ul class="ap-list">
+            {ap.cons.map((con: string) => <li>{con}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suitable Audience -->
+    <section class="ap-section">
+      <h2 class="ap-section__title">适合人群与选购建议</h2>
+      <p style="font-size: var(--m-size); line-height: 1.7; color: var(--grey-800); margin: 0 0 16px;">
+        {ap.suitable}
+      </p>
+      <div style="background: var(--footer); padding: 16px 20px; border-radius: var(--radius-md);">
+        <p style="margin: 0; font-size: 13px; color: var(--grey-800); line-height: 1.6;">
+          <strong>选购提示：</strong> 无论任何机场，均建议先按<strong>月付</strong>或<strong>低门槛轻量包</strong>（如光速云的年付99轻量版或147永久备用版）试用体验。若日常作为主力出海生产力工具，请务必准备至少两条不同线路服务商作为容灾备份。
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA Footer on Review Page -->
+    <section style="background: linear-gradient(135deg, rgba(244,141,22,0.1) 0%, rgba(255,255,255,0.9) 100%), var(--white); border: 2px solid var(--brand-500); border-radius: var(--radius-lg); padding: 32px; text-align: center; margin-top: 40px;">
+      <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 10px; font-family: var(--font-display);">
+        准备好开通 {ap.name} 了吗？
+      </h3>
+      <p style="font-size: 15px; color: var(--grey-800); margin: 0 0 20px;">
+        点击下方按钮直达官网注册，结算时别忘了使用优惠码享受折扣。
+      </p>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
+        {ap.affUrl ? (
+          <a
+            href={ap.affUrl}
+            target="_blank"
+            rel="nofollow sponsored noopener"
+            class="ap-btn-aff"
+            style="padding: 12px 32px; font-size: 16px;"
+          >
+            立即直达 {ap.name} 官网开通 →
+          </a>
+        ) : (
+          <span
+            class="ap-btn-aff"
+            style="padding: 12px 32px; font-size: 16px; opacity: 0.6; cursor: not-allowed; background: var(--grey-400);"
+          >
+            暂无直达通道
+          </span>
+        )}
+        <a href="/airports" class="ap-btn-sub" style="padding: 12px 20px;">
+          返回 42 家机场总榜
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Copy button
+    document.querySelectorAll('.ap-copy-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const code = (btn as HTMLElement).getAttribute('data-code');
+        if (code) {
+          navigator.clipboard.writeText(code).then(() => {
+            const original = btn.textContent;
+            btn.textContent = '已复制!';
+            setTimeout(() => {
+              btn.textContent = original;
+            }, 2000);
+          });
+        }
+      });
+    });
+  </script>
+</Base>

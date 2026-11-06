@@ -142,14 +142,14 @@
 
 .fcomp__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .fcol { padding: 40px; border-radius: var(--radius-md); }
-.fcol--parley { background: var(--footer); }
+.fcol--missavai { background: var(--footer); }
 .fcol__title {
   margin: 0 0 4px;
   font-family: var(--font-display);
   font-weight: 500;
   font-size: var(--h5-size);
 }
-.fcol--parley .fcol__title { color: var(--brand-500); }
+.fcol--missavai .fcol__title { color: var(--brand-500); }
 .fcol--manual .fcol__title { color: var(--x-grey-500); }
 .fcol__sub { margin: 0 0 39px; font-size: var(--m-size); color: var(--x-card-body); }
 .fcol__rows { margin: 0; }

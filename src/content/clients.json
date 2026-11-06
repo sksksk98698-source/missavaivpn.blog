@@ -1,0 +1,213 @@
+[
+  {
+    "platform": "Windows",
+    "tag": "电脑必备",
+    "badge": "推荐新手 & 进阶",
+    "summary": "Windows 平台主流推荐基于 Mihomo (Clash Meta) 内核的图形化客户端与 Xray/sing-box 多内核客户端。",
+    "keywords": [
+      "Clash for Windows",
+      "Clash Verge Rev 下载",
+      "v2rayN 下载",
+      "Windows 机场客户端",
+      "电脑代理软件",
+      "Mihomo 客户端"
+    ],
+    "apps": [
+      {
+        "name": "Clash Verge Rev",
+        "badge": "首选主力",
+        "core": "Mihomo (Clash.Meta)",
+        "url": "https://github.com/clash-verge-rev/clash-verge-rev/releases",
+        "desc": "支持现代化 UI、内置订阅管理、智能规则分流、TUN 虚拟网卡接管，内存占用低且持续更新。",
+        "suitable": "绝大多数 Windows 用户，一键开启系统代理或 TUN 模式。"
+      },
+      {
+        "name": "v2rayN",
+        "badge": "多协议全能",
+        "core": "Xray / sing-box",
+        "url": "https://github.com/2dust/v2rayN/releases",
+        "desc": "支持 VLESS、VMess、Trojan、Shadowsocks 等全协议，支持自定义路由与大批量节点测速。",
+        "suitable": "需要多协议切换、自定义路由或配合高级配置的进阶用户。"
+      },
+      {
+        "name": "FlClash",
+        "badge": "极简轻量",
+        "core": "Mihomo",
+        "url": "https://github.com/chen08209/FlClash/releases",
+        "desc": "基于 Flutter 打造的跨平台轻量客户端，界面极其清爽无干扰，支持 Clash 订阅与一键连接。",
+        "suitable": "喜欢极简纯净 UI 的轻度上网与办公用户。"
+      },
+      {
+        "name": "Hiddify",
+        "badge": "全协议多平台",
+        "core": "sing-box",
+        "url": "https://github.com/hiddify/hiddify-next/releases",
+        "desc": "开源跨平台多协议客户端，自动选路、远程策略同步，支持一键订阅解析与自动更新。",
+        "suitable": "跨设备同步规则与多种复杂订阅格式的用户。"
+      }
+    ]
+  },
+  {
+    "platform": "Android",
+    "tag": "安卓手机/平板",
+    "badge": "移动端主流",
+    "summary": "安卓平台首推分流成熟、后台稳定的 v2rayNG 与支持智能策略组的 FlClash / Hiddify。",
+    "keywords": [
+      "v2rayNG 下载",
+      "安卓 Clash 下载",
+      "FlClash 安卓",
+      "sing-box 安卓",
+      "手机翻墙软件"
+    ],
+    "apps": [
+      {
+        "name": "v2rayNG",
+        "badge": "装机首选",
+        "core": "Xray",
+        "url": "https://github.com/2dust/v2rayNG/releases",
+        "desc": "安卓生态最经久不衰的客户端，支持一键扫描二维码、剪贴板导入、分应用代理与分流设置。",
+        "suitable": "所有安卓手机与平板用户，轻量省电。"
+      },
+      {
+        "name": "FlClash (Android)",
+        "badge": "现代美观",
+        "core": "Mihomo",
+        "url": "https://github.com/chen08209/FlClash/releases",
+        "desc": "支持 Clash 策略组切换（如按国家选择、流媒体分流）、暗色主题与 Material You 设计语言。",
+        "suitable": "希望手机端具备与电脑端相同分流逻辑的用户。"
+      },
+      {
+        "name": "Karing (Android)",
+        "badge": "sing-box 跨平台",
+        "core": "sing-box",
+        "url": "https://github.com/KaringX/karing/releases",
+        "desc": "全平台规则分流神器，支持多种订阅一键解析并自动转为 sing-box 格式，规则非常精细。",
+        "suitable": "需要精确规则路由和规则链切换的深度用户。"
+      },
+      {
+        "name": "Hiddify (Android)",
+        "badge": "智能自选",
+        "core": "sing-box",
+        "url": "https://github.com/hiddify/hiddify-next/releases",
+        "desc": "免去繁复手动设置，自动根据延迟健康检查优选节点，新手友好度高。",
+        "suitable": "希望开箱即用、不想折腾规则的入门用户。"
+      }
+    ]
+  },
+  {
+    "platform": "iOS",
+    "tag": "iPhone / iPad",
+    "badge": "需海外 Apple ID",
+    "summary": "iOS 客户端受苹果沙盒机制管理，需切换美区/港区等非国区 Apple ID 前往 App Store 下载。",
+    "keywords": [
+      "Shadowrocket 小火箭下载",
+      "Stash 下载",
+      "Quantumult X 圈X",
+      "Surge iOS",
+      "美区 Apple ID 翻墙"
+    ],
+    "apps": [
+      {
+        "name": "Shadowrocket (小火箭)",
+        "badge": "性价比最高",
+        "core": "自研高效内核",
+        "url": "https://apps.apple.com/us/app/shadowrocket/id932747118",
+        "desc": "iOS 生态装机量第一的必备神器，售价仅 $2.99。支持所有主流协议与一键扫码导入，抗掉线能力强。",
+        "suitable": "绝大多数 iPhone 与 iPad 用户，日常主力首选。"
+      },
+      {
+        "name": "Stash",
+        "badge": "iOS 版 Clash",
+        "core": "Clash Meta",
+        "url": "https://apps.apple.com/us/app/stash-rule-based-proxy/id1596063349",
+        "desc": "完整移植 Clash 规则体系，支持复写、分流组嵌套与策略联动，拥有极佳的 iOS 原生 UI 体验。",
+        "suitable": "习惯 Clash 规则、使用多设备生态的进阶用户。"
+      },
+      {
+        "name": "Quantumult X (圈X)",
+        "badge": "脚本流极客",
+        "core": "QX 自研",
+        "url": "https://apps.apple.com/us/app/quantumult-x/id1453970090",
+        "desc": "强大的 MitM、重写与 JS 脚本支持，可实现去广告、签到与复杂分流。",
+        "suitable": "具备一定技术基础、喜欢自定义脚本玩法的极客玩家。"
+      },
+      {
+        "name": "Surge 5",
+        "badge": "工业级网络调试",
+        "core": "Surge Core",
+        "url": "https://apps.apple.com/us/app/surge-5/id1442620678",
+        "desc": "高端网络开发与抓包分析工具，兼顾超低功耗与极致稳定性，支持网关接管与网络诊断。",
+        "suitable": "网络开发者、高端商务人士与预算充裕的专业用户。"
+      }
+    ]
+  },
+  {
+    "platform": "macOS",
+    "tag": "苹果电脑",
+    "badge": "Apple Silicon / Intel",
+    "summary": "支持 M 系列芯片（arm64）与 Intel 芯片（x64），支持全局与增强模式。",
+    "keywords": [
+      "Clash Verge Mac",
+      "Surge Mac",
+      "Mac 翻墙软件",
+      "苹果电脑 Clash 下载"
+    ],
+    "apps": [
+      {
+        "name": "Clash Verge Rev (Mac)",
+        "badge": "Mac 首选",
+        "core": "Mihomo",
+        "url": "https://github.com/clash-verge-rev/clash-verge-rev/releases",
+        "desc": "原生适配 Apple Silicon，支持菜单栏托盘控制、分流组快速切换与一键开启 TUN 模式。",
+        "suitable": "日常办公、看视频与终端命令行代理的 Mac 用户。"
+      },
+      {
+        "name": "Surge Mac",
+        "badge": "Mac 标杆",
+        "core": "Surge Engine",
+        "url": "https://nssurge.com/",
+        "desc": "Mac 端公认最稳定、最强大的网络中枢，支持将 Mac 作为局域网代理网关共享给其他设备。",
+        "suitable": "需要将 Mac 作为家庭网关代理或进行复杂网络调试的用户。"
+      },
+      {
+        "name": "FlClash (Mac)",
+        "badge": "小巧流畅",
+        "core": "Mihomo",
+        "url": "https://github.com/chen08209/FlClash/releases",
+        "desc": "轻量化无残留，菜单栏一键启闭，响应快速。",
+        "suitable": "轻度使用、注重系统资源占用的用户。"
+      }
+    ]
+  },
+  {
+    "platform": "OpenWrt / 软路由",
+    "tag": "全家全局科学上网",
+    "badge": "路由器网关级别",
+    "summary": "直接在软路由或刷机路由器上运行，无需在手机、电脑、电视上单独安装软件，实现全屋设备透明代理。",
+    "keywords": [
+      "OpenClash 教程",
+      "PassWall 软路由",
+      "软路由翻墙",
+      "OpenWrt 翻墙插件",
+      "电视盒子科学上网"
+    ],
+    "apps": [
+      {
+        "name": "OpenClash",
+        "badge": "软路由装机王者",
+        "core": "Mihomo Meta",
+        "url": "https://github.com/vernesong/OpenClash/releases",
+        "desc": "功能最全的 OpenWrt 代理插件，支持 DNS 防污染、Fake-IP 模式、策略分流与全家设备一网打尽。",
+        "suitable": "具备软路由环境、希望 Apple TV / 智能电视 / 游戏机自动翻墙的家庭。"
+      },
+      {
+        "name": "PassWall 2",
+        "badge": "简单高效",
+        "core": "Xray / sing-box",
+        "url": "https://github.com/xiaorouji/openwrt-passwall",
+        "desc": "节点切换快捷、分流规则直观、支持多节点同时备用与负载均衡。",
+        "suitable": "追求低延迟、稳定性和简单界面的软路由玩家。"
+      }
+    ]
+  }
+]

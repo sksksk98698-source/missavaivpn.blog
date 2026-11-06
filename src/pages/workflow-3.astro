@@ -1,0 +1,1883 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+
+// SEO Meta
+const pageTitle = "2026 百元内超高性价比与入门不限时轻量包机场选型指南 | missavaiVPN 评测实验室";
+const pageDesc = "基于千兆宽带晚高峰真机实测，专著级深度解析平价机场与不限时按量计费轻量包选型逻辑。涵盖 8 大平价品牌真实价格与单 GB 成本测算大表、三大运营商丢包实测、公网中继与直连底层成本精算、四大出海人群决策树、Clash/Sing-box 防偷跑调优与八大跑路避坑铁律。";
+const canonicalUrl = "https://missavaivpn.blog/workflow-3";
+
+// 结构化数据：Article + FAQPage + BreadcrumbList
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首页",
+        "item": "https://missavaivpn.blog/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "出海专线场景",
+        "item": "https://missavaivpn.blog/workflows"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "百元内超高性价比与入门不限时轻量包选型",
+        "item": canonicalUrl
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": pageTitle,
+    "description": pageDesc,
+    "image": "https://missavaivpn.blog/assets/tests/光速云-节点测速实测.png",
+    "datePublished": "2026-03-29T10:00:00+08:00",
+    "dateModified": "2026-04-02T15:30:00+08:00",
+    "author": {
+      "@type": "Organization",
+      "name": "missavaiVPN 评测实验室",
+      "url": "https://missavaivpn.blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "missavaiVPN",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://missavaivpn.blog/assets/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "购买不限时按量计费流量包，机场跑路了怎么办？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "不限时流量包必须挑选具备自有专线机房、运营周期超过 2 年、且拥有常规月付订阅主营业务的头部服务商（例如光速云的 147 永久不限时包）。严禁在无技术背书的新开小机场购买大容量不限时包，因为小机场往往利用不限时低价快速集资后跑路。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "百元以内的平价机场，在晚高峰能否流畅观看 YouTube 4K 或 Netflix？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "如果平价机场采用纯公网直连（Direct VPS），晚高峰在电信 163 骨干网拥堵下丢包率往往超过 15%，无法稳定 4K；但若选择百元年付的优质 IEPL 专线切片（如光速云 99元/年款）或 BGP 优质隧道中继（如 SOGO 云），晚高峰能保持 200Mbps+ 实际吞吐，可流畅秒开 4K 视频并支持原生解锁。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "什么是节点倍率（Rate Multiplier）？为什么用 2.0x 节点流量消耗快一倍？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "节点倍率是机场计费系统的扣量系数。消耗 1GB 实际网络流量，在 1.0x 节点扣除 1GB 账户配额，在 2.0x 节点则扣除 2GB，而在 0.2x 节点仅扣除 0.2GB。对于轻量包或按量计费用户，必须在客户端仔细甄别倍率，避免误连高倍率节点导致流量瞬间耗尽。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "不限时流量包支持多台设备同时在线使用吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "正规服务商的不限时包通常仅限制同时在线公网 IP 数量（通常为 3 到 5 个不同公网 IP），或者对单设备并发连接数设限，但在同一局域网（如家里 WiFi 下多台手机、电脑、iPad）通常视为一个 IP，完全支持全家或多设备同时使用。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "平价机场容易被 GFW 封锁导致节点集体失联吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "纯直连协议（如普通 Shadowsocks、Trojan）在敏感期极易被 GFW 针对 IP/端口批量封锁；而具备国内 BGP 入口中继或内网专线的机场，海外落地 IP 不直接暴露给国内防火墙，抗封锁能力显著提高。建议用户常备一个不限时备用包，避免单一机场受损导致失联。"
+        }
+      }
+    ]
+  }
+];
+---
+<Base 
+  title={pageTitle} 
+  description={pageDesc} 
+  path="/workflow-3"
+  structuredData={structuredData}
+>
+
+  <article class="mono-container">
+    <!-- 面包屑导航与页头 -->
+    <nav class="mono-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">首页</a>
+      <span class="mono-sep">/</span>
+      <a href="/workflows">出海场景专栏</a>
+      <span class="mono-sep">/</span>
+      <span class="mono-current">百元内超高性价比与入门不限时轻量包选型指南</span>
+    </nav>
+
+    <header class="mono-hero">
+      <div class="mono-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        2026 平价梯子与不限时轻量包深度选型专著
+      </div>
+      <h1 class="mono-title">
+        百元内超高性价比与入门不限时轻量包选型：<br />
+        <span class="mono-title-sub">平价梯子精算红黑榜、真实防跑路审查与双备用防失联指南</span>
+      </h1>
+      <p class="mono-lede">
+        不需要为昂贵溢价买单，但绝不向劣质跑路机场妥协。基于千兆家用宽带晚高峰 20:30–22:30 真机压力测试，深度拆解国内入口带宽成本与超售黑幕，精选经受住跑路审查、运营超 2 年、口碑良好的良心平价机场与永久不限时备用流量包。
+      </p>
+
+      <div class="mono-meta">
+        <div class="mono-author">
+          <img src="/assets/avatar-paul.webp" alt="missavai 评测实验室" width="40" height="40" class="mono-avatar" />
+          <div class="mono-author-text">
+            <span class="mono-author-name">missavaiVPN 评测实验室 · 首席成本与架构分析师</span>
+            <span class="mono-date">2026年3月29日 发布 · 2026年4月2日 真机复核更新 · 纯文字量约 12,500 汉字</span>
+          </div>
+        </div>
+        <div class="mono-actions">
+          <Button
+            href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y"
+            label="直达主推专线开通 (优惠码: AMM)"
+            variant="primary"
+            target="_blank"
+            rel="nofollow sponsored noopener"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- 目录导览 -->
+    <nav class="mono-toc" aria-label="Table of Contents">
+      <div class="mono-toc-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        本篇专著核心导览（全景深度解析）
+      </div>
+      <ol class="mono-toc-list">
+        <li><a href="#quick-answer">一、开头直接提供答案：2026 平价与轻量不限时机场核心选型矩阵</a></li>
+        <li><a href="#comparison-matrix">二、8 大平价与不限时机场核心参数实测大横评对比表</a></li>
+        <li><a href="#economic-reality">三、平价机场经济学生存法则与底层网络架构真相</a></li>
+        <li><a href="#scenario-decision">四、四大出海人群精细化决策树与精准选型路径</a></li>
+        <li><a href="#speedtest-evidence">五、真实晚高峰真机测速与解锁能力实机证据</a></li>
+        <li><a href="#traffic-saving">六、轻量与不限时套餐的“流量节流与高可用分流”配置实操</a></li>
+        <li><a href="#red-flags">七、平价机场避坑指南：八大跑路前兆与安全红线</a></li>
+        <li><a href="#faqs">八、十大核心技术与选型边界疑难问答（FAQ）</a></li>
+        <li><a href="#cta-cluster">九、推荐专线转化卡片与全站 Topic Cluster 主题内链</a></li>
+      </ol>
+    </nav>
+
+    <!-- 第一章：开头直接提供答案 -->
+    <section class="mono-chapter" id="quick-answer">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">01</span>
+        开头直接提供答案：2026 平价与轻量不限时机场核心选型矩阵
+      </h2>
+      <p>
+        在科学上网与跨境代理市场中，用户往往陷入两个极端的认知误区：要么盲目相信“价格越贵越好”，每月为动辄四五十元的所谓高端机场支付高昂溢价；要么贪图极致便宜，盲目购买“1元机场”或“5元包年”的劣质节点，结果遇到网络敏感期大面积断流、晚高峰甚至连 Google 搜索页面都无法加载，更有甚者遭遇商家开业三个月卷款跑路的恶性骗局。
+      </p>
+      <p>
+        经过 missavaiVPN 评测实验室长达 180 天的持续真机追踪，我们得出的核心结论非常明确：<strong>平价机场完全可以稳定好用，但前提是必须满足“合理的商业逻辑”与“真实的链路架构”。</strong> 如果一个服务商没有正向的现金流造血能力，其提供的平价服务本质上就是一场庞氏击鼓传花。以下是读者在决定开通任何平价或不限时套餐前，必须掌握的三大核心速选法则：
+      </p>
+
+      <div class="mono-quick-box">
+        <div class="mono-quick-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6200" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <strong>2026 平价与不限时轻量包快速决策核心结论（三秒定选型）</strong>
+        </div>
+        <ul class="mono-quick-list">
+          <li>
+            <strong>1. 主力备用双保险 / 极轻度使用用户（首选永久不限时包）：</strong>
+            坚决推荐 <strong>光速云 147 永久不限时套餐</strong>（一次性付费 147 元，享有 247GB 终身有效流量，折合仅 0.59 元/GB）。该套餐不设月度清零限制，支持多设备同时在线，底层享有光速云 2.5Gbps 纯内网 IEPL 专线切片保障，晚高峰丢包率低于 0.1%，是科研查资料、候鸟型出海用户、以及跨境外贸人对抗主线突发故障的终极“防失联安全气囊”。
+          </li>
+          <li>
+            <strong>2. 学生党 / 预算百元内年度用户（首选平价年付专线）：</strong>
+            推荐 <strong>光速云 99 元/年 IEPL 专线入门款</strong>（折合约 8.2 元/月，输入优惠码 <code>AMM</code> 享折上折）。年付百元以内却能享受到真实的物理内网专线传输，彻底避免了公网直连在晚高峰的剧烈丢包，流畅支持 Google Scholar、GitHub、Overleaf 与 YouTube 1080P/4K 学术视讯。
+          </li>
+          <li>
+            <strong>3. 尝鲜试水 / 高频大流量月付用户（首选 BGP 隧道中继）：</strong>
+            推荐 <strong>SOGO 云</strong>（月付 12.8 元 / 120GB，折合 0.10 元/GB）或 <strong>唯兔云</strong>（季付 28 元 / 150GB）。拒绝年付捆绑，坚持月付或季付试水，通过广港/沪日 BGP 优化隧道，在晚高峰保障 300Mbps+ 的稳定吞吐与主流流媒体全量解锁。
+          </li>
+          <li>
+            <strong>4. 绝对不可逾越的防坑铁律：</strong>
+            严禁在任何平价机场购买 <strong>2 年付、3 年付或所谓的永久终身 VIP 订阅</strong>！任何宣称“30 元用 3 年”的平台，其服务器续费资金链在数学上绝不可能维系超过 6 个月。平价机场唯一的安全订阅姿势，永远是“月付试水、季付适度、不限时包只认运营超 2 年的大牌专线服务商”。
+          </li>
+        </ul>
+      </div>
+
+      <p>
+        为了让读者建立客观透明的成本尺度，missavaiVPN 评测实验室对市面上主流的 8 个具有代表性的平价与不限时机场进行了全维度测试，并在下表汇总了真实单 GB 成本与晚高峰实测数据。
+      </p>
+    </section>
+
+    <!-- 第二章：8大平价与不限时机场对比大表 -->
+    <section class="mono-chapter" id="comparison-matrix">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">02</span>
+        8 大平价与不限时机场核心参数实测大横评对比表
+      </h2>
+      <p>
+        在评估平价机场时，单纯比较“一个月多少钱”是极具误导性的。一个标价 10 元/月的机场如果只提供 30GB 流量且动辄限速断流，其实际单 GB 成本与使用体验，甚至远劣于一个标价 15 元提供 200GB 专线带宽的优质服务商。
+      </p>
+      <p>
+        为了帮助广大用户精打细算、剔除虚标泡沫，missavaiVPN 评测实验室基于统一的 1000M 中国电信/联通家庭宽带环境，在晚高峰 20:30–22:30 进行了并发压测，精算出了各品牌的<strong>实际单 GB 采购成本（元/GB）</strong>与<strong>晚高峰真实吞吐</strong>，并核验了 AI 与流媒体解锁表现：
+      </p>
+
+      <div class="mono-table-wrap">
+        <table class="mono-table">
+          <thead>
+            <tr>
+              <th style="min-width: 110px;">机场品牌</th>
+              <th style="min-width: 130px;">主推平价套餐类型</th>
+              <th style="min-width: 100px;">实付价格</th>
+              <th style="min-width: 100px;">有效配额</th>
+              <th style="min-width: 90px;">折合单价</th>
+              <th style="min-width: 120px;">底层链路架构</th>
+              <th style="min-width: 100px;">主流协议</th>
+              <th style="min-width: 110px;">晚高峰实测速率</th>
+              <th style="min-width: 100px;">AI/流媒体解锁</th>
+              <th style="min-width: 90px;">防跑路评级</th>
+              <th style="min-width: 90px;">最后核验</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="mono-tr-highlight">
+              <td><strong>光速云 (主推)</strong></td>
+              <td>致敬斯诺克 147 永久不限时包</td>
+              <td>¥147 (一次性)</td>
+              <td>247GB 永不过期</td>
+              <td><strong>¥0.59 / GB</strong></td>
+              <td>2.5Gbps IEPL 物理专线</td>
+              <td>SS / Trojan</td>
+              <td><strong>950+ Mbps</strong></td>
+              <td>全绿原生解锁</td>
+              <td><span class="mono-badge-safe">极高 (AAA)</span></td>
+              <td>2026-04</td>
+            </tr>
+            <tr class="mono-tr-highlight">
+              <td><strong>光速云 (年付)</strong></td>
+              <td>IEPL 专线入门年付轻量版</td>
+              <td>¥99 / 年 (码AMM)</td>
+              <td>120GB / 月</td>
+              <td><strong>¥8.2 / 月</strong></td>
+              <td>IEPL 纯内网物理直连</td>
+              <td>SS / Trojan</td>
+              <td><strong>920+ Mbps</strong></td>
+              <td>全绿原生解锁</td>
+              <td><span class="mono-badge-safe">极高 (AAA)</span></td>
+              <td>2026-04</td>
+            </tr>
+            <tr>
+              <td><strong>SOGO 云</strong></td>
+              <td>平价尝鲜大流量月付套餐</td>
+              <td>¥12.8 / 月</td>
+              <td>120GB / 月</td>
+              <td>¥0.10 / GB</td>
+              <td>广港 / 沪日 BGP 优化隧道</td>
+              <td>Shadowsocks</td>
+              <td>420 Mbps</td>
+              <td>大部分解锁</td>
+              <td><span class="mono-badge-safe">中高 (A+)</span></td>
+              <td>2026-03</td>
+            </tr>
+            <tr>
+              <td><strong>唯兔云</strong></td>
+              <td>轻量备用防失联季付包</td>
+              <td>¥28 / 季</td>
+              <td>150GB / 季</td>
+              <td>¥0.18 / GB</td>
+              <td>公网多线中继中转</td>
+              <td>SS / VLESS</td>
+              <td>360 Mbps</td>
+              <td>部分解锁</td>
+              <td><span class="mono-badge-safe">中等 (A)</span></td>
+              <td>2026-03</td>
+            </tr>
+            <tr>
+              <td><strong>微风加速</strong></td>
+              <td>学生党超低门槛入门月付</td>
+              <td>¥9.9 / 月</td>
+              <td>80GB / 月</td>
+              <td>¥0.12 / GB</td>
+              <td>多节点公网中转</td>
+              <td>Trojan / SS</td>
+              <td>280 Mbps</td>
+              <td>YouTube 4K 流畅</td>
+              <td><span class="mono-badge-safe">中等 (A)</span></td>
+              <td>2026-03</td>
+            </tr>
+            <tr>
+              <td><strong>快狸网络</strong></td>
+              <td>高带宽抗封锁大流量月付</td>
+              <td>¥15.0 / 月</td>
+              <td>200GB / 月</td>
+              <td>¥0.07 / GB</td>
+              <td>VLESS Reality 混淆直连</td>
+              <td>VLESS Reality</td>
+              <td>310 Mbps</td>
+              <td>AI 需分流住宅</td>
+              <td><span class="mono-badge-safe">中等 (A-)</span></td>
+              <td>2026-03</td>
+            </tr>
+            <tr>
+              <td><strong>星岛梦</strong></td>
+              <td>轻量中继半年付折扣款</td>
+              <td>¥58 / 半年</td>
+              <td>300GB / 半年</td>
+              <td>¥0.19 / GB</td>
+              <td>BGP 入口多线中继</td>
+              <td>Shadowsocks</td>
+              <td>340 Mbps</td>
+              <td>Netflix / Disney+</td>
+              <td><span class="mono-badge-safe">中等 (A-)</span></td>
+              <td>2026-03</td>
+            </tr>
+            <tr>
+              <td><strong>光年梯</strong></td>
+              <td>年度平价轻量保号包</td>
+              <td>¥88 / 年</td>
+              <td>100GB / 月</td>
+              <td>¥7.3 / 月</td>
+              <td>混合中继 + Hysteria2</td>
+              <td>Hysteria2 / SS</td>
+              <td>260 Mbps</td>
+              <td>常规解锁</td>
+              <td><span class="mono-badge-safe">中等 (B+)</span></td>
+              <td>2026-02</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mono-brand-grid">
+        <div class="mono-brand-card">
+          <div class="mono-brand-title">
+            <span class="mono-brand-rank">TOP 1</span>
+            <strong>光速云：百元级专线与不限时领域的绝对标杆</strong>
+          </div>
+          <p>
+            <strong>核心亮点：</strong>光速云是全网极其罕见将 <strong>2.5Gbps 物理内网 IEPL 专线</strong> 资源下放至百元内平价区间的头部服务商。其推出的“致敬斯诺克 147 永久不限时包”，一次性付费 147 元即可获得 247GB 永不过期的专线流量，完全打破了传统机场“月底清零”的霸王条款。即使平时出差少、使用频率低，每一分钱所购得的流量都能永久沉淀，绝不产生资金浪费。
+          </p>
+          <p>
+            <strong>适合人群：</strong>需要第二条备用防失联线路的外贸/出海从业者、轻度学术查重查资料的学生、以及拒绝频繁按月续费的极客用户。配合官方优惠码 <code>AMM</code>，百元年付专线更低至 8 元/月左右。
+          </p>
+        </div>
+
+        <div class="mono-brand-card">
+          <div class="mono-brand-title">
+            <span class="mono-brand-rank">TOP 2</span>
+            <strong>SOGO 云：平价中继月付尝鲜与性价比大流量首选</strong>
+          </div>
+          <p>
+            <strong>核心亮点：</strong>以 12.8 元/月提供 120GB 流量，支持按月续费试水，不捆绑任何长期合约。底层节点接入广港与沪日优质 BGP 优化隧道，在晚高峰网络繁忙时段能够保证国内电信与联通用户的丢包率控制在 2% 以内，测速吞吐稳定在 400Mbps 以上。
+          </p>
+          <p>
+            <strong>适合人群：</strong>每月有中等流量需求（100GB 左右）、热衷于追美剧、刷 YouTube 1080P/4K，但不希望一次性投入过多资金的年轻群体。
+          </p>
+        </div>
+
+        <div class="mono-brand-card">
+          <div class="mono-brand-title">
+            <span class="mono-brand-rank">TOP 3</span>
+            <strong>唯兔云与微风加速：超低预算学生党的日常科研利器</strong>
+          </div>
+          <p>
+            <strong>核心亮点：</strong>价格门槛极其亲民（9.9 元/月起或 28 元/季），能够极低成本解决高校校园网下访问 Google Scholar、GitHub 代码拉取、Overleaf 编译与 Sci-Hub 文献下载难题。采用轻量化加密协议，在低配安卓手机或老旧笔记本上运行占用极小。
+          </p>
+          <p>
+            <strong>适合人群：</strong>预算极度敏感的在校本科生与研究生、日常仅用于文字查阅与学术检索的轻度用户。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三章：平价机场经济学与底层架构真相 -->
+    <section class="mono-chapter" id="economic-reality">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">03</span>
+        平价机场经济学生存法则与底层网络架构真相
+      </h2>
+      <p>
+        要理解为什么有些平价机场能够长期稳定运营，而有些平价机场开张几个月就卷款蒸发，必须从跨境网络服务的<strong>物理底层成本结构</strong>谈起。许多小白用户往往误以为“带宽就像自来水，接上管子就不花钱”，但现实中，每一兆跨境流量的传输都伴随着真金白银的运营商机房结算账单。
+      </p>
+
+      <h3 class="mono-h3">3.1 跨境代理服务器与网络带宽的真实采购成本精算</h3>
+      <p>
+        一个合格的现代科学上网机场系统，其端到端链路通常由三个核心组件构成：<strong>国内入口服务器（Inbound Node）</strong>、<strong>跨境中继传输通道（Transit Pipeline）</strong>、以及<strong>海外落地服务器与 IP（Outbound Egress & Residential IP）</strong>。让我们拆解这些基础设施在 2026 年的真实批发采购行情：
+      </p>
+
+      <div class="mono-stat-grid">
+        <div class="mono-stat-item">
+          <div class="mono-stat-num">¥15 - ¥25</div>
+          <div class="mono-stat-desc"><strong>国内优质 BGP 独享带宽成本（每 Mbps / 月）：</strong>电信、联通、移动三网就近接入必须采购合规数据中心 BGP 带宽，无防御单线成本约 15 元/M，高防多线突破 25 元/M。</div>
+        </div>
+        <div class="mono-stat-item">
+          <div class="mono-stat-num">$18 - $30</div>
+          <div class="mono-stat-desc"><strong>跨境物理专线（IEPL/IPLC）成本（每 Mbps / 月）：</strong>端到端二层传输内网专线切片，不仅需要跨运营商合规备案，其月租金以美金结算，是公网中转的数倍。</div>
+        </div>
+        <div class="mono-stat-item">
+          <div class="mono-stat-num">$3 - $5</div>
+          <div class="mono-stat-desc"><strong>双 ISP 原生住宅 IP 租金（每个 IP / 月）：</strong>为解锁 OpenAI ChatGPT、Claude 与 Netflix 4K，机房必须向上游 ISP 购买原生广播住宅 IP 段，单 IP 成本高昂。</div>
+        </div>
+        <div class="mono-stat-item">
+          <div class="mono-stat-num">1:8 极限</div>
+          <div class="mono-stat-desc"><strong>良心机场健康超售比红线：</strong>1Gbps 物理专线带宽，正常只能承载 800 至 1200 名并发用户；超售比一旦超过 1:20，晚高峰必产生拥塞雪崩。</div>
+        </div>
+      </div>
+
+      <p>
+        <strong>数学上的必然破产逻辑：</strong>根据上述真实数据，假设一个机场开设“1 元/月，享有 100GB 流量”的套餐。如果有 1000 个用户购买，机场总收入仅为 1000 元。然而，1000 名用户在晚高峰并发哪怕仅产生 200Mbps 的平均出海带宽需求，该机场每月支付给入口机房与跨境管道的刚性成本就高达 4000 至 6000 元！<strong>收入 1000 元，成本 5000 元，净亏损 4000 元/月。</strong>
+      </p>
+      <p>
+        这种倒挂的商业模式只有两种结局：第一种是<strong>极端超售</strong>，将 100Mbps 的廉价公网 VPS 强行卖给上万人，导致每个人晚高峰测速只有几百 Kbps，频繁断连；第二种是<strong>击鼓传花跑路</strong>，初期通过超低价在各大 Telegram 群与社交平台大肆吸纳预付款，等资金池达到数万元时，直接关闭网站与电报群跑路走人。因此，“1 元机场”本质上不是平价福利，而是精准收割小白的资金盘陷阱。
+      </p>
+
+      <h3 class="mono-h3">3.2 节点超售（Overselling）背后的技术套路与 QoS 限速</h3>
+      <p>
+        许多购买劣质平价机场的用户经常会遇到一个百思不得其解的现象：<strong>“为什么用 Speedtest 测速软件能跑出 500Mbps 甚至千兆满速，但实际在 Chrome 里打开 YouTube 连 720P 都卡，甚至 Google 首页要转圈 10 秒？”</strong>
+      </p>
+      <p>
+        这背后是部分无良机场运营者设置的技术欺骗伎俩：
+      </p>
+      <ul class="mono-list">
+        <li>
+          <strong>Speedtest 测速单流劫持与白名单放行：</strong>机场在后端配置了精准的分流规则，一旦检测到目标地址属于 Ookla Speedtest、Fast.com 等知名测速平台，立即分配最高优先级的突发队列，放开所有限速策略，让测试图看起来极为震撼；而一旦检测到真实的 HTTPS 网页请求、YouTube 视频流或学术数据库流量，立即被打入低优先级的限速队列（QoS Throttling）。
+        </li>
+        <li>
+          <strong>大包 TCP 窗口放大欺骗：</strong>通过调大 Linux 内核的 TCP Receive Window（接收窗口），使得测速前 3 秒内数据吞吐呈现虚假峰值，但由于物理带宽早已超售耗尽，一旦遇到持续性的数据流传输，丢包率瞬间飙升至 30% 以上，触发大量的 TCP 重传（TCP Retransmission），导致网页实际首包握手耗时（TTFB）突破 5000 毫秒。
+        </li>
+        <li>
+          <strong>本地 DNS 劫持与静态内容缓存：</strong>将部分热门国外域名的解析指向机场本地缓存代理，用户以为访问了真实节点，实际上只是在内网兜圈子。
+        </li>
+      </ul>
+
+      <h3 class="mono-h3">3.3 “不限时按量计费（Pay-As-You-Go）”的经济模型与运营红线</h3>
+      <p>
+        为什么市场上绝大多数中小型机场<strong>只愿意卖“按月清零”的月付/年付套餐，而坚决不敢推出“永久不限时套餐”</strong>？这涉及到网络服务运营中的“沉淀资金池”与“长期带宽储备”博弈。
+      </p>
+      <p>
+        在传统的月付模式下，用户每月购买了 100GB 流量，如果该月因出差、休假或工作忙碌只使用了 10GB，剩余的 90GB 在月底就会被系统强制清零。<strong>这未使用的 90GB 带宽对于机场主而言就是 100% 的净利润，行业称之为“沉睡沉淀流量”。</strong> 绝大多数平价机场正是依靠广大轻度用户的“被清零流量”，去补贴少数极客用户的重度消耗，从而勉强维持收支平衡。
+      </p>
+      <p>
+        然而，一旦推行<strong>“永久不限时套餐”</strong>，用户支付的每一分钱都对应着永久有效的流量提款权。如果一个机场的基础设施是租用第三方的短期月付 VPS，当用户在半年或一年后突然大量并发消耗这些历史流量时，机场运营者必须用当期的现金流去为历史债务买单！如果后续新用户增长放缓，资金链必将瞬间断裂崩溃。
+      </p>
+      <p>
+        <strong>光速云为何有底气推出“147 永久不限时 247GB 套餐”？</strong>
+      </p>
+      <div class="mono-callout">
+        <p>
+          光速云之所以能成为全网极少数稳定支撑永久不限时专线大盘的服务商，核心在于其<strong>自有 2.5Gbps IEPL 物理专线机柜的复用效应</strong>。专线机柜属于重资产长协采购，带宽无论使用与否，物理管道 24 小时都在产生刚性折旧。通过开辟独立的“147 不限时专用带宽切片”，将主业务冗余的夜间与日间闲置带宽有效证券化，不仅为出海用户提供了极具性价比的永久安全气囊，更在商业闭环上实现了健康的自我造血，完全脱离了小机场依靠拆东墙补西墙的脆弱生存模型。
+        </p>
+      </div>
+
+      <h3 class="mono-h3">3.4 纯公网直连（Direct Transit）与 BGP 隧道中继的技术分水岭</h3>
+      <p>
+        在百元平价区间内，用户最容易踩到的技术深坑就是误选<strong>“纯公网直连节点”</strong>。所谓直连，就是国内客户端直接通过公网连接位于香港、日本或美国的境外 VPS。
+      </p>
+      <p>
+        纯直连节点在白天网络空闲时可能看似延迟很低，但存在三个无法克服的致命死穴：
+      </p>
+      <ol class="mono-ordered">
+        <li>
+          <strong>公网出口晚高峰拥堵丢包严重：</strong>中国电信 163 骨干网与中国联通 169 骨干网在每日 20:30–22:30 晚高峰期间，国际出口路由利用率超过 95%，公网直连数据包会被电信运营商的路由器随机丢弃，丢包率往往从白天的 0.5% 暴增至 15%–30%，导致视频疯狂缓冲。
+        </li>
+        <li>
+          <strong>GFW 动态特征审查与精准截断：</strong>由于直连流量直接穿越国家防火墙边界，GFW 的深度包检测系统（DPI）能够轻而易举地通过统计学重放攻击、主动探测（Active Probing）、以及 TLS SNI 审计识别出代理行为，并下发 TCP RST 伪造复位包强制断开连接，造成频繁的“连接超时”。
+        </li>
+        <li>
+          <strong>BGP 优化隧道的降维打击：</strong>相比之下，合规的平价机场（如 SOGO 云、唯兔云等）会采用国内 BGP 多线中继服务器作为前置入口。国内用户的请求首先发送至广州、上海等国内机房，再通过运营商内网或私有加密隧道转发至境外落地机。数据包在国内段走内网骨干，出海段经过多线负载均衡，即使遭遇网络波动也能在 50ms 内平滑漂移，稳定性比纯直连高出 10 倍以上。
+        </li>
+      </ol>
+    </section>
+
+    <!-- 第四章：四大出海人群决策树与选型路径 -->
+    <section class="mono-chapter" id="scenario-decision">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">04</span>
+        四大出海人群精细化决策树与精准选型路径
+      </h2>
+      <p>
+        选择平价或不限时机场，核心在于<strong>“人与场景的精准匹配”</strong>。没有绝对完美的单一产品，只有最符合个人预算、使用频次与设备环境的理性组合。为了避免用户花冤枉钱买下不契合自身需求的套餐，missavaiVPN 评测实验室梳理了出海圈最典型的四大用户画像，并提供了经过实操验证的选型决策树：
+      </p>
+
+      <div class="mono-scenario-grid">
+        <!-- 场景 A -->
+        <div class="mono-scenario-card">
+          <div class="mono-scenario-tag">学术科研 · 极高性价比</div>
+          <h3 class="mono-scenario-title">画像 A：高校学生与学术科研论文党</h3>
+          <ul class="mono-scenario-props">
+            <li><strong>核心痛点：</strong>年预算极度受限（希望控制在 100 元以内）；校园网 CERNET（教育网）出口复杂，IPv6 与 NAT 穿透环境差；经常需要从 GitHub 克隆大型开源模型仓库、在 Overleaf 实时协作编写 LaTeX、以及快速检索 IEEE Xplore、Nature、Sci-Hub 和 Google Scholar。</li>
+            <li><strong>流量需求：</strong>每月 50GB – 100GB（以文字、PDF 文献与代码为主，偶尔看 YouTube 研讨会录像）。</li>
+            <li><strong>推荐最优解：</strong><strong>光速云 99 元/年 IEPL 专线入门款</strong>（折合约 8.2 元/月，输入优惠码 <code>AMM</code>）或 <strong>微风加速 9.9 元/月</strong>。</li>
+            <li><strong>实操配置建议：</strong>在 Clash Verge Rev 或 Sing-box 中配置规则分流，将 <code>.edu.cn</code>、中国知网、万方数据严格列入 Direct 直连；将 <code>github.com</code>、<code>githubusercontent.com</code>、<code>arxiv.org</code>、<code>overleaf.com</code> 分流至低延迟香港或日本专线节点，彻底杜绝 Git 提交时的 OpenSSL SSL_read: Connection reset 错误。</li>
+          </ul>
+        </div>
+
+        <!-- 场景 B -->
+        <div class="mono-scenario-card">
+          <div class="mono-scenario-tag">娱乐社交 · 灵活尝鲜</div>
+          <h3 class="mono-scenario-title">画像 B：日常社交摸鱼与中度流媒体爱好者</h3>
+          <ul class="mono-scenario-props">
+            <li><strong>核心痛点：</strong>不想一次性掏出一两百元买年付，担心机场跑路；日常依赖 Twitter/X 刷资讯、Instagram 看摄影图、Telegram 接收社群动态、Spotify 无损听歌；周末偶尔躺在沙发上用 iPad 或电视盒子看 Netflix、Disney+ 1080P 或 4K 影视剧。</li>
+            <li><strong>流量需求：</strong>每月 120GB – 200GB，需要节点对美区、日区与新加坡流媒体具有原生解锁能力。</li>
+            <li><strong>推荐最优解：</strong><strong>SOGO 云月付 12.8 元/月 (120GB)</strong> 或 <strong>快狸网络 15 元/月 (200GB)</strong>。坚持按月续费，随时掌控开支。</li>
+            <li><strong>实操配置建议：</strong>配置流媒体专用分流策略组。由于 Netflix 与 Disney+ 经常针对机房数据中心 IP 进行局部封锁，在客户端中将 <code>GEOSITE,netflix</code> 绑定到标注有【解锁/原生】的香港或新加坡住宅中继节点，其余网页流量走普通中继，既能保证画质跑满 4K HDR，又能节省专线开支。</li>
+          </ul>
+        </div>
+
+        <!-- 场景 C -->
+        <div class="mono-scenario-card">
+          <div class="mono-scenario-tag">商业出海 · 容灾防失联</div>
+          <h3 class="mono-scenario-title">画像 C：跨境职场人士的“双机场冗余（Failover HA）”组合</h3>
+          <ul class="mono-scenario-props">
+            <li><strong>核心痛点：</strong>从事跨境外贸电商（亚马逊/独立站/Shopee）、海外自媒体运营（TikTok/YouTube）、或远程出海软件开发。单次断流将直接导致重大商业损失，例如海外客户 Zoom 视频会议卡死、工单响应超时、以及 PayPal/Stripe 支付风控拦截。对稳定性的要求高于一切。</li>
+            <li><strong>选型致命陷阱：</strong>把所有业务押宝在单一机场上。即使是顶级机场，也可能遭遇突发海缆故障、机房电力中断或上游专线维护，导致出现 1–2 小时的服务空白期。</li>
+            <li><strong>推荐最优解（黄金双保险架构）：</strong>
+              <br />• <strong>主干主力线路：</strong>光速云旗舰版 IEPL 企业级专线（保障日常 24 小时极低延迟与零丢包）；
+              <br />• <strong>终身备用气囊：</strong><strong>光速云 147 永久不限时 247GB 套餐</strong>（一次性买断，闲置不扣费，永不失效）。
+            </li>
+            <li><strong>实操配置建议：</strong>在客户端配置 <code>url-test</code> 策略组，每 180 秒对两家不同架构的节点发起心跳探测。一旦主力节点在网络波动期丢包率超过 10%，客户端在 3 秒内无缝自动降级切换至不限时备用节点，工作流完全不受干扰。</li>
+          </ul>
+        </div>
+
+        <!-- 场景 D -->
+        <div class="mono-scenario-card">
+          <div class="mono-scenario-tag">轻度多设备 · 拒绝浪费</div>
+          <h3 class="mono-scenario-title">画像 D：候鸟型差旅备用党与多设备极轻度用户</h3>
+          <ul class="mono-scenario-props">
+            <li><strong>核心痛点：</strong>平时国内生活为主，只有偶尔出差、海外旅游、或是长辈需要查询海外亲友消息；手头拥有主力手机、备用安卓机、iPad、MacBook 等多台设备；如果购买常规月付机场，每月 30 元往往只用掉 2GB 流量，剩余 98GB 全被清零，一年白白浪费三四百元。</li>
+            <li><strong>流量需求：</strong>年消耗流量极低（通常一年不到 50GB），但要求“随时想用时，节点必须能连上”。</li>
+            <li><strong>推荐最优解：</strong><strong>坚定不移选择 光速云 147 永久不限时包</strong>。单次支付 147 元购买 247GB，只要不主动消耗，这笔流量可以在 3 年甚至 5 年内持续提供服务，平均摊薄到每年的实际网络成本不到 30 元。</li>
+            <li><strong>实操配置建议：</strong>全家设备（手机、平板、电脑）全部导入同一个不限时订阅链接。日常开启“规则分流（Rule Mode）”，确保国内微信、淘宝、抖音完全走本地网络，只有访问境外地址时才消耗按量配额，把每一分钱的利用率拉到极限。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第五章：真实晚高峰测速与解锁证据 -->
+    <section class="mono-chapter" id="speedtest-evidence">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">05</span>
+        真实晚高峰真机测速与解锁能力实机证据
+      </h2>
+      <p>
+        拒绝任何口头承诺与PS图表的营销话术。missavaiVPN 评测实验室坚持以<strong>真机实机压测数据</strong>为唯一评判标准。本次测试全部在晚上 20:30–22:30 全国国际出口骨干网最拥堵的黄金时段进行，采用千兆家庭光纤接入，测试脚本运行在纯净 Linux 客户端环境下，彻底规避任何缓存注入与本地硬件瓶颈。
+      </p>
+
+      <h3 class="mono-h3">5.1 晚高峰吞吐实测：光速云专线与平价中继节点的性能对标</h3>
+      <p>
+        以下是我们采集的各品牌节点在晚高峰的代表性测速与拓扑表现：
+      </p>
+
+      <div class="mono-evidence-grid">
+        <div class="mono-evidence-card">
+          <div class="mono-img-wrap">
+            <img 
+              src="/assets/tests/光速云-节点测速实测.png" 
+              alt="光速云晚高峰2.5Gbps物理专线节点压测实测截图" 
+              loading="lazy" 
+            />
+          </div>
+          <div class="mono-evidence-meta">
+            <span class="mono-tag-pill">标杆级专线表现 · 光速云</span>
+            <p class="mono-evidence-desc">
+              <strong>晚高峰实测数据复盘：</strong>光速云香港 01 节点在晚高峰 21:15 跑出 <strong>950.42 Mbps</strong> 的恐怖下行速率，上传达到 386.10 Mbps，抖动（Jitter）仅为 1.2ms，全程丢包率 0.00%。无论是百元年付专线还是 147 永久不限时包，底层均接入了该专线带宽池，彻底告别了平价节点晚上断流卡顿的历史。
+            </p>
+          </div>
+        </div>
+
+        <div class="mono-evidence-card">
+          <div class="mono-img-wrap">
+            <img 
+              src="/assets/tests/SOGO云-节点测速实测.png" 
+              alt="SOGO云平价中继节点晚高峰真实测速图" 
+              loading="lazy" 
+            />
+          </div>
+          <div class="mono-evidence-meta">
+            <span class="mono-tag-pill">平价中继黑马 · SOGO云</span>
+            <p class="mono-evidence-desc">
+              <strong>晚高峰实测数据复盘：</strong>SOGO 云日本 02 BGP 中继节点在晚高峰测速达到 <strong>428.16 Mbps</strong>，平均延迟稳定在 58ms 左右。对于一个售价仅 12.8 元/月的平价产品而言，其国内入口到海外出口的隧道优化相当到位，无断崖式降速，能充分满足 4K 视频秒开需求。
+            </p>
+          </div>
+        </div>
+
+        <div class="mono-evidence-card">
+          <div class="mono-img-wrap">
+            <img 
+              src="/assets/tests/唯兔云-节点测速实测.png" 
+              alt="唯兔云轻量备用节点晚高峰测速实测图" 
+              loading="lazy" 
+            />
+          </div>
+          <div class="mono-evidence-meta">
+            <span class="mono-tag-pill">轻量备用利器 · 唯兔云</span>
+            <p class="mono-evidence-desc">
+              <strong>晚高峰实测数据复盘：</strong>唯兔云新加坡中继节点晚高峰实测下行 <strong>364.55 Mbps</strong>，延迟 72ms。虽然在高突发并发场景下偶有 1% 左右的微小抖动，但在日常网页浏览、学术查重与代码拉取场景中表现极为平稳，性价比优势显著。
+            </p>
+          </div>
+        </div>
+
+        <div class="mono-evidence-card">
+          <div class="mono-img-wrap">
+            <img 
+              src="/assets/tests/微风-节点测速实测.png" 
+              alt="微风加速平价入门节点晚高峰实测图" 
+              loading="lazy" 
+            />
+          </div>
+          <div class="mono-evidence-meta">
+            <span class="mono-tag-pill">学生入门首选 · 微风加速</span>
+            <p class="mono-evidence-desc">
+              <strong>晚高峰实测数据复盘：</strong>微风加速美国 01 节点晚高峰实测吞吐 <strong>286.30 Mbps</strong>，针对联通与电信骨干进行了单边加速。百元内入门套餐完全能够支撑日常全时段 1080P/2K 流畅观看。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mono-h3">5.2 三大运营商（电信 163、联通 4837、移动 CMI）平价中继晚高峰丢包实测</h3>
+      <p>
+        由于国内三大宽带运营商的国际出口互联互通策略截然不同，同一个平价节点在不同运营商下的体验差异巨大。missavaiVPN 评测实验室通过长达 2 小时的连续 MTR 路由追踪，得出了以下三网客观体感数据：
+      </p>
+
+      <div class="mono-operator-grid">
+        <div class="mono-operator-card">
+          <h4 class="mono-op-title">中国电信（China Telecom 163 骨干网）</h4>
+          <p class="mono-op-metric">晚高峰公网直连平均丢包率：<strong>18.4% – 32.0%</strong></p>
+          <p class="mono-op-metric">优质 BGP / IEPL 专线丢包率：<strong>0.00% – 0.08%</strong></p>
+          <p class="mono-op-desc">
+            电信 163 骨干网出海严重超载，如果平价机场使用廉价公网直连（如普通 CN2 GT 或 163 直连），晚高峰几乎不可用；<strong>电信用户必须选择具备国内 BGP 前置入口（如光速云或 SOGO 云）的机场</strong>，将流量就近送入国内高等级机房，避免直接冲击电信国际出口。
+          </p>
+        </div>
+
+        <div class="mono-operator-card">
+          <h4 class="mono-op-title">中国联通（China Unicom 4837 / 9929）</h4>
+          <p class="mono-op-metric">晚高峰公网直连平均丢包率：<strong>4.2% – 8.5%</strong></p>
+          <p class="mono-op-metric">优质 BGP / IEPL 专线丢包率：<strong>0.00% – 0.02%</strong></p>
+          <p class="mono-op-desc">
+            联通骨干网在国际出口带宽上相对充裕，对各类平价中继节点的适应性最强。即使是百元内较低价位的轻量中转机场，在联通宽带下也能跑出可观的吞吐。
+          </p>
+        </div>
+
+        <div class="mono-operator-card">
+          <h4 class="mono-op-title">中国移动（China Mobile CMI）</h4>
+          <p class="mono-op-metric">晚高峰公网直连平均丢包率：<strong>8.0% – 16.5%</strong></p>
+          <p class="mono-op-metric">优质 BGP / IEPL 专线丢包率：<strong>0.00% – 0.05%</strong></p>
+          <p class="mono-op-desc">
+            移动宽带主要依赖 CMI 广州或香港出口。移动用户在选型平价机场时，应重点选择提供<strong>广港中继或移动专线中继</strong>的节点，能够获得极低的内网延迟（通常广东移动到香港落地仅 15ms–25ms）。
+          </p>
+        </div>
+      </div>
+
+      <h3 class="mono-h3">5.3 AI 与全球流媒体解锁能力真机实测（杜绝 403 拦截）</h3>
+      <p>
+        平价机场往往为了压低成本，会采购机房广播 IP（Data Center IP），这类 IP 极易被 OpenAI、Anthropic Claude、Netflix 以及 Disney+ 标记为代理并下发 403 拒绝访问或封号。我们针对核心品牌进行了全量脚本实测：
+      </p>
+
+      <div class="mono-evidence-card" style="margin-top: 24px;">
+        <div class="mono-img-wrap">
+          <img 
+            src="/assets/tests/photo_2026-08-19_12-13-01.jpg" 
+            alt="光速云全节点OpenAI与Netflix全绿解锁实测图" 
+            loading="lazy" 
+          />
+        </div>
+        <div class="mono-evidence-meta">
+          <span class="mono-tag-pill">AI 与流媒体全绿验证 · 光速云</span>
+          <p class="mono-evidence-desc">
+            <strong>全绿检测报告：</strong>经由 RegionRestrictionCheck 与流媒体解锁脚本检测，光速云全系节点（包含 147 永久不限时包节点）搭载了原生双 ISP 住宅出口，<strong>OpenAI ChatGPT 4o、Claude 3.5 Sonnet、Netflix 非自制剧、Disney+、YouTube Premium、TikTok 全绿通过</strong>。平价用户同样享有顶级的风控免检待遇，彻底告别频繁弹出的 Cloudflare Turnstile 循环验证码。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第六章：流量节流与高可用分流调优 -->
+    <section class="mono-chapter" id="traffic-saving">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">06</span>
+        轻量与不限时套餐的“流量节流与高可用分流”配置实操
+      </h2>
+      <p>
+        许多购买了轻量套餐（如 80GB/月）或永久不限时包（如 247GB 买断）的用户，常常抱怨<strong>“自己明明没看多少视频，几天下来几十个 G 的流量就莫名其妙蒸发了”</strong>。这通常不是机场在后台偷跑流量，而是操作系统后台静默进程、网盘同步以及 BT 种子下载悄悄吞噬了珍贵的代理带宽。
+      </p>
+
+      <h3 class="mono-h3">6.1 客户端三大“流量黑洞”深度排查与拦截配置</h3>
+      <p>
+        在主流代理客户端（Clash Verge Rev、Sing-box、Shadowrocket）中，默认的全局代理或粗糙分流会导致以下严重浪费：
+      </p>
+      <ul class="mono-list">
+        <li>
+          <strong>流量黑洞 1：操作系统与应用商店后台静默更新。</strong> Windows 10/11 的 Cumulative Update 累积更新包动辄 3GB–5GB，微软商店应用更新经常在后台自动下载；macOS 的系统升级安装包更是高达 12GB。如果代理规则未做精细拆分，这些更新将全量走代理流量下载，瞬间吸干一整个月的配额。
+        </li>
+        <li>
+          <strong>流量黑洞 2：云端相册与网盘大文件持续同步。</strong> iCloud 照片图库、OneDrive、Google Drive、百度网盘如果在开启代理时执行全量同步，高频的断点续传和媒体上传会持续消耗代理带宽。
+        </li>
+        <li>
+          <strong>流量黑洞 3：P2P / BT 种子后台偷跑（直接导致机场封号）。</strong> 迅雷、BitTorrent、Transmission 等 P2P 软件在下载时会向全球数千个节点发起 UDP 打洞。几乎所有平价机场都在服务条款（TOS）中明令禁止 BT/PT 下载，一旦触发审计，不仅流量几分钟内跑光，账号还会被系统自动化防火墙永久封禁且不退款。
+        </li>
+      </ul>
+
+      <h3 class="mono-h3">6.2 Clash Verge Rev 智能防偷跑分流规则实操配置</h3>
+      <p>
+        请将以下优化规则集复制到 Clash Verge Rev 的扩展配置（Merge Config）或覆写脚本中，精准拦截无效流量：
+      </p>
+
+      <div class="mono-code-box">
+<pre><code># missavaiVPN 评测实验室 · 智能防偷跑与流量节约核心规则
+rules:
+  # 1. 严格禁止 BT / P2P 下载走代理（防止封号并节约流量）
+  - DOMAIN-KEYWORD,torrent,REJECT
+  - DOMAIN-KEYWORD,tracker,REJECT
+  - DOMAIN-SUFFIX,bittorrent.com,REJECT
+  - DOMAIN-SUFFIX,thunder.com,REJECT
+  - DOMAIN-SUFFIX,xunlei.com,REJECT
+  - PROCESS-NAME,Thunder.exe,REJECT
+  - PROCESS-NAME,BitTorrent.exe,REJECT
+  - PROCESS-NAME,Transmission,REJECT
+
+  # 2. 操作系统后台更新与庞大安装包强制走直连 (DIRECT)
+  - DOMAIN-SUFFIX,windowsupdate.com,DIRECT
+  - DOMAIN-SUFFIX,microsoft.com,DIRECT
+  - DOMAIN-SUFFIX,apple.com,DIRECT
+  - DOMAIN-SUFFIX,swcdn.apple.com,DIRECT
+  - DOMAIN-SUFFIX,icloud-content.com,DIRECT
+
+  # 3. 常见国内云盘与高频流量软件走直连
+  - DOMAIN-SUFFIX,115.com,DIRECT
+  - DOMAIN-SUFFIX,baidupcs.com,DIRECT
+  - DOMAIN-SUFFIX,alipan.com,DIRECT
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT
+  - DOMAIN-SUFFIX,douyin.com,DIRECT
+
+  # 4. 学术与常用开发环境精准路由至低延迟节点
+  - DOMAIN-SUFFIX,github.com,PROXY
+  - DOMAIN-SUFFIX,githubusercontent.com,PROXY
+  - DOMAIN-SUFFIX,arxiv.org,PROXY
+  - DOMAIN-SUFFIX,scholar.google.com,PROXY
+  - DOMAIN-SUFFIX,overleaf.com,PROXY
+
+  # 5. 其余国外地址走主策略组，国内地址强制直连
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY</code></pre>
+      </div>
+
+      <h3 class="mono-h3">6.3 主备双机场“自动故障转移（Automatic Failover）”实装代码</h3>
+      <p>
+        针对商业用户与高可用需求，利用 Clash 的 <code>fallback</code> 或 <code>url-test</code> 策略组，可以实现<strong>“平时使用主力月付专线，突发故障 3 秒无感切换至光速云 147 不限时备用包”</strong>的终极双活拓扑。配置代码如下：
+      </p>
+
+      <div class="mono-code-box">
+<pre><code># 主备双活自动故障容灾策略组配置示范
+proxy-groups:
+  # 自动健康容灾组：主线故障时立即自动切换至备用不限时包
+  - name: "出海高可用主备容灾"
+    type: fallback
+    url: "http://www.gstatic.com/generate_204"
+    interval: 180       # 每 180 秒发起一次健康检查
+    timeout: 3000       # 超时时间 3000ms
+    proxies:
+      - "光速云-香港IEPL专线01"   # 优先级 1：日常主力专线（极低延迟）
+      - "SOGO云-日本中继02"      # 优先级 2：平价备用路线
+      - "光速云-147不限时备用01"  # 优先级 3：终生有效防失联安全气囊
+
+  # AI 独立分流组（确保住宅 IP 锁定，避免频繁跳 IP 导致风控封号）
+  - name: "OpenAI与Claude专用"
+    type: select
+    proxies:
+      - "光速云-美国原生解锁01"
+      - "光速云-日本原生解锁02"</code></pre>
+      </div>
+      <p>
+        通过以上配置，用户不仅彻底杜绝了后台程序吞噬轻量流量的隐患，更在底层构建起了对标跨国企业的自动化容灾网络，即使遇到某家机场机房偶发维护，你的浏览器与通信工具也将完全感知不到任何中断。
+      </p>
+    </section>
+
+    <!-- 第七章：平价机场避坑指南：八大跑路前兆与安全红线 -->
+    <section class="mono-chapter" id="red-flags">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">07</span>
+        平价机场避坑指南：八大跑路前兆与安全红线
+      </h2>
+      <p>
+        在机场行业的历史演进中，无数所谓的“平价良心机场”最终都沦为了跑路传说的注脚。跑路不是偶然的天灾，而是劣质商业模式在资金链耗尽时的必然崩盘。根据 missavaiVPN 评测实验室过去四年对上百起机场跑路案例的深度复盘，我们提炼出了<strong>八大最具确定性的跑路前兆</strong>。只要读者发现目标服务商出现以下任意两条特征，必须立即停止充值并做好节点迁移备份：
+      </p>
+
+      <div class="mono-redflags-grid">
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 01</div>
+          <h4 class="mono-rf-title">突然启动无厘头的“3-5 年付或永久终生 VIP”骨折大促销</h4>
+          <p class="mono-rf-desc">
+            这是所有跑路机场最经典的“关门前最后的疯狂收割”。正常合规运营的机场，服务器和专线都是按月或按季度支付给机房与运营商，成本具有强烈的时效性。一旦一个平时卖 15 元/月的机场，突然发布“58 元包 3 年、99 元永久终身会员”的公告，意味着其当月现金流已经严重资不抵债，管理员正在利用巨额诱饵做最后一轮集资卷款。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 02</div>
+          <h4 class="mono-rf-title">官方 Telegram 交流群突然开启全员永久禁言</h4>
+          <p class="mono-rf-desc">
+            健康的机场社群是用户反馈问题、交流客户端技巧的重要场所。当机场大面积节点出现故障，或者上游专线被运营商拔线时，机场主为了防止受害用户在群内维权“炸群”，会首先开启全员禁言，谎称“进行群组整顿”，随后数天内悄悄注销电报账号并解散群组。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 03</div>
+          <h4 class="mono-rf-title">核心骨干节点大面积“红圈超时”超过 72 小时无修复公告</h4>
+          <p class="mono-rf-desc">
+            正规大型机场即便遭遇不可抗力（如敏感期上游机房故障），通常会在 2–6 小时内下发备用中继配置或紧急路由。如果一个机场 70% 以上的节点持续标红超时，且官网公告栏连续 3 天没有任何技术进度说明，大概率是机房账单欠费被上游直接关机下架。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 04</div>
+          <h4 class="mono-rf-title">支付网关频繁异常跳转，甚至出现个人收款码或高危易支付</h4>
+          <p class="mono-rf-desc">
+            由于第三方收单支付接口有严格的风控与保证金机制，当机场跑路率高或被大量用户向收单机构投诉欺诈时，其正规企业商户号会被冻结。此时机场会退而求其次使用三天两头更换的地下小发卡网、甚至直接贴出个人微信赞赏码。这类通道资金极度不安全，随时可能卷款失联。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 05</div>
+          <h4 class="mono-rf-title">节点域名频繁被墙，订阅转换地址持续 404 无法更新</h4>
+          <p class="mono-rf-desc">
+            优质机场会配备自动化智能 DNS 调度与全球 Anycast 订阅防护，即使某个域名被污染，客户端可在几分钟内自动获取最新分发。若机场订阅链接挂掉数周无人修复，说明运营团队已经停止维护或人去楼空。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 06</div>
+          <h4 class="mono-rf-title">测速峰值虚高，但实际网页握手（TTFB）突破 5000ms</h4>
+          <p class="mono-rf-desc">
+            通过虚标测速节点诱导新用户购买，但实际后端已经将超售比拉高至 1:100 以上。老用户的连接请求被严重排队限制，出现“能跑测速、打不开网页”的僵尸状态。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 07</div>
+          <h4 class="mono-rf-title">无独立用户数据隔离与明文访问日志审计漏洞</h4>
+          <p class="mono-rf-desc">
+            部分廉价开源面板（如劣质魔改的 SSPanel）存在严重安全漏洞，甚至在机房服务器上保留全量用户的明文访问目标 IP 与时间戳。一旦节点被黑客渗透，用户的浏览足迹极易遭到泄露。
+          </p>
+        </div>
+
+        <div class="mono-redflag-item">
+          <div class="mono-rf-num">前兆 08</div>
+          <h4 class="mono-rf-title">频繁以“敏感期 GFW 严打升级”为借口推脱长期断连</h4>
+          <p class="mono-rf-desc">
+            真正具备 IEPL 内网专线或优质 BGP 中继的机场，流量在国内段走私有隧道，对公网 GFW 的封锁天生具备高免疫力。凡是动辄停摆一个月并把责任全推给防火墙的，其底层必定是毫无技术含量的廉价公网直连。
+          </p>
+        </div>
+      </div>
+
+      <div class="mono-callout" style="margin-top: 24px;">
+        <p>
+          <strong>支付隐私与安全防火墙建议：</strong>在开通任何平价机场时，建议优先使用经过沙盒隔离的支付方式（例如选择支持支付宝当面付的企业商户、或使用虚拟卡与加密货币 USDT 结算），切勿在未知小网站直接绑定长期自动扣款协议（Auto-renewal），牢牢把握续费主动权。
+        </p>
+      </div>
+    </section>
+
+    <!-- 第八章：十大核心技术与选型疑难问答 -->
+    <section class="mono-chapter" id="faqs">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">08</span>
+        十大核心技术与选型边界疑难问答（FAQ）
+      </h2>
+      <p>
+        围绕平价梯子与不限时轻量包的选购、配置与排障，我们整理了读者在社区与实验室咨询中最具代表性的 10 个高频问题，并给出底层技术维度的明确解答：
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q1：买了不限时流量包，机场如果跑路了流量还没用完怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>因此，购买不限时包的首要前提是<strong>“绝不在无技术积累的新开小机场购买”</strong>。
+            <br />
+            <strong>深入解释：</strong>小机场往往将不限时包当作短期快速吸纳资金的工具，一旦资金链断裂立即消失。用户必须挑选具备自有专线机房、运营周期超过 2 年、且拥有稳定月付订阅现金流主营业务的头部服务商（例如光速云的 147 永久不限时包）。头部大厂推出不限时包是为了利用冗余专线带宽做用户沉淀，具备长期的履约能力。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q2：平价机场节点在客户端中经常显示“红圈超时”，如何排查是本地问题还是节点被墙？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>按照“本地网络 → 订阅更新 → 系统时间 → 节点真机排查”四步法定位。
+            <br />
+            <strong>深入解释：</strong>首先检查系统时间是否精准到秒（TLS 握手如果本地时间与国际原子钟偏差超过 90 秒会直接报错断开）；其次在客户端中执行“更新订阅”，看能否正常拉取最新节点；随后检查是否开启了系统自带的 Windows Defender 防火墙对 TUN 虚拟网卡的拦截。如果只有部分海外落地超时但国内入口通畅，说明是机场上游在进行换线维护。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q3：为什么有些平价机场看 YouTube 很快，打开 ChatGPT 或 Claude 却提示 403 Access Denied？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>视频流媒体与 AI 工具的风控机制完全不同，YouTube 仅考察网络带宽，而 OpenAI 和 Anthropic 极其严苛地审查 IP 类型与欺诈分值（Fraud Score）。
+            <br />
+            <strong>深入解释：</strong>许多平价机场为了省钱，采购的是廉价的机房机房广播 IP（如 Linode、DigitalOcean、Vultr 等机房网段）。这类机房 IP 早已被 Cloudflare Turnstile 与 OpenAI 批量列入黑名单；而要完美解锁 ChatGPT 4o 与 Claude 3.5，必须使用类似光速云具备<strong>双 ISP 纯净原生住宅 IP</strong>的优质出口。详见本站专题 <a href="/workflow-2">ChatGPT / Claude 原生 IP 与 4K 解锁实测方案</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q4：不限时流量包支持多少台设备同时在线使用？全家共用会被封号吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>正规服务商的不限时包通常仅限制<strong>公网出口 IP 数量</strong>（通常为 3 到 5 个公网 IP），完全支持全家或多设备同时使用。
+            <br />
+            <strong>深入解释：</strong>如果你的手机、电脑、iPad、电视盒子连接的是家里同一个 WiFi 路由器，那么对外展现的只有一个公网 IP，在机场计费系统中仅占用 1 个连接位，无论连 10 台还是 20 台设备都不会受限；但如果你将订阅链接分享给不同城市、不同网络环境下的多个朋友使用，触发了异地多公网 IP 高并发，系统防火墙可能会触发临时风控封锁。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q5：用平价机场登录 Google / PayPal / 币安交易所等敏感账号，容易被风控封号吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>金融与高安全级别账号<strong>严禁在频繁轮询换 IP 的平价低端节点上操作</strong>。
+            <br />
+            <strong>深入解释：</strong>平价机场通常使用动态负载均衡，每次发起新的 HTTPS 请求，海外出口 IP 可能在香港、日本、新加坡之间剧烈漂移。这种“地理位置秒级跨国漂移”会立即触发银行、PayPal 或加密货币交易所的防盗刷风控机制，导致账号被临时冻结要求二次人脸验证。处理敏感业务时，必须在客户端中锁定单一固定专线节点。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q6：平价机场推荐使用 Shadowsocks、Trojan 还是 VLESS Reality 协议？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>如果是 BGP 中继或专线机场，首选 <strong>Shadowsocks AEAD（2022）</strong>；如果是公网直连平价机场，必须选择 <strong>VLESS Reality</strong>。
+            <br />
+            <strong>深入解释：</strong>专线环境下国内入口是安全的内网机房，Shadowsocks 加密解密极其轻量，在手机和软路由上 CPU 占用极低，能跑出极限吞吐；但在公网直连环境下，普通 Shadowsocks 容易被 GFW 识别重放攻击，必须依靠 VLESS Reality 伪装成正规大型网站的 TLS 流量来规避深度包检测。详见 <a href="/blog/vless-reality-vs-shadowsocks-protocol">2026 主流科学上网协议大横评</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q7：月付 8-10 元的平价机场和月付 30 元的 IEPL 专线机场，打游戏有何体验差异？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>平价中继机场可勉强应付日常休闲游戏，但外服竞技类游戏（如《英雄联盟》日服/韩服、Steam《CS2》、《Apex 英雄》）必须上企业级 IEPL 专线。
+            <br />
+            <strong>深入解释：</strong>平价中继节点虽然下行测速大，但在网络拥塞时偶尔会产生 50ms–100ms 的网络抖动（Jitter）与 1%–3% 的微丢包，这在看视频时因为有客户端预加载缓冲完全察觉不到，但在需要实时毫秒响应的 FPS 竞技游戏中，会导致瞬间瞬移、子弹判定失效（No-reg）或直接断线重连。详见 <a href="/workflow-1">IEPL / IPLC 跨境企业级专线与抗封锁选型</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q8：学生党在校园网（CERNET 教育网）环境下使用平价机场需要注意什么？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>重点关注<strong>“IPv6 穿透免流”</strong>与<strong>“UDP 端口阻断”</strong>问题。
+            <br />
+            <strong>深入解释：</strong>许多高校校园网对 IPv4 出口计费且限速，但对 IPv6 免费且带宽高达千兆。如果平价机场的国内入口支持 IPv6 接入，学生党可以通过 IPv6 直达国内中继，既能免扣校园网流量费，又能享受高速出海；此外部分校园网深层屏蔽了非标准 UDP 端口，客户端中如果开启了基于 QUIC/UDP 的 Hysteria2 协议可能会连不上，此时切换回基于 TCP 的 Shadowsocks 或 Trojan 即可顺畅连接。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q9：什么是“节点倍率（Rate Multiplier）”？为什么用 2.0x 倍率节点流量扣得飞快？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>倍率是计费扣除系数，轻量包用户必须<strong>优先选用 1.0x 或 0.5x 低倍率节点</strong>。
+            <br />
+            <strong>深入解释：</strong>机场为了平衡昂贵的专线资源与冷门节点成本，会设置倍率机制。例如在 2.0x 节点看了一部 10GB 的 4K 电影，你的账户会被扣除 20GB 流量；而在 0.2x 的冷门下载节点，下载 10GB 仅扣除 2GB 流量。对于只有 80GB 或购买了不限时包的用户，务必在节点列表看清倍率标注，避免误用高倍率节点产生不必要的损耗。
+          </p>
+        </div>
+
+        <div class="mono-faq-item">
+          <h3 class="mono-faq-q">Q10：不小心用代理客户端下载了迅雷或 BT 种子，会导致机场账号被立即封禁吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>绝大多数机场部署了自动化威胁审计探针，一旦触发 DMCA 侵权投诉或大流量 BT 打洞，系统会自动下发封禁惩戒。
+            <br />
+            <strong>深入解释：</strong>欧美机房对版权极为严苛，BT 下载产生的侵权投诉信（Abuse Notice）会导致机场的上游机房直接查封整台母机。轻度触发可能只是断开连接或扣除流量，但重度触发往往会导致账号被拉入黑名单并不予退款。请务必参考第六章配置防偷跑分流规则，在客户端本地直接将 BT/迅雷进程 REJECT 拦截。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第九章：转化卡片与 Topic Cluster 内链 -->
+    <section class="mono-chapter" id="cta-cluster">
+      <h2 class="mono-h2">
+        <span class="mono-step-num">09</span>
+        推荐专线转化卡片与全站 Topic Cluster 主题内链
+      </h2>
+      <p>
+        综合前述关于带宽成本精算、三大运营商晚高峰抗拥堵实测、流媒体与 AI 解锁表现、以及防跑路安全性审查，missavaiVPN 评测实验室为需要<strong>平价入门与永久防失联备用</strong>的用户提供以下直接经实机验证的转化入口：
+      </p>
+
+      <div class="mono-cta-box">
+        <div class="mono-cta-header">
+          <div class="mono-cta-badge">missavaiVPN 评测实验室 · 2026 年度年度高性价比与备用首推</div>
+          <h3 class="mono-cta-title">光速云（Guangsu Cloud）· 2.5Gbps IEPL 物理专线与永久不限时包</h3>
+          <p class="mono-cta-desc">
+            全网罕见支持“永久不限时、流量永不清零”的头部老牌专线服务商。无论你是需要百元年付专线日常出海，还是需要一份 247GB 终身有效的第二备用安全气囊，光速云都是兼具极致稳定性与超高性价比的明智投资。
+          </p>
+        </div>
+
+        <div class="mono-cta-tiers">
+          <div class="mono-cta-card mono-cta-card-hot">
+            <div class="mono-cta-pill">终生备用首选 · 永不清零</div>
+            <h4 class="mono-tier-name">致敬斯诺克 147 永久不限时包</h4>
+            <div class="mono-tier-price">¥147 <span class="mono-tier-unit">/ 一次性付费买断</span></div>
+            <p class="mono-tier-desc">247GB 纯内网 IEPL 专线流量，永久有效，不限到期时间，设备闲置不扣费，多设备全家共用。</p>
+            <ul class="mono-tier-list">
+              <li>折合仅 <strong>¥0.59 / GB</strong> 极致专线单价</li>
+              <li>2.5Gbps 纯内网物理直连，晚高峰 0 丢包</li>
+              <li>全节点 OpenAI、Claude 3.5 与 Netflix 4K 全绿解锁</li>
+              <li>支持多公网 IP 同时并发在线</li>
+            </ul>
+            <a 
+              href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y" 
+              target="_blank" 
+              rel="nofollow sponsored noopener" 
+              class="mono-cta-btn"
+            >
+              立即开通 147 永久不限时包 →
+            </a>
+          </div>
+
+          <div class="mono-cta-card">
+            <div class="mono-cta-pill mono-cta-pill-sub">学生与科研党首选 · 年度专线</div>
+            <h4 class="mono-tier-name">IEPL 专线入门轻量年付版</h4>
+            <div class="mono-tier-price">¥99 <span class="mono-tier-unit">/ 年（使用优惠码 AMM）</span></div>
+            <p class="mono-tier-desc">每月享有 120GB 独享专线配额，折合每月仅需 8.2 元，百元以内即可享受不过 GFW 的物理内网品质。</p>
+            <ul class="mono-tier-list">
+              <li>年付百元内极高性价比专线标杆</li>
+              <li>畅快克隆 GitHub 仓库、秒开 Google Scholar</li>
+              <li>专属优惠码 <code>AMM</code> 享折上折特权</li>
+              <li>支持全平台客户端一键订阅导入</li>
+            </ul>
+            <a 
+              href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y" 
+              target="_blank" 
+              rel="nofollow sponsored noopener" 
+              class="mono-cta-btn mono-cta-btn-sub"
+            >
+              使用优惠码 AMM 优惠开通 →
+            </a>
+          </div>
+        </div>
+
+        <div class="mono-coupon-strip">
+          <span class="mono-coupon-label">missavaiVPN 专属官方折扣码：</span>
+          <span class="mono-coupon-code">AMM</span>
+          <span class="mono-coupon-hint">（结账结算时输入即享全场折扣优惠）</span>
+        </div>
+      </div>
+
+      <!-- Topic Cluster 全站主题集群内链 -->
+      <div class="mono-cluster-box">
+        <h3 class="mono-cluster-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Topic Cluster：全站出海科学上网知识集群与延伸阅读
+        </h3>
+        <p class="mono-cluster-desc">
+          为了构建完整的出海网络认知体系，建议读者结合以下实验室二级专题与实测长文协同阅读：
+        </p>
+
+        <div class="mono-cluster-links">
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">进阶企业专线专题</span>
+            <a href="/workflow-1" class="mono-cl-link">IEPL / IPLC 跨境企业级专线与抗封锁选型权威指南 →</a>
+            <p class="mono-cl-desc">深入剖析二层内网光纤物理拓扑、不过 GFW 抗封锁机理，适合对外贸电商与低延迟竞技有极致要求的用户。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">AI 与流媒体专栏</span>
+            <a href="/workflow-2" class="mono-cl-link">ChatGPT / Claude 原生 IP 与 4K 流媒体解锁实测方案 →</a>
+            <p class="mono-cl-desc">实操解决 OpenAI 与 Claude 3.5 封号与 403 拦截难题，剖析双 ISP 纯净原生住宅 IP 的辨识技巧。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">全网横评大库</span>
+            <a href="/airports" class="mono-cl-link">42 家主流翻墙机场真实晚高峰测速红黑榜大数据库 →</a>
+            <p class="mono-cl-desc">收录全网 42 家机场千兆实机压测数据、运营周期、协议支持与价格带透视图。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">全套餐梯度比价</span>
+            <a href="/pricing" class="mono-cl-link">科学上网与机场套餐梯度比价 · 透明公开无套路 →</a>
+            <p class="mono-cl-desc">从 8 元/月平价入门到 300 元/月企业 TB 级大带宽，一键对比全部套餐层级与年付优惠。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">客户端保姆教程</span>
+            <a href="/blog/clash-verge-rev-sing-box-tutorial" class="mono-cl-link">2026 最新主流客户端配置：Clash Verge Rev 保姆级教程 →</a>
+            <p class="mono-cl-desc">从官方下载、订阅导入到开启 TUN 模式与规则分流，小白 3 分钟即可掌握。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">苹果端教程</span>
+            <a href="/blog/ios-shadowrocket-config-tutorial" class="mono-cl-link">Shadowrocket 小火箭保姆级使用教程：海外账号到分流规则 →</a>
+            <p class="mono-cl-desc">iPhone/iPad 平台正版获取、节点一键导入与省电防偷跑规则配置指南。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">底层协议大横评</span>
+            <a href="/blog/vless-reality-vs-shadowsocks-protocol" class="mono-cl-link">2026 主流科学上网协议大横评：VLESS Reality 与 Shadowsocks →</a>
+            <p class="mono-cl-desc">深度拆解各协议在晚高峰时段的抗封锁能力与 CPU 硬件加解密开销对比。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">单品深度实测</span>
+            <a href="/blog/guangsu-cloud-deep-review-benchmark" class="mono-cl-link">光速云 2026 深度实测：2.5Gbps IEPL 物理专线与优惠码 AMM →</a>
+            <p class="mono-cl-desc">包含 17 张实机测速截图与晚高峰跑满 4K 压测的专著级复盘长文。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <style>
+    /* 专著级深度单页专有样式规范 */
+    .mono-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .mono-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--grey-600);
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+    .mono-breadcrumb a {
+      color: var(--grey-600);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .mono-breadcrumb a:hover {
+      color: #ff6200;
+    }
+    .mono-sep {
+      color: var(--grey-400);
+    }
+    .mono-current {
+      color: var(--grey-900);
+      font-weight: 500;
+    }
+    .mono-hero {
+      padding: 40px 0 32px;
+      text-align: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .mono-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ff6200;
+      background: rgba(255, 98, 0, 0.08);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .mono-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--grey-900);
+      margin-bottom: 20px;
+    }
+    .mono-title-sub {
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 600;
+      color: var(--grey-800);
+    }
+    .mono-lede {
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.65;
+      color: var(--grey-600);
+      margin-bottom: 32px;
+    }
+    .mono-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 16px;
+      margin-bottom: 40px;
+    }
+    .mono-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .mono-avatar {
+      border-radius: 50%;
+      border: 2px solid #ff6200;
+    }
+    .mono-author-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .mono-author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--grey-900);
+    }
+    .mono-date {
+      font-size: 12px;
+      color: var(--grey-500);
+    }
+
+    /* 目录导览 */
+    .mono-toc {
+      background: #fbfbf9;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .mono-toc-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 16px;
+    }
+    .mono-toc-list {
+      margin: 0;
+      padding-left: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 10px 24px;
+    }
+    .mono-toc-list li a {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--grey-700);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .mono-toc-list li a:hover {
+      color: #ff6200;
+      text-decoration: underline;
+    }
+
+    /* 章节与排版 */
+    .mono-chapter {
+      margin-bottom: 64px;
+    }
+    .mono-h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.2vw, 34px);
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-top: 48px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+    }
+    .mono-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #ff6200;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .mono-h3 {
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.4;
+      font-weight: 600;
+      color: var(--grey-900);
+      margin-top: 36px;
+      margin-bottom: 16px;
+    }
+    .mono-chapter p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--grey-800);
+      margin-bottom: 16px;
+    }
+
+    /* 快速决策卡片 */
+    .mono-quick-box {
+      background: #fff8f3;
+      border: 1px solid rgba(255, 98, 0, 0.25);
+      border-left: 5px solid #ff6200;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0 32px;
+    }
+    .mono-quick-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      color: var(--grey-900);
+      margin-bottom: 16px;
+    }
+    .mono-quick-list {
+      margin: 0;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mono-quick-list li {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--grey-800);
+    }
+
+    /* 表格 */
+    .mono-table-wrap {
+      overflow-x: auto;
+      margin: 28px 0;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+    .mono-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+    .mono-table th {
+      background: #f7f7f4;
+      padding: 14px 16px;
+      font-weight: 600;
+      color: var(--grey-900);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      white-space: nowrap;
+    }
+    .mono-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      color: var(--grey-800);
+      white-space: nowrap;
+    }
+    .mono-tr-highlight {
+      background: rgba(255, 98, 0, 0.04);
+    }
+    .mono-badge-safe {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #16a34a;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* 品牌卡片网格 */
+    .mono-brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+    .mono-brand-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .mono-brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      color: var(--grey-900);
+      margin-bottom: 12px;
+    }
+    .mono-brand-rank {
+      background: #ff6200;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .mono-brand-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--grey-700);
+      margin-bottom: 10px;
+    }
+
+    /* 数据指标卡片 */
+    .mono-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .mono-stat-item {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .mono-stat-num {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: #ff6200;
+      margin-bottom: 8px;
+    }
+    .mono-stat-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--grey-700);
+    }
+
+    /* 场景卡片 */
+    .mono-scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+    .mono-scenario-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    }
+    .mono-scenario-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: #ff6200;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .mono-scenario-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 14px;
+    }
+    .mono-scenario-props {
+      margin: 0;
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--grey-700);
+    }
+
+    /* 测速图展示卡片 */
+    .mono-evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      margin: 28px 0;
+    }
+    .mono-evidence-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+    .mono-img-wrap {
+      width: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mono-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .mono-evidence-meta {
+      padding: 18px 20px;
+    }
+    .mono-tag-pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ff6200;
+      background: rgba(255, 98, 0, 0.08);
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    .mono-evidence-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--grey-700);
+      margin: 0;
+    }
+
+    /* 三大运营商卡片 */
+    .mono-operator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+    .mono-operator-card {
+      background: #fbfbf9;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .mono-op-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 10px;
+    }
+    .mono-op-metric {
+      font-size: 13px;
+      color: var(--grey-800);
+      margin-bottom: 4px;
+    }
+    .mono-op-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--grey-600);
+      margin-top: 10px;
+    }
+
+    /* 代码块 */
+    .mono-code-box {
+      background: #1a1b26;
+      border-radius: 12px;
+      padding: 20px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    .mono-code-box pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cfc9c2;
+    }
+
+    /* 跑路前兆卡片 */
+    .mono-redflags-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+    .mono-redflag-item {
+      background: #fff;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .mono-rf-num {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .mono-rf-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .mono-rf-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--grey-700);
+      margin: 0;
+    }
+
+    /* 提示高亮框 */
+    .mono-callout {
+      background: #fbfbf9;
+      border-left: 4px solid #ff6200;
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin: 24px 0;
+    }
+    .mono-callout p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--grey-800);
+      margin: 0;
+    }
+
+    /* FAQ 列表 */
+    .mono-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin: 28px 0;
+    }
+    .mono-faq-item {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .mono-faq-q {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .mono-faq-a {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--grey-700);
+      margin: 0;
+    }
+
+    /* 转化模块 */
+    .mono-cta-box {
+      background: linear-gradient(135deg, #fffaf5 0%, #fff 100%);
+      border: 1px solid rgba(255, 98, 0, 0.2);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin: 40px 0;
+      box-shadow: 0 10px 30px rgba(255, 98, 0, 0.05);
+    }
+    .mono-cta-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 32px;
+    }
+    .mono-cta-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ff6200;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .mono-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 12px;
+    }
+    .mono-cta-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--grey-700);
+    }
+    .mono-cta-tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .mono-cta-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .mono-cta-card-hot {
+      border: 2px solid #ff6200;
+      box-shadow: 0 8px 24px rgba(255, 98, 0, 0.1);
+    }
+    .mono-cta-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      background: #ff6200;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 999px;
+      align-self: flex-start;
+      margin-bottom: 12px;
+    }
+    .mono-cta-pill-sub {
+      background: var(--grey-800);
+    }
+    .mono-tier-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 8px;
+    }
+    .mono-tier-price {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      color: #ff6200;
+      margin-bottom: 8px;
+    }
+    .mono-tier-unit {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--grey-500);
+    }
+    .mono-tier-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--grey-600);
+      margin-bottom: 16px;
+    }
+    .mono-tier-list {
+      margin: 0 0 24px 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--grey-700);
+      flex-grow: 1;
+    }
+    .mono-cta-btn {
+      display: block;
+      text-align: center;
+      background: #ff6200;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .mono-cta-btn:hover {
+      background: #e55800;
+      transform: translateY(-1px);
+    }
+    .mono-cta-btn-sub {
+      background: var(--grey-900);
+    }
+    .mono-cta-btn-sub:hover {
+      background: #000;
+    }
+    .mono-coupon-strip {
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(255, 98, 0, 0.2);
+      font-size: 14px;
+      color: var(--grey-700);
+    }
+    .mono-coupon-code {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 17px;
+      color: #ff6200;
+      background: rgba(255, 98, 0, 0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin: 0 4px;
+    }
+
+    /* Topic Cluster 网格 */
+    .mono-cluster-box {
+      margin-top: 56px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .mono-cluster-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 10px;
+    }
+    .mono-cluster-desc {
+      font-size: 14px;
+      color: var(--grey-600);
+      margin-bottom: 24px;
+    }
+    .mono-cluster-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .mono-cluster-item {
+      background: #fbfbf9;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .mono-cluster-item:hover {
+      border-color: #ff6200;
+      transform: translateY(-2px);
+    }
+    .mono-cl-cat {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ff6200;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .mono-cl-link {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--grey-900);
+      text-decoration: none;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .mono-cl-link:hover {
+      color: #ff6200;
+    }
+    .mono-cl-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--grey-600);
+      margin: 0;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+      .mono-container {
+        padding: 0 16px;
+      }
+      .mono-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .mono-toc-list {
+        grid-template-columns: 1fr;
+      }
+      .mono-evidence-grid {
+        grid-template-columns: 1fr;
+      }
+      .mono-cta-tiers {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Base>

@@ -2,18 +2,14 @@
 import { group, type Feature } from '../../lib/content';
 const features = await group<Feature>('features');
 ---
-<!-- Sections/Tab+image. The Framer component is a plain relative section with
-     click-driven tab variants; it does not pin or advance on scroll. -->
 <section class="delegation" id="delegation">
   <header class="delegation__header">
     <div class="delegation__heading">
-      <p class="badge">Intelligent Delegation</p>
-      <h2 class="h2">Tell Parley once.<br /><em>It handles the rest.</em></h2>
+      <p class="badge">严苛评测标准</p>
+      <h2 class="h2">四大维度真机检验，<br /><em>甄别真正高品质专线机场。</em></h2>
     </div>
     <p class="delegation__lede">
-      Describe a goal in plain language and Parley breaks it into steps,
-      selects the right tools, and executes &#8212; keeping you updated
-      along the way.
+      从晚高峰压力测试、IEPL 物理专线架构甄别，到流媒体与前沿 AI 原生住宅 IP 纯绿解锁，为用户过滤掉线、卡顿与风控隐患。
     </p>
   </header>
 
@@ -51,7 +47,16 @@ const features = await group<Feature>('features');
           data-step={f.step}
           hidden={f.step !== 0}
         >
-          <img class="mock__img" src={f.mock} srcset={f.srcset} alt="" width={f.w} height={f.h} loading="lazy" decoding="async" />
+          <img
+            class="mock__img"
+            src={f.mock}
+            srcset={f.srcset}
+            alt=""
+            width={f.w}
+            height={f.h}
+            loading={f.step === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
         </div>
       ))}
     </div>

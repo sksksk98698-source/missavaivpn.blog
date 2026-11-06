@@ -1,24 +1,113 @@
 ---
-import schema from '../content/schema.json';
+import baseSchema from '../content/schema.json';
 
-/**
- * Page head. Titles, descriptions and the Open Graph image mirror the Framer
- * project's own SEO settings; the JSON-LD block is the payload its
- * StructuredData component emits site-wide (Organization, WebSite, Product,
- * FAQPage), with the origin pointed at this deployment.
- */
 export interface Props {
   title: string;
   description: string;
   path: string;
-  /** Blog posts override the shared card with their own cover. */
   ogImage?: string;
-  /** The waitlist and thank-you pages carry no structured data in Framer. */
   schema?: boolean;
+  noindex?: boolean;
+  siteVerification?: {
+    google?: string;
+    bing?: string;
+    shenma?: string;
+    baidu?: string;
+  };
+  articleMeta?: {
+    datePublished: string;
+    dateModified?: string;
+    author: string;
+    category: string;
+    tags?: string[];
+  };
 }
-const { title, description, path, ogImage, schema: withSchema = true } = Astro.props;
-const canonical = new URL(path, Astro.site).href;
-const card = new URL(ogImage ?? '/assets/og-image.jpg', Astro.site).href;
+
+const {
+  title,
+  description,
+  path,
+  ogImage,
+  schema: withSchema = true,
+  noindex = false,
+  siteVerification,
+  articleMeta,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL('https://missavaivpn.blog');
+
+// Canonical normalization: root has '/', subpages strictly never have trailing slash
+let normalizedPath = path.startsWith('/') ? path : `/${path}`;
+if (normalizedPath !== '/' && normalizedPath.endsWith('/')) {
+  normalizedPath = normalizedPath.slice(0, -1);
+}
+const canonical = new URL(normalizedPath, siteUrl).href;
+const card = new URL(ogImage ?? '/assets/og-image.jpg', siteUrl).href;
+
+// Search Engine Verification (GSC, Bing, Shenma, Baidu)
+const googleCode = siteVerification?.google || import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || '';
+const bingCode = siteVerification?.bing || import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '';
+const shenmaCode = siteVerification?.shenma || import.meta.env.PUBLIC_SHENMA_SITE_VERIFICATION || '';
+const baiduCode = siteVerification?.baidu || import.meta.env.PUBLIC_BAIDU_SITE_VERIFICATION || '';
+
+let structuredData: any = baseSchema;
+if (articleMeta) {
+  structuredData = [
+    ...baseSchema.filter((item: any) => item['@type'] === 'Organization' || item['@type'] === 'WebSite'),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description: description,
+      url: canonical,
+      image: card,
+      datePublished: articleMeta.datePublished,
+      dateModified: articleMeta.dateModified ?? articleMeta.datePublished,
+      articleSection: articleMeta.category,
+      keywords: articleMeta.tags?.join(', '),
+      author: {
+        '@type': 'Person',
+        name: articleMeta.author,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'missavaiVPN 评测实验室',
+        logo: {
+          '@type': 'ImageObject',
+          url: new URL('/assets/favicon.png', siteUrl).href,
+        },
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonical,
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: '首页',
+          item: 'https://missavaivpn.blog',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: '技术专栏',
+          item: 'https://missavaivpn.blog/blog',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: title,
+          item: canonical,
+        },
+      ],
+    },
+  ];
+}
 ---
 <meta charset="UTF-8" />
 <meta name="generator" content={Astro.generator} />
@@ -26,20 +115,45 @@ const card = new URL(ogImage ?? '/assets/og-image.jpg', Astro.site).href;
 <meta name="theme-color" content="#f7f7f4" />
 <title>{title}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+{!noindex && <link rel="canonical" href={canonical} />}
 
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Parley" />
+<!-- Search Engine Site Verification Slots (Google / Bing / Shenma / Baidu) -->
+{googleCode && <meta name="google-site-verification" content={googleCode} />}
+{bingCode && <meta name="msvalidate.01" content={bingCode} />}
+{shenmaCode && <meta name="shenma-site-verification" content={shenmaCode} />}
+{baiduCode && <meta name="baidu-site-verification" content={baiduCode} />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={articleMeta ? 'article' : 'website'} />
+<meta property="og:site_name" content="missavaiVPN 评测实验室" />
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={card} />
+
+<!-- Article Specific Open Graph Extensions -->
+{articleMeta && (
+  <>
+    <meta property="article:published_time" content={articleMeta.datePublished} />
+    {articleMeta.dateModified && <meta property="article:modified_time" content={articleMeta.dateModified} />}
+    <meta property="article:author" content={articleMeta.author} />
+    <meta property="article:section" content={articleMeta.category} />
+    {articleMeta.tags?.map((tag: string) => (
+      <meta property="article:tag" content={tag} />
+    ))}
+  </>
+)}
+
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={card} />
 
-<link rel="icon" href="/assets/favicon.png" />
+<!-- Favicon & Touch Icons -->
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
 <link rel="apple-touch-icon" href="/assets/favicon.png" />
 
-{withSchema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+<!-- Structured Data JSON-LD -->
+{withSchema && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}

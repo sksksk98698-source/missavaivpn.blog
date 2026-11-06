@@ -16,7 +16,7 @@ const sameCategory = others.filter((p) => p.data.category === category);
 const related = [...sameCategory, ...others.filter((p) => !sameCategory.includes(p))].slice(0, 3);
 ---
 <section class="related">
-  <h3 class="related__title">Related posts</h3>
+  <h3 class="related__title">推荐阅读与关联技术文章</h3>
   <ul class="bgrid" role="list">
     {related.map((p) => (
       <li class="bcard">

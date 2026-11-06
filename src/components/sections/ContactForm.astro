@@ -5,9 +5,9 @@ import FormButton from '../FormButton.astro';
  *  stay in the browser and the form shows its success state. */
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 const fields = [
-  { id: 'first-name', label: 'First name', type: 'text', placeholder: 'Sarah', autocomplete: 'given-name' },
-  { id: 'work-email', label: 'Work email', type: 'email', placeholder: 'sarah@example.com', autocomplete: 'email' },
-  { id: 'company', label: 'Company', type: 'text', placeholder: 'Acme Inc.', autocomplete: 'organization' },
+  { id: 'first-name', label: '您的称呼 / 昵称', type: 'text', placeholder: '李先生 / Alex', autocomplete: 'given-name' },
+  { id: 'work-email', label: '电子邮箱', type: 'email', placeholder: 'your-email@example.com', autocomplete: 'email' },
+  { id: 'company', label: '所在团队 / 使用场景', type: 'text', placeholder: '外贸出海 / AI 独立开发 / 个人日常', autocomplete: 'organization' },
 ];
 ---
 <div class="cform">
@@ -27,9 +27,9 @@ const fields = [
       </div>
     ))}
     <div class="cform__field">
-      <label class="cform__label" for="message">Your message</label>
-      <textarea class="cform__input cform__input--area" id="message" name="message" rows="4" placeholder="Drop your message…"></textarea>
+      <label class="cform__label" for="message">咨询或反馈详情</label>
+      <textarea class="cform__input cform__input--area" id="message" name="message" rows="4" placeholder="请简述您希望测速的机场品牌、网络疑问或商务诉求…"></textarea>
     </div>
-    <FormButton label="Send your message" class="cform__submit" />
+    <FormButton label="发送提交反馈" class="cform__submit" />
   </form>
 </div>

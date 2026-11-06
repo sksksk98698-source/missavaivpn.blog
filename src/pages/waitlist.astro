@@ -8,21 +8,22 @@ const avatars = [
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
 ---
 <Bare
-  title="AI Startup Waitlist Page Template | Parley"
-  description="A focused waitlist page for AI agents, SaaS launches, and automation products, included with the Parley Astro template."
+  title="订阅最新测速报告与节点监控 | missavaiVPN 评测实验室"
+  description="免费订阅 missavaiVPN 评测实验室邮件周报：第一时间获取全网 42 家机场晚高峰实测跑分、节点维护预警及专属折扣码。"
   path="/waitlist"
   schema={false}
+  noindex={true}
 >
   <div class="wl">
     <div class="wl__left">
-      <a class="wl__brand" href="/" aria-label="Parley">
-        <img src="/assets/parley-logo.webp" alt="Parley" width="78" height="26" />
+      <a class="wl__brand" href="/" aria-label="missavaiVPN">
+        <img src="/assets/logo.svg" alt="missavaiVPN" width="145" height="28" />
       </a>
 
       <div class="wl__main">
-        <p class="wl__launch">Launches: Oct 25, 2026</p>
-        <h1 class="wl__title">Get early access</h1>
-        <p class="wl__lede">Secure your spot and experience the next generation before launch.</p>
+        <p class="wl__launch">2026 晚高峰测速雷达</p>
+        <h1 class="wl__title">订阅测速更新</h1>
+        <p class="wl__lede">第一时间获取 42 家机场最新晚高峰跑分、突发断流预警及独家折扣码。</p>
 
         <form
           class="wl__form"
@@ -32,27 +33,27 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
           data-endpoint={endpoint || undefined}
           data-success-url="/thank-you"
         >
-          <label class="visually-hidden" for="wl-email">Email address</label>
-          <input class="wl__input" id="wl-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required />
-          <button class="wl__submit" type="submit">Join waitlist</button>
+          <label class="visually-hidden" for="wl-email">电子邮箱地址</label>
+          <input class="wl__input" id="wl-email" name="email" type="email" placeholder="输入您的电子邮箱..." autocomplete="email" required />
+          <button class="wl__submit" type="submit">立即免费订阅</button>
         </form>
 
         <div class="wl__social">
           <div class="wl__avatars" aria-hidden="true">
             {avatars.map((src) => <img src={src} alt="" width="36" height="36" />)}
           </div>
-          <p class="wl__count">Join 3000+ others</p>
+          <p class="wl__count">已有 12,000+ 出海从业者订阅</p>
         </div>
       </div>
 
       <footer class="wl__footer">
-        <p>© 2026 Parley. For AI agent template</p>
-        <p><a href="/terms-conditions">Terms&amp;Conditions</a></p>
+        <p>© 2026 missavaiVPN (missavaivpn.blog). All rights reserved.</p>
+        <p><a href="/terms-conditions">免责声明与服务条款</a></p>
       </footer>
     </div>
 
     <div class="wl__right">
-      <img src="/assets/waitlist-app.webp" alt="Parley AI agent Astro template interface preview" />
+      <img src="/assets/waitlist-app.webp" alt="missavaiVPN 评测监控后台展示" />
     </div>
   </div>
 </Bare>

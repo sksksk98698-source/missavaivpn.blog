@@ -1,0 +1,334 @@
+---
+import Base from '../../layouts/Base.astro';
+import airportsData from '../../content/airports.json';
+
+const allAirports = airportsData.sort((a, b) => a.rank - b.rank);
+const guangsu = allAirports.find((a) => a.id === 'guangsu') || allAirports[0];
+
+const schemaItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "2026年42家优质翻墙机场测评推荐榜",
+  "description": "基于千兆宽带晚高峰真机压测的42家翻墙机场与海外加速器测评数据库，涵盖IEPL专线、便宜平价、永久不限时套餐。",
+  "numberOfItems": allAirports.length,
+  "itemListElement": allAirports.slice(0, 10).map((a, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "Product",
+      "name": a.name,
+      "description": a.summary,
+      "url": `https://missavaivpn.blog/airports/${a.slug}`,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "CNY",
+        "price": a.rank === 1 ? "99.00" : "15.00",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  }))
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://missavaivpn.blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "42家机场品牌测评库",
+      "item": "https://missavaivpn.blog/airports"
+    }
+  ]
+};
+---
+
+<Base
+  title="2026年42家翻墙机场推荐与真机测速红黑榜 | missavaiVPN 评测实验室"
+  description="基于电信/联通/移动千兆宽带晚高峰真机压测，深度评测全网 42 家主流机场梯子。涵盖光速云、暮光加速等顶级 IEPL 专线、便宜平价、永久不限时套餐实测雷达。"
+  path="/airports"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaItemList)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="ap-header">
+    <p class="badge">MissAvAi VPN 实验室</p>
+    <h1 class="ap-header__title">42 家机场品牌<em>测速与选型雷达</em></h1>
+    <p class="ap-header__desc">
+      晚高峰 20:30 - 22:30 实机压力测试，拒绝滤镜与虚标。支持实时搜索与线路筛选，附赠专属优惠码与节点解锁状态。
+    </p>
+
+    <!-- Client-side Search -->
+    <div class="ap-search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="apSearch" placeholder="搜索机场名字、协议（VLESS/Shadowsocks）、线路（IEPL）或特点..." />
+    </div>
+
+    <!-- Filters -->
+    <div class="ap-filters" id="apFilters">
+      <button class="ap-pill is-active" data-filter="all">全部 (42)</button>
+      <button class="ap-pill" data-filter="top10">★ 综合前10名</button>
+      <button class="ap-pill" data-filter="iepl">IEPL / IPLC 专线</button>
+      <button class="ap-pill" data-filter="cheap">百元平价 / 高性价比</button>
+      <button class="ap-pill" data-filter="timeless">永久不限时套餐</button>
+      <button class="ap-pill" data-filter="unlock">流媒体 & AI 全绿</button>
+      <button class="ap-pill" data-filter="tested">附真机测速图 (18)</button>
+    </div>
+  </div>
+
+  <!-- Spotlight Banner (#1 光速云) -->
+  {guangsu && (
+    <section class="ap-spotlight">
+      <div class="ap-spotlight__main">
+        <span class="ap-spotlight__badge">
+          ★ 2026 年度综合推荐榜首 #1
+        </span>
+        <h2 class="ap-spotlight__title">光速云 (Guangsu Cloud) — 2.5Gbps IEPL 专线旗舰</h2>
+        <p class="ap-spotlight__lede">
+          全线采用 2.5Gbps 企业级 IEPL/IPLC 物理专线，晚高峰丢包率控制在 0.1% 以内。独家提供年付折合约 8 元/月入门轻量包，以及致敬斯诺克 147 永久不限时 247GB 备用套餐。
+        </p>
+        <div class="ap-spotlight__features">
+          <span class="ap-tag ap-tag--highlight">2.5Gbps 物理专线</span>
+          <span class="ap-tag ap-tag--highlight">晚高峰 0 丢包</span>
+          <span class="ap-tag ap-tag--highlight">ChatGPT / Claude 原生解锁</span>
+          <span class="ap-tag">自研客户端 + 通用订阅</span>
+          <span class="ap-tag">致敬斯诺克 147 永久版</span>
+          <span class="ap-tag">全节点 1.0 倍率</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <a href="/airports/guangsu" class="ap-btn-sub" style="flex: none; padding: 10px 20px;">
+            查看光速云深度实测报告 & 测速图
+          </a>
+          <span style="font-size: 13px; color: var(--grey-600);">含 17 张节点测速压测与解锁实录</span>
+        </div>
+      </div>
+
+      <div class="ap-spotlight__aside">
+        <p class="ap-spotlight__price">¥8 <span style="font-size: 16px; font-weight: normal; color: var(--grey-600);">/ 月起</span></p>
+        <p class="ap-spotlight__sub">年付 ¥99 起 · 永久套餐 ¥147</p>
+
+        <div class="ap-coupon-box">
+          <span style="font-size: 12px; color: var(--grey-600);">永久特惠优惠码</span>
+          <span class="ap-coupon-code">AMM</span>
+          <button class="ap-copy-btn" data-code="AMM">复制</button>
+        </div>
+
+        <a
+          href={guangsu.affUrl}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          class="ap-btn-aff"
+          style="display: block; width: 100%; box-sizing: border-box; padding: 12px 0; font-size: 15px;"
+        >
+          立即前往光速云官网特惠开通
+        </a>
+      </div>
+    </section>
+  )}
+
+  <!-- 42 Airport Cards Grid -->
+  <div class="ap-grid" id="airportGrid">
+    {allAirports.map((ap) => {
+      const isTop10 = ap.rank <= 10;
+      const isStar = ap.rank === 1;
+      const hasSpeed = Boolean(ap.hasSpeedtest && ap.speedtestImage);
+      const isIepl = ap.lineType.includes('IEPL') || ap.lineType.includes('IPLC');
+      const isCheap = ap.startingPrice.includes('8') || ap.startingPrice.includes('9') || ap.startingPrice.includes('10') || ap.startingPrice.includes('12') || ap.startingPrice.includes('15');
+      const isTimeless = ap.startingPrice.includes('永久') || ap.startingPrice.includes('不限时') || ap.name.includes('光速云');
+
+      return (
+        <article
+          class={`ap-card ${isStar ? 'ap-card--featured' : ''}`}
+          data-name={ap.name.toLowerCase()}
+          data-slug={ap.slug}
+          data-rank={ap.rank}
+          data-top10={isTop10 ? 'true' : 'false'}
+          data-iepl={isIepl ? 'true' : 'false'}
+          data-cheap={isCheap ? 'true' : 'false'}
+          data-timeless={isTimeless ? 'true' : 'false'}
+          data-tested={hasSpeed ? 'true' : 'false'}
+          data-protocols={ap.protocols.join(' ').toLowerCase()}
+          data-line={ap.lineType.toLowerCase()}
+        >
+          <div class="ap-card__top">
+            <span class={`ap-card__rank ${isStar ? 'ap-card__rank--star' : isTop10 ? 'ap-card__rank--top10' : ''}`}>
+              {isStar ? '★ TOP 1' : `#${ap.rank}`}
+            </span>
+            <span class={`ap-card__status ap-card__status--${ap.dataStatus}`}>
+              {ap.dataStatus === 'measured' ? '实机压测验证' : ap.dataStatus === 'vendor' ? '官方宣称规格' : '历史收录存档'}
+            </span>
+          </div>
+
+          <h3 class="ap-card__title">
+            <a href={`/airports/${ap.slug}`}>{ap.name}</a>
+          </h3>
+
+          <p class="ap-card__summary">{ap.summary}</p>
+
+          <div class="ap-card__specs">
+            <div class="ap-card__spec-item">
+              <span class="ap-card__spec-label">线路架构</span>
+              <span class="ap-card__spec-value" title={ap.lineType}>{ap.lineType}</span>
+            </div>
+            <div class="ap-card__spec-item">
+              <span class="ap-card__spec-label">协议类型</span>
+              <span class="ap-card__spec-value">{ap.protocols.slice(0, 2).join(' / ')}</span>
+            </div>
+            <div class="ap-card__spec-item">
+              <span class="ap-card__spec-label">带宽规格</span>
+              <span class="ap-card__spec-value">{ap.bandwidth}</span>
+            </div>
+            <div class="ap-card__spec-item">
+              <span class="ap-card__spec-label">节点规模</span>
+              <span class="ap-card__spec-value">{ap.nodesCount}</span>
+            </div>
+          </div>
+
+          <div class="ap-card__unlocks">
+            {ap.streamingUnlock?.youtube4k && <span class="ap-unlock-badge">YouTube 4K</span>}
+            {ap.streamingUnlock?.netflix && <span class="ap-unlock-badge">Netflix</span>}
+            {ap.streamingUnlock?.chatgpt && <span class="ap-unlock-badge">ChatGPT</span>}
+            {ap.streamingUnlock?.claude && <span class="ap-unlock-badge">Claude</span>}
+            {ap.streamingUnlock?.tiktok && <span class="ap-unlock-badge">TikTok</span>}
+            {hasSpeed && <span class="ap-unlock-badge" style="background: rgba(244,141,22,0.12); color: rgb(180,80,0);">有测速图</span>}
+          </div>
+
+          {ap.couponCode && (
+            <div class="ap-coupon-box" style="margin-bottom: 12px; padding: 4px 10px;">
+              <span style="font-size: 11px; color: var(--grey-600);">优惠码:</span>
+              <span class="ap-coupon-code" style="font-size: 13px;">{ap.couponCode}</span>
+              <button class="ap-copy-btn" data-code={ap.couponCode} style="padding: 2px 6px; font-size: 11px;">复制</button>
+            </div>
+          )}
+
+          <div class="ap-card__pricing">
+            <span style="font-size: 12px; color: var(--grey-600);">起步参考价</span>
+            <span class="ap-card__price">{ap.startingPrice}</span>
+          </div>
+
+          <div class="ap-card__actions">
+            <a href={`/airports/${ap.slug}`} class="ap-btn-sub">
+              实测报告
+            </a>
+            {ap.affUrl ? (
+              <a
+                href={ap.affUrl}
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                class="ap-btn-aff"
+              >
+                官网开通
+              </a>
+            ) : (
+              <span
+                class="ap-btn-aff"
+                style="opacity: 0.5; cursor: not-allowed; background: var(--grey-400);"
+                title="暂无直达通道"
+              >
+                排期中
+              </span>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <!-- Disclosure Note -->
+  <aside class="ap-disclosure">
+    <p style="margin: 0 0 6px; font-weight: 600; color: var(--grey-900);">关于 missavaiVPN 评测实验室的中立性声明：</p>
+    <p style="margin: 0;">
+      本站所有测速数据与解锁检测基于真实千兆家用宽带（电信/联通/移动）交叉实测。为支持高昂的服务器带宽压测成本与节点采购费用，本站部分外链包含赞助商返利代码（aff）。我们承诺绝不因赞助关系隐瞒卡顿或虚标性能，不合格或跑路风险品牌一律客观扣分或列入黑名单。
+    </p>
+  </aside>
+
+  <script>
+    // Client-side search and filtering
+    const searchInput = document.getElementById('apSearch') as HTMLInputElement | null;
+    const filterButtons = document.querySelectorAll('#apFilters button');
+    const cards = document.querySelectorAll('#airportGrid .ap-card');
+
+    let currentFilter = 'all';
+
+    function applyFilters() {
+      const q = (searchInput?.value || '').trim().toLowerCase();
+
+      cards.forEach((el) => {
+        const card = el as HTMLElement;
+        const name = card.dataset.name || '';
+        const protocols = card.dataset.protocols || '';
+        const line = card.dataset.line || '';
+        const top10 = card.dataset.top10 === 'true';
+        const iepl = card.dataset.iepl === 'true';
+        const cheap = card.dataset.cheap === 'true';
+        const timeless = card.dataset.timeless === 'true';
+        const tested = card.dataset.tested === 'true';
+
+        // Search match
+        const matchesQuery = !q || name.includes(q) || protocols.includes(q) || line.includes(q);
+
+        // Filter pill match
+        let matchesFilter = true;
+        if (currentFilter === 'top10') matchesFilter = top10;
+        else if (currentFilter === 'iepl') matchesFilter = iepl;
+        else if (currentFilter === 'cheap') matchesFilter = cheap;
+        else if (currentFilter === 'timeless') matchesFilter = timeless;
+        else if (currentFilter === 'tested') matchesFilter = tested;
+        else if (currentFilter === 'unlock') {
+          matchesFilter = card.innerText.includes('ChatGPT') || card.innerText.includes('Claude');
+        }
+
+        if (matchesQuery && matchesFilter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput?.addEventListener('input', applyFilters);
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        applyFilters();
+      });
+    });
+
+    // Handle URL search params on load (e.g. /airports?filter=iepl)
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterParam = urlParams.get('filter');
+    if (filterParam) {
+      const targetBtn = document.querySelector(`#apFilters button[data-filter="${filterParam}"]`);
+      if (targetBtn) {
+        (targetBtn as HTMLButtonElement).click();
+      }
+    }
+
+    // Coupon copy handler
+    document.querySelectorAll('.ap-copy-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const code = (btn as HTMLElement).getAttribute('data-code');
+        if (code) {
+          navigator.clipboard.writeText(code).then(() => {
+            const originalText = btn.textContent;
+            btn.textContent = '已复制!';
+            setTimeout(() => {
+              btn.textContent = originalText;
+            }, 2000);
+          });
+        }
+      });
+    });
+  </script>
+</Base>

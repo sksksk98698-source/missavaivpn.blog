@@ -7,28 +7,32 @@ import { group, type Workflow, type Logo } from '../lib/content';
 export async function getStaticPaths() {
   const { group } = await import('../lib/content');
   const workflows = await group<Workflow>('workflows');
-  return workflows.map((w) => ({ params: { workflow: w.slug }, props: { w } }));
+  return workflows
+    .filter((w) => w.slug !== 'workflow-1' && w.slug !== 'workflow-2' && w.slug !== 'workflow-3')
+    .map((w) => ({ params: { workflow: w.slug }, props: { w } }));
 }
 
 const { w } = Astro.props as { w: Workflow };
 const meta: Record<string, { title: string; desc: string }> = {
   'workflow-1': {
-    title: 'Workflow Detail Page Template | Parley',
-    desc: 'A detailed workflow page for presenting AI agent use cases and automation flows in the Parley Astro template.',
+    title: 'IEPL / IPLC 跨境企业级专线与抗封锁选型方案 | missavaiVPN',
+    desc: '物理内网不过 GFW 防火墙，晚高峰丢包率低于 0.1%，专为跨境外贸电商、出海研发与高频数据传输打造。',
   },
   'workflow-2': {
-    title: 'AI Workflow Use Case Template | Parley',
-    desc: 'A workflow detail page template for AI agent use cases, automation stories, and SaaS product pages.',
+    title: 'ChatGPT / Claude 原生 IP 与 4K 流媒体解锁实测方案 | missavaiVPN',
+    desc: '双 ISP 纯净住宅原生 IP 分流，全绿解锁 Netflix、Disney+、YouTube 4K 与 OpenAI、Claude 3.5，告别 403 拦截。',
   },
   'workflow-3': {
-    title: 'Automation Workflow Page Template | Parley',
-    desc: 'A polished workflow page for AI automation products and agentic SaaS templates built with Astro.',
+    title: '百元内超高性价比与入门不限时轻量包选型方案 | missavaiVPN',
+    desc: '年付低至 80-99 元，或单次付费永久有效不限时，学生党科研查资料与多设备防失联备用方案。',
   },
 };
-const m = meta[w.slug];
+const m = meta[w.slug] ?? {
+  title: `${w.title} | missavaiVPN`,
+  desc: w.lede,
+};
 const logos = await group<Logo>('logos');
 const brandLogo = logos.find((l) => l.slug === w.brand.toLowerCase());
-
 ---
 <Base title={m.title} description={m.desc} path={`/${w.slug}`}>
   <header class="wdhero">
@@ -36,13 +40,19 @@ const brandLogo = logos.find((l) => l.slug === w.brand.toLowerCase());
     <h1 class="wdhero__title">{w.title}</h1>
     <p class="wdhero__lede">{w.lede}</p>
     <div class="wdhero__actions">
-      <Button href="/contact" label="Try this workflow" variant="primary" />
+      <Button
+        href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y"
+        label="直达推荐专线开通 (优惠码: AMM)"
+        variant="primary"
+        target="_blank"
+        rel="nofollow sponsored noopener"
+      />
       <p class="wdhero__by">
-        Created by
+        由
         <span class="wdhero__chip">
-          <img src="/assets/parley-logo.webp" alt="" width="52" height="17" />
+          <span class="wdhero__chip-text">missavaiVPN</span>
         </span>
-        Parley Team
+        实验室实机验证
       </p>
     </div>
   </header>
@@ -52,7 +62,7 @@ const brandLogo = logos.find((l) => l.slug === w.brand.toLowerCase());
   <section class="wdprod">
     <header class="wdprod__header">
       <div class="wdprod__heading">
-        <p class="badge">The product</p>
+        <p class="badge">技术方案解析</p>
         <h2 class="h2">{w.sectionTitle}<br /><em>{w.sectionTitleEm}</em></h2>
       </div>
       <p class="wdprod__lede">{w.sectionLede}</p>
@@ -81,7 +91,7 @@ const brandLogo = logos.find((l) => l.slug === w.brand.toLowerCase());
   </section>
 
   <section class="wdproof">
-    <p class="badge badge--center">In Production</p>
+    <p class="badge badge--center">真实实测验证</p>
     <h2 class="h2 h2--center">{w.proofTitle}</h2>
 
     <figure class="wdquote">
@@ -96,20 +106,24 @@ const brandLogo = logos.find((l) => l.slug === w.brand.toLowerCase());
         </span>
         <blockquote class="wdquote__text">{w.quote}</blockquote>
         <figcaption class="wdquote__author">
-          <img src={w.avatar} alt="" width="36" height="36" />
-          <span>
-            <h5 class="wdquote__name">{w.name}</h5>
-            <span class="wdquote__role">{w.role}</span>
-          </span>
+          <img class="wdquote__avatar" src={w.avatar} alt="" width="48" height="48" />
+          <p class="wdquote__name">{w.name}</p>
+          <p class="wdquote__role">{w.role}</p>
         </figcaption>
       </div>
       <div class="wdquote__stat">
-        <h3 class="wdquote__value">{w.stat}</h3>
+        <p class="wdquote__num">{w.stat}</p>
         <p class="wdquote__label">{w.statLabel}</p>
       </div>
       </div>
     </figure>
   </section>
 
-  <div class="wdlogos"><Logos hideLabel /></div>
+  <div class="wdhero__actions" style="margin: 40px auto; text-align: center; justify-content: center;">
+    <a href="/airports" class="ap-btn-aff" style="padding: 14px 32px; font-size: 15px;">
+      浏览 42 家机场评测库 →
+    </a>
+  </div>
+
+  <Logos hideLabel />
 </Base>

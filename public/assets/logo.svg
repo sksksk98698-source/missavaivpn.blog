@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 32" fill="none">
+  <!-- Shield / Node Icon -->
+  <rect x="2" y="2" width="28" height="28" rx="8" fill="#18181b" />
+  <path d="M16 8L8 12V17C8 21.5 11.4 25.7 16 26.8C20.6 25.7 24 21.5 24 17V12L16 8Z" stroke="#3b82f6" stroke-width="1.8" stroke-linejoin="round"/>
+  <circle cx="16" cy="17" r="2.5" fill="#60a5fa" />
+  <path d="M12.5 15.5L16 17L19.5 15.5" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Brand Typography -->
+  <text x="38" y="21" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#18181b" letter-spacing="-0.3">MissAvAi</text>
+  <rect x="108" y="9" width="36" height="15" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="126" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#2563eb" text-anchor="middle" letter-spacing="0.5">VPN</text>
+</svg>

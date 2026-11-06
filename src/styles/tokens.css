@@ -1,8 +1,5 @@
 /* ============================================================
-   Design tokens — read directly from the Parley Framer project
-   (M9cZnnZEzzWUCV6nAPp1). Names, values and breakpoints match the
-   project's own color styles, text styles and transitions exactly.
-   Do not substitute near-miss values.
+   Design tokens and typography scales for MissAvAi VPN.
    ============================================================ */
 
 :root {
@@ -21,8 +18,8 @@
   --error: rgb(251, 56, 88);
 
   /* ---- Typefaces ------------------------------------------------- */
-  --font-display: "DM Sans Variable", "DM Sans", system-ui, sans-serif;
-  --font-ui: "Geist Variable", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "DM Sans Variable", "DM Sans", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", system-ui, sans-serif;
+  --font-ui: "Geist Variable", "Geist", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "Segoe UI", system-ui, sans-serif;
 
   /* ---- Text styles ----------------------------------------------
      Desktop values. The two media blocks below carry the project's
@@ -37,7 +34,7 @@
   --number-size: 52px;                         /* Number (p) */
 
   --badge-size: 14px;  --badge-weight: 600; --badge-line: 100%;
-  --xl-size: 18px;     --body-weight: 400;  --body-line: 120%;
+  --xl-size: 18px;     --body-weight: 400;  --body-line: 160%;
   --l-size: 16px;
   --m-size: 14px;
   --s-size: 12px;

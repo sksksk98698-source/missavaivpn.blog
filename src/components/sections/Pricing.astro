@@ -9,24 +9,23 @@ const Heading = headingLevel === 1 ? 'h1' : 'h2';
 <section class="pricing" id="pricing">
   <header class="pricing__header">
     <div class="pricing__heading">
-      <p class="badge">Pricing</p>
+      <p class="badge">梯队定价比价</p>
       <Heading class={display ? 'ts-display' : 'h2'}>
-        Simple, transparent pricing. <em>No surprises.</em>
+        科学上网与机场套餐梯度比价。<em>透明公开无套路。</em>
       </Heading>
     </div>
     <div class="pricing__side">
       <p class="pricing__lede">
-        Start free, scale as you grow. Every plan includes core features —
-        upgrade when you need more power or seats.
+        从百元内平价入门、永久不限时备用包，到 2.5Gbps IEPL 企业级物理专线。根据个人或团队需求挑选最契合的服务层级。
       </p>
     </div>
   </header>
 
   <div class="pricing__billing">
     <div class="toggle" role="tablist" aria-label="Billing period">
-      <button class="toggle__btn is-active" type="button" role="tab" aria-selected="true">Monthly</button>
+      <button class="toggle__btn is-active" type="button" role="tab" aria-selected="true">月付计费</button>
       <button class="toggle__btn" type="button" role="tab" aria-selected="false">
-        Annual <span class="toggle__off">-15%</span>
+        年付周期 <span class="toggle__off">最高省20%</span>
       </button>
     </div>
   </div>
@@ -47,7 +46,14 @@ const Heading = headingLevel === 1 ? 'h1' : 'h2';
             <li class={f.off ? 'is-off' : undefined}><span class="plan-features__dot"></span>{f.text}</li>
           ))}
         </ul>
-        <Button href={plan.cta.href} label={plan.cta.label} variant={plan.cta.variant} full />
+        <Button
+          href={plan.cta.href}
+          label={plan.cta.label}
+          variant={plan.cta.variant}
+          full
+          target={plan.cta.href.startsWith('http') ? '_blank' : undefined}
+          rel={plan.cta.href.startsWith('http') ? 'nofollow sponsored noopener' : undefined}
+        />
       </article>
     ))}
   </div>

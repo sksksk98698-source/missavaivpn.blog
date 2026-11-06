@@ -2,19 +2,13 @@ import { defineCollection, z } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 
 /**
- * Two collections:
- *
- * `blog` — one Markdown file per article in src/content/blog/. This is the
- * source of truth for posts; the blog index and related strips read their
- * card data from here too, so editing a post updates everywhere.
- *
- * `content` — one JSON file, one entry per content group, for repeated
- * section content (logos, plans, FAQs, nav links, workflow pages, and the
- * blog cards that have no article behind them).
+ * Collections:
+ * - blog: Markdown posts
+ * - content: UI content groups
+ * - airports: 42 Airport Brand datasets with speedtest & unlock verification
+ * - clients: Multi-platform proxy software recommendations & guides
  */
 const blog = defineCollection({
-  /* Astro slugifies ids, which would turn "parley-2.0-..." into
-     "parley-20-...". Framer's URL keeps the dot, so keep the filename. */
   loader: glob({
     pattern: '**/*.md',
     base: './src/content/blog',
@@ -30,7 +24,6 @@ const blog = defineCollection({
     authorOrg: z.string(),
     avatar: z.string(),
     cover: z.string(),
-    /* Social card image; link previews want JPG or PNG. Falls back to the cover. */
     ogImage: z.string().optional(),
   }),
 });
@@ -43,4 +36,18 @@ const content = defineCollection({
   schema: z.object({ items: z.array(z.any()) }),
 });
 
-export const collections = { blog, content };
+const airports = defineCollection({
+  loader: file('src/content/airports.json'),
+});
+
+const clients = defineCollection({
+  loader: file('src/content/clients.json', {
+    parser: (text) =>
+      JSON.parse(text).map((item: any) => ({
+        id: item.platform.toLowerCase(),
+        ...item,
+      })),
+  }),
+});
+
+export const collections = { blog, content, airports, clients };

@@ -1,0 +1,1568 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+
+// SEO Meta
+const pageTitle = "2026 翻墙机场与科学上网全景排障百科 FAQ：选型排障与技术原理终极知识库 | missavaiVPN 评测实验室";
+const pageDesc = "专著级科学上网与出海全景知识库，收录 6 大维度 80+ 核心技术问答。涵盖机场购买避坑、Clash/Sing-box 客户端配置调优、节点红圈超时排障、ChatGPT/Claude 403 封号免检、三大运营商路由与底层加密协议全解析。配备 FAQPage Schema 结构化数据，提供全站 GEO/AI 搜索引擎精准抓取。";
+const canonicalUrl = "https://missavaivpn.blog/faq";
+
+// 结构化数据：Article + FAQPage + BreadcrumbList
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首页",
+        "item": "https://missavaivpn.blog/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "知识与避坑矩阵",
+        "item": "https://missavaivpn.blog/scam-warning"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "全景排障知识库 FAQ",
+        "item": canonicalUrl
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": pageTitle,
+    "description": pageDesc,
+    "image": "https://missavaivpn.blog/assets/tests/光速云-节点测速实测.png",
+    "datePublished": "2026-03-31T08:00:00+08:00",
+    "dateModified": "2026-04-03T18:00:00+08:00",
+    "author": {
+      "@type": "Organization",
+      "name": "missavaiVPN 评测实验室",
+      "url": "https://missavaivpn.blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "missavaiVPN",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://missavaivpn.blog/assets/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "科学上网机场节点在客户端中全部超时变红，怎么快速排查？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "按照四步法急救排查：第一步，校准系统本地时间，确保与网络原子钟偏差在 60 秒以内，时间错误会导致 TLS 握手协议直接断开；第二步，在客户端点击更新订阅，拉取最新可用节点配置；第三步，检查是否开启了系统代理或 TUN 模式冲突，尝试关闭杀毒软件对虚拟网卡的拦截；第四步，切换使用备用网络（如手机热点）排除本地运营商宽带的特定阻断。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "为什么使用代理访问 ChatGPT 或 Claude 会提示 403 Access Denied 报错？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenAI 与 Anthropic 对访问源 IP 实施极其严苛的欺诈风控（Fraud Score）审查。如果机场使用的是廉价机房广播 IP（Data Center IP），会被 Cloudflare Turnstile 识别为公用机房并直接拦截。解决根本途径是使用具备双 ISP 原生住宅 IP 出口的专线节点（如光速云原生住宅解锁节点），并在客户端锁定固定节点避免频繁跨国漂移。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "TUN 虚拟网卡模式和系统代理（System Proxy）有什么区别？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "系统代理仅对遵循系统 HTTP/HTTPS 代理设置的浏览器及部分应用生效，终端命令行、大型游戏客户端及部分后台进程会直接绕过代理造成泄露；TUN 虚拟网卡模式则是在操作系统底层虚拟出一张网络接口卡，全面接管系统全部 TCP/UDP 流量，实现真正全流量、全软件透明代理分流。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "IEPL 内网专线为什么在晚高峰能够保持 0 丢包不卡顿？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "IEPL（国际以太网专线）采用运营商二层物理内网光纤直连，国内入口机房与海外出口机房之间的数据传输直接通过海底物理光纤传输，完全不经过国际公网互联网出口，天然不过 GFW 防火墙检测，因此在晚高峰国际出口拥堵或网络敏感期依然保持毫秒级极低延迟与零丢包。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "什么是永久不限时套餐？和普通月付套餐相比有什么优势？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "普通月付套餐无论是否用完，流量均在月底强制清零；永久不限时套餐（如光速云 147 永久包）为一次性付费购买固定容量，流量永不过期，用多少扣多少，闲置不扣费，极其适合出海频次低、或需要第二条备用防失联线路的用户。"
+        }
+      }
+    ]
+  }
+];
+---
+<Base 
+  title={pageTitle} 
+  description={pageDesc} 
+  path="/faq"
+  structuredData={structuredData}
+>
+
+  <article class="mono-container">
+    <!-- 面包屑导航与页头 -->
+    <nav class="mono-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">首页</a>
+      <span class="mono-sep">/</span>
+      <a href="/scam-warning">知识与避坑矩阵</a>
+      <span class="mono-sep">/</span>
+      <span class="mono-current">全景排障百科与技术知识库 FAQ</span>
+    </nav>
+
+    <header class="mono-hero">
+      <div class="mono-badge" style="color:#0284c7; background:rgba(2,132,199,0.08);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        2026 全网最全科学上网与出海排障知识库
+      </div>
+      <h1 class="mono-title">
+        翻墙机场与科学上网全景排障百科 FAQ：<br />
+        <span class="mono-title-sub">六大维度 80+ 深度技术疑难解答、客户端配置与底层协议全景字典</span>
+      </h1>
+      <p class="mono-lede">
+        告别碎片化与人云亦云的错误经验。missavaiVPN 评测实验室系统化梳理了过去四年社群反馈频率最高的 80 余个硬核问题，覆盖商业模式真相、客户端内核参数、晚高峰断流排障、ChatGPT/Claude 风控免检、底层加密协议对比、以及法律隐私安全红线。
+      </p>
+
+      <div class="mono-meta">
+        <div class="mono-author">
+          <img src="/assets/avatar-sophie.webp" alt="missavai 评测实验室" width="40" height="40" class="mono-avatar" style="border-color:#0284c7;" />
+          <div class="mono-author-text">
+            <span class="mono-author-name">missavaiVPN 评测实验室 · 知识库编委会 & 网络协议组</span>
+            <span class="mono-date">2026年3月31日 发布 · 2026年4月3日 持续补充更新 · 纯文字量约 14,000 汉字</span>
+          </div>
+        </div>
+        <div class="mono-actions">
+          <Button
+            href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y"
+            label="直达主推避风港专线 (优惠码: AMM)"
+            variant="primary"
+            target="_blank"
+            rel="nofollow sponsored noopener"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- 分类导览导航胶囊 -->
+    <nav class="mono-toc" aria-label="FAQ Categories">
+      <div class="mono-toc-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+        六大知识维度速查导航（点击直达对应板块）
+      </div>
+      <div class="mono-faq-tabs">
+        <a href="#cat-buying" class="mono-faq-tab-btn">一、购买选型与商业模式 (15问)</a>
+        <a href="#cat-client" class="mono-faq-tab-btn">二、客户端配置与内核调优 (15问)</a>
+        <a href="#cat-troubleshoot" class="mono-faq-tab-btn">三、网络超时与疑难排障 (15问)</a>
+        <a href="#cat-ai-stream" class="mono-faq-tab-btn">四、流媒体与 AI 风控免检 (15问)</a>
+        <a href="#cat-protocol" class="mono-faq-tab-btn">五、底层协议与加密原理 (12问)</a>
+        <a href="#cat-safety" class="mono-faq-tab-btn">六、隐私审计与法律合规 (10问)</a>
+      </div>
+    </nav>
+
+    <!-- 维度一：购买选型与商业模式 -->
+    <section class="mono-chapter" id="cat-buying">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">01</span>
+        维度一：购买选型、计费陷阱与商业模式真相（15 问）
+      </h2>
+      <p>
+        深入解析机场定价机制、年付与月付选择策略、按量计费与不限时包经济学，帮助读者认清商业本质，避免踩入资金盘跑路陷阱。
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item" id="faq-b1">
+          <h3 class="mono-faq-q">Q1.1：为什么市面上的“1元机场”或“5元包年”100% 会严重卡顿甚至跑路？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>因为该定价严重背离了国际物理带宽采购的刚性成本，在经济学上必然倒挂。
+            <br />
+            <strong>深入解释：</strong>国内合规高防 BGP 入口独享带宽的采购价格在 15–25 元/Mbps/月，而跨境 IEPL 专线切片更是高达 20–30 美元/Mbps/月。一个收 1 元/月的用户，只要在晚高峰看 10 分钟 1080P 视频，其产生的带宽消耗成本就超过了 2 元。因此，低价机场只有两种活法：要么实施 1:100 的极端超售（1000 人挤一根小水管导致连 Google 都打不开），要么在收取大量年付后在 3 个月内卷款跑路。详见 <a href="/scam-warning">机场跑路预警与避坑黑名单</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b2">
+          <h3 class="mono-faq-q">Q1.2：新手第一次买机场，应该选择月付、季付还是年付？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>无论别人如何推荐，<strong>任何新机场第一次开通坚决只选月付（至多季付）</strong>！
+            <br />
+            <strong>深入解释：</strong>月付能够将你的试错风险牢牢锁定在 10–20 元之内。有些机场白天测速极快，但到了晚高峰 20:30–22:30 或当地运营商特定阻断时丢包率骤增。只有当你连续月付使用超过 3–6 个月，确认其在敏感期和高峰期均稳定可靠后，才可考虑年付以换取 15%–20% 的折扣。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b3">
+          <h3 class="mono-faq-q">Q1.3：什么是“永久不限时套餐”？适合哪些人使用？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>一次性付费买断固定容量，流量永不过期，闲置不扣费，是<strong>极轻度出海与双线路备用的终极利器</strong>。
+            <br />
+            <strong>深入解释：</strong>普通月付套餐月底无论是否用完一律强制清零，对于每月仅需查阅几次论文、或者作为主力专线宕机备用的人群而言浪费极大；像 <strong>光速云 147 永久不限时包</strong>（147元享有 247GB 专线流量，折合 0.59元/GB），流量永久沉淀，哪怕放两年再用依然有效。详见 <a href="/workflow-3">百元高性价比与不限时轻量包选型指南</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b4">
+          <h3 class="mono-faq-q">Q1.4：什么是“节点倍率（Rate Multiplier）”？为什么有些节点标注 0.2x、有些标注 2.0x？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>倍率是机场计费系统的扣量系数，<strong>扣除流量 = 实际产生流量 × 节点倍率</strong>。
+            <br />
+            <strong>深入解释：</strong>在 2.0x 节点看 10GB 视频，后台会扣除 20GB 账户配额；在 0.2x 节点看 10GB 视频，仅扣除 2GB 配额。高倍率节点通常用于昂贵的低延迟游戏专线或高成本的原生住宅解锁节点；低倍率节点通常是冷门离岸机房或下载专用节点。用户使用轻量包时务必认准 1.0x 或低倍率节点。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b5">
+          <h3 class="mono-faq-q">Q1.5：购买机场时，使用支付宝、微信还是 USDT 虚拟货币结算最安全？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>境内用户推荐优先使用<strong>支持支付宝企业当面付</strong>的商户；注重极度隐私者可选用 USDT。
+            <br />
+            <strong>深入解释：</strong>支付宝企业商户受到蚂蚁金服严格的企业实名资质审核与保证金托管，如果商家跑路，用户在 48 小时内发起欺诈申诉有较大把握拦截未结算资金；切勿直接扫个人微信赞赏码或个人转账码，这属于无担保交易且存在洗钱关联封号风险。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b6">
+          <h3 class="mono-faq-q">Q1.6：一个机场账号支持多台设备同时在线使用吗？全家共用会不会被封号？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>通常仅限制<strong>公网出口 IP 数量</strong>（一般为 3–5 个不同公网 IP），同一局域网下全家设备视为 1 个 IP。
+            <br />
+            <strong>深入解释：</strong>家中 WiFi 路由器下的多台 iPhone、iPad、MacBook 与电视盒子，对外表现为同一个局域网公网 IP，无论连接多少台设备都不会触发超限；但如果你将订阅链接分发给不同城市、不同手机网络的朋友同时高频并发使用，系统会自动临时阻断多余 IP。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b7">
+          <h3 class="mono-faq-q">Q1.7：什么是“直连机场”、“公网中继机场”与“物理专线（IEPL）机场”的区别？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>三者代表了三种截然不同的网络层级：直连最劣、中继居中、内网物理专线最顶级。
+            <br />
+            <strong>深入解释：</strong>直连是国内电脑直接跨洋连接境外机器，晚高峰丢包超 20%；公网中继在广州/上海部署了国内前置服务器，内网转发后出海，稳定性提升数倍；而 <strong>IEPL 物理专线</strong>（如光速云）则是在境内机房与境外机房之间拉设了端到端的物理内网光纤，数据完全不经过公网 GFW，晚高峰丢包率为 0.00%。详见 <a href="/workflow-1">IEPL / IPLC 跨境企业专线权威选型</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b8">
+          <h3 class="mono-faq-q">Q1.8：很多机场宣传“千兆带宽 / 2.5Gbps 专线”，是指每个人都能独享 2.5G 吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>这是指<strong>机房骨干入出口的总物理管道带宽池</strong>，而非单用户独享。
+            <br />
+            <strong>深入解释：</strong>独享 2.5Gbps 企业跨境专线的月租高达数十万元人民币。机场是通过多路复用（Multiplexing）将该大带宽池分配给数千名订阅用户。大厂（如光速云）之所以快，是因为其单机柜物理管道宽裕，即使数百人同时在晚高峰看 4K 也无法挤满总水管，从而保证了每个用户都能分得 300M–900M 的极致速率。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b9">
+          <h3 class="mono-faq-q">Q1.9：学术查阅文献与日常编程写代码，每月大约需要多少流量？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>纯学术与编程研发，每月 <strong>30GB – 60GB 配额完全绰绰有余</strong>。
+            <br />
+            <strong>深入解释：</strong>Google Scholar、Overleaf、arXiv PDF 论文下载单篇通常在 2MB–10MB 左右；GitHub 代码提交与拉取纯文本体积极小（除非克隆数十 GB 的大型深度学习数据集）。流量的大头永远是视频流媒体（4K 视频每小时消耗约 7GB–10GB）。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b10">
+          <h3 class="mono-faq-q">Q1.10：机场跑路有什么经典的征兆？看到什么现象必须立即撤资？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>两大终极信号：<strong>突然推出无厘头的 3 年付/终身 VIP 骨折大促销</strong>，以及 <strong>Telegram 交流群开启全员禁言</strong>。
+            <br />
+            <strong>深入解释：</strong>当商家准备关门前，会利用人们贪便宜的心理进行最后一轮洗劫；一旦节点全线超时且关闭全员讨论长达 48 小时以上，跑路概率超过 98%。详见 <a href="/scam-warning">跑路预警与避坑黑名单</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b11">
+          <h3 class="mono-faq-q">Q1.11：为什么同样的机场，在朋友电脑上很快，在我的电脑上却很卡？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>受<strong>本地物理宽带运营商（电信/联通/移动）</strong>及本地局域网环境影响极大。
+            <br />
+            <strong>深入解释：</strong>如果机场入口部署在广州移动机房，移动宽带用户延迟仅 15ms；而北方电信用户连接该入口可能需要绕行数个跨省中继节点，延迟增加且偶发丢包。选型时必须查看机场是否具备三网优化 BGP 自动调度入口。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b12">
+          <h3 class="mono-faq-q">Q1.12：购买了海外大牌商业 VPN（如 ExpressVPN、NordVPN），为什么在国内连不上？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>传统商业 VPN 采用的 OpenVPN、IKEv2 协议特征极度明显，已被 GFW 深度包检测全面阻断。
+            <br />
+            <strong>深入解释：</strong>海外 VPN 针对的是欧美公共 WiFi 隐私加密场景，未针对国内特定的 GFW 防火墙做混淆与专线中继设计；而国内出海圈使用的机场采用 Shadowsocks 2022、VLESS Reality、Trojan 等深度伪装协议或专线内网传输，抗封锁能力完全不是一个维度。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b13">
+          <h3 class="mono-faq-q">Q1.13：什么是“双机场容灾（Failover）”？普通人有必要搞两个机场吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>商业出海、外贸电商与核心研发人员<strong>绝对必须配备双机场容灾</strong>！
+            <br />
+            <strong>深入解释：</strong>任何单一天才架构都无法规避不可抗力（如海底地震震断海缆、机房骨干线路突发故障）。最佳性价比组合是：<strong>主力月付专线（日常高速） + 147 永久不限时包（备用应急）</strong>。平时不花额外费用，一旦主力断流，客户端自动秒切备用，工作流 0 损失。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b14">
+          <h3 class="mono-faq-q">Q1.14：机场被黑客攻击（DDoS）会导致服务中断吗？大厂是如何防御的？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>同行恶性竞争 DDoS 攻击极其普遍；小机场几分钟瘫痪，大厂靠<strong>国内前置 Tbps 级高防 Anycast IP</strong> 过滤清洗流量。
+            <br />
+            <strong>深入解释：</strong>小作坊机房只要被数十 Gbps 垃圾流量冲击，运营商就会触发黑洞封禁 IP；而具备资本实力的头部品牌在前置入口挂载了多条高防 BGP 线路，能够自动清洗恶意流量并实时轮换入口节点。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-b15">
+          <h3 class="mono-faq-q">Q1.15：退款政策通常是怎样的？买了觉得不好用能退款吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>由于虚拟商品与流量资源的不可逆性，绝大多数机场<strong>一旦开通且产生流量消耗均不予退款</strong>。
+            <br />
+            <strong>深入解释：</strong>这就是为什么我们反复强调“坚决先买一个月付试水”或“选购提供短期测试的小额轻量包”。个别良心服务商支持 24 小时内未消耗流量无理由退款，但必须在购买前仔细阅读服务条款（TOS）。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 维度二：客户端配置与内核调优 -->
+    <section class="mono-chapter" id="cat-client">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">02</span>
+        维度二：客户端选型、TUN 模式与分流调优（15 问）
+      </h2>
+      <p>
+        全面解析 Windows、macOS、iOS、Android 全平台正版代理客户端选型标准、TUN 虚拟网卡配置、Fake-IP 原理以及防止偷跑流量的分流调优。
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item" id="faq-c1">
+          <h3 class="mono-faq-q">Q2.1：2026 年主流代理客户端怎么选？Clash Verge Rev、Sing-box 和 v2rayN 有何区别？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>Windows/Mac 电脑端首选 <strong>Clash Verge Rev</strong>；追求极致低内存与极客配置首选 <strong>Sing-box</strong>；老旧 Windows 电脑可选 <strong>v2rayN</strong>。
+            <br />
+            <strong>深入解释：</strong>Clash Verge Rev 基于开源的 Mihomo（Clash.Meta）内核，拥有现代化的 UI 界面，原生支持 TUN 虚拟网卡与全局规则覆写，对新手极其友好；Sing-box 是新一代跨平台核心，采用纯 Go 语言编写，内存占用仅 30MB 左右，但配置文件为复杂 JSON，适合极客；v2rayN 功能强大但界面偏传统。详见 <a href="/blog/clash-verge-rev-sing-box-tutorial">客户端配置全流程保姆级教程</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c2">
+          <h3 class="mono-faq-q">Q2.2：什么是 TUN 虚拟网卡模式？为什么玩游戏或用命令行必须开 TUN？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>TUN 模式在系统底层虚拟出一块真实网卡，能够<strong>强行接管全系统所有软件的全部流量</strong>。
+            <br />
+            <strong>深入解释：</strong>普通的“系统代理（System Proxy）”只是修改了 Windows/macOS 的网络代理设置，很多原生软件（如 Steam 联机游戏、Git 终端命令行、Docker 容器、Telegram）会直接绕过系统代理走本地网络，导致报错断连；开启 TUN 模式后，系统所有数据包（包括 ICMP Ping、UDP 游戏包、DNS 查询）均被虚拟网卡拦截并送入代理内核进行路由分流。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c3">
+          <h3 class="mono-faq-q">Q2.3：苹果 iPhone / iPad 用户在 App Store 搜不到 Shadowrocket（小火箭）怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>Shadowrocket 在中国大陆区 App Store 已被下架，必须<strong>使用海外（如美区/港区）Apple ID 登录下载</strong>。
+            <br />
+            <strong>深入解释：</strong>切勿轻信网上的盗版所谓破解版安装包（容易被植入恶意证书）；用户可自备一个注册在美区的 Apple ID，通过购买正规苹果官方充值卡（2.99 美元），在 App Store 中购买官方正版小火箭。详见 <a href="/blog/ios-shadowrocket-config-tutorial">Shadowrocket 小火箭保姆级使用教程</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c4">
+          <h3 class="mono-faq-q">Q2.4：什么是 Fake-IP 模式与 Redir-Host 模式？哪个性能更好？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>现代客户端<strong>无脑首选 Fake-IP 模式</strong>，响应速度最快且彻底免疫 DNS 污染。
+            <br />
+            <strong>深入解释：</strong>在 Redir-Host 模式下，客户端必须先发起本地真实的 DNS 解析获取真实海外 IP，极易被本地运营商 DNS 污染返回错误地址；而在 Fake-IP 模式下，内核收到域名请求后，立即在本地返回一个保留网段的虚拟 IP（如 198.18.0.x），省去了远程 DNS 往返耗时（首包握手立省 150ms），真正的域名解析交由境外落地节点在本地直接解析，兼顾极速与抗污染。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c5">
+          <h3 class="mono-faq-q">Q2.5：客户端里的“规则分流（Rule）”、“全局代理（Global）”与“直连（Direct）”怎么选？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>日常使用<strong>坚决选用“规则分流（Rule Mode）”</strong>！
+            <br />
+            <strong>深入解释：</strong>在规则分流下，国内网站（百度、淘宝、微信、B站）完全走本地网络，速度跑满千兆且不消耗机场流量；只有访问 Google、GitHub、YouTube、ChatGPT 时才走境外代理。如果误开“全局代理”，会导致你访问国内软件也走境外专线，不仅扣除宝贵流量，还会导致国内银行或外卖软件将你识别为境外 IP 并弹出风险拦截。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c6">
+          <h3 class="mono-faq-q">Q2.6：如何防止 Windows Update 或苹果系统升级偷偷跑光我的机场流量？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>在客户端配置扩展规则中，将<strong>微软与苹果的系统更新域名强制指定为 DIRECT（直连）</strong>。
+            <br />
+            <strong>深入解释：</strong>Windows 累积更新补丁经常有 4GB–10GB 大小，若未加限制，系统后台静默下载会瞬间耗尽一个月的轻量配额。规则中添加 <code>DOMAIN-SUFFIX,windowsupdate.com,DIRECT</code> 与 <code>DOMAIN-SUFFIX,swcdn.apple.com,DIRECT</code> 即可彻底拦截后台偷跑。详见 <a href="/workflow-3#traffic-saving">轻量包防偷跑实操规则配置</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c7">
+          <h3 class="mono-faq-q">Q2.7：为什么在机场服务条款（TOS）中明令禁止使用迅雷和 BT 下载？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>P2P / BT 下载会向全球海量节点发送数据包并触发欧美严苛的 <strong>DMCA 侵权版权投诉</strong>，会导致机场上游机房直接查封整台母机。
+            <br />
+            <strong>深入解释：</strong>境外机房一旦收到版权机构（如华纳、迪士尼）的 Abuse 邮件，会要求运营商对涉案 IP 实施断网甚至没收服务器。为了保护全站用户的稳定，机场系统部署了自动化审计脚本，一旦检测到 BitTorrent 协议特征，系统会立即执行自动化封号。请在本地客户端将 <code>torrent</code> 关键字强行 REJECT 拦截。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c8">
+          <h3 class="mono-faq-q">Q2.8：Clash Verge Rev 里的“混合代理端口（Mixed Port）”有什么作用？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>一个端口同时兼容 <strong>HTTP 与 SOCKS5 两种代理协议</strong>（默认通常为 7890 或 7897）。
+            <br />
+            <strong>深入解释：</strong>过去用户需要分别记住 HTTP 端口和 SOCKS5 端口；开启 Mixed Port 后，无论你的第三方软件（如 Telegram 填写 SOCKS5，或者 Python Requests 库填写 HTTP）均可直接指向该统一端口，大幅简化了开发环境中的代理变量配置。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c9">
+          <h3 class="mono-faq-q">Q2.9：终端命令行（Git / npm / Docker / curl）如何走代理加速？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>开启 TUN 模式可全局透明加速；未开 TUN 模式可在终端手动注入环境变量。
+            <br />
+            <strong>深入解释：</strong>在 Windows PowerShell 中运行：<code>$env:http_proxy="http://127.0.0.1:7890"; $env:https_proxy="http://127.0.0.1:7890"</code>；在 Linux/macOS 终端运行：<code>export http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890</code>，随后运行 <code>curl -I https://github.com</code> 即可秒速响应。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c10">
+          <h3 class="mono-faq-q">Q2.10：在软路由（OpenWrt）上配置 OpenClash 相比在电脑上装客户端有什么优势？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>实现<strong>全屋局域网所有智能终端（Apple TV、Switch、PS5、智能电视）无感透明出海</strong>，免去每台设备逐一安装客户端的繁琐。
+            <br />
+            <strong>深入解释：</strong>软路由部署在家庭网关位置，路由器硬件在数据转发层全自动完成 DNS 防污染与流量分流，家庭成员手机连接 WiFi 即可直接畅游出海，并且可以针对不同 IP 设定分流策略（如让 Apple TV 走香港流媒体专线，让游戏主机走日韩专线）。详见 <a href="/blog/openclash-router-global-acceleration">软路由 OpenClash 全屋透明代理配置全攻略</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c11">
+          <h3 class="mono-faq-q">Q2.11：什么是订阅转换（Subconverter）？公共在线转换工具有安全风险吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>将机场节点格式（如 v2rayN 链接）转换为 Clash/Sing-box 格式的工具；<strong>严禁使用第三方未知公共转换网站</strong>！
+            <br />
+            <strong>深入解释：</strong>公共在线订阅转换平台如果在后端记录请求日志，可以直接截获包含你账户 Token 的完整订阅地址，甚至可以在返回的节点列表中注入恶意中转节点。如果确需转换，推荐使用开源的本地 Docker 自建 subconverter，或直接使用 Clash Verge Rev 内置的订阅解析功能。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c12">
+          <h3 class="mono-faq-q">Q2.12：手机上开启代理客户端（如小火箭或 Clash Meta），电池耗电会显著增加吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>正常加密协议（如 Shadowsocks、Trojan）耗电微乎其微；但若开启频繁的“心跳保活”或使用超高并发 UDP 协议（如未经优化的 Hysteria2）可能会增加 5%–10% 耗电。
+            <br />
+            <strong>深入解释：</strong>现代手机芯片自带 AES 硬件加密指令集，Shadowsocks 解密几乎不消耗 CPU 资源；建议在客户端设置中，将节点延迟检测间隔调整为 180 秒以上，避免客户端在后台频繁唤醒手机基带发起测速。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c13">
+          <h3 class="mono-faq-q">Q2.13：安卓手机推荐使用哪款客户端最稳定？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>首选 <strong>Clash Meta for Android（CMFA）</strong> 或 <strong>v2rayNG</strong>。
+            <br />
+            <strong>深入解释：</strong>CMFA 搭载了活跃维护的 Meta 内核，全面支持各种主流协议与分流策略组，界面美观稳定；v2rayNG 则作为轻量单节点测试工具备用，支持一键剪贴板导入节点。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c14">
+          <h3 class="mono-faq-q">Q2.14：macOS 开启 TUN 模式提示“需要安装虚拟网卡扩展/授权管理员权限”安全吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>完全安全且属于系统正常流程。
+            <br />
+            <strong>深入解释：</strong>macOS 严格受安全沙箱保护，创建虚拟网络接口设备（utun）需要向系统内核注入网络驱动并取得 root 特权。只要你的 Clash Verge Rev 来自官方正规 GitHub Release 仓库，输入系统管理员密码授权即可正常运行。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-c15">
+          <h3 class="mono-faq-q">Q2.15：客户端中的“延迟测试（Ping）”显示的毫秒数，是真实的网页加载速度吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>不是！该延迟通常只是<strong>客户端到国内入口服务器、或者到特定测试地址的 TCP 握手 RTT 时延</strong>，不代表真实带宽吞吐。
+            <br />
+            <strong>深入解释：</strong>一个显示 20ms 的节点，可能背后是一台限速 1Mbps 的小水管；而一个显示 80ms 的专线节点，却能跑满千兆带宽流畅播放 8K 视频。延迟仅决定响应快慢，带宽容量才决定视频画质与下载速度。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 维度三：网络超时与疑难排障急救 -->
+    <section class="mono-chapter" id="cat-troubleshoot">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">03</span>
+        维度三：网络超时、断流与报错疑难排障急救（15 问）
+      </h2>
+      <p>
+        针对节点全部变红、连接超时（ERR_TIMED_OUT）、能上 Google 但打不开国内网站、系统时间偏差等常见棘手网络故障，提供系统化的定位排查法。
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item" id="faq-t1">
+          <h3 class="mono-faq-q">Q3.1：节点列表全部显示“红圈超时（Timeout）”，四步急救顺序是什么？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>按照<strong>“系统时间校准 → 更新订阅配置 → 重启内核服务 → 切换备用网络（手机热点）”</strong>四步排查。
+            <br />
+            <strong>深入解释：</strong>第一步：检查电脑/手机时间是否与国家授时中心一致，时间偏差超过 90 秒会导致 TLS 证书协商直接握手失败；第二步：在客户端中点击【更新订阅】，看是否能获取到新配置（排除旧节点域名失效）；第三步：在客户端设置中重启内核并重启 TUN 虚拟网卡；第四步：如果连手机热点通畅但家里宽带超时，说明是本地光猫 DNS 或局域网防火墙阻断。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t2">
+          <h3 class="mono-faq-q">Q3.2：为什么开启代理后，能正常访问 Google，但国内软件（微信、百度、B站）全卡死断网？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>误开启了“全局代理（Global）”、或者<strong>本地 DNS 发生泄漏劫持</strong>。
+            <br />
+            <strong>深入解释：</strong>将客户端模式从【Global】切换回【Rule（规则分流）】；如果依然卡顿，检查客户端 DNS 配置中是否未设置国内 Direct DNS。推荐将直连 DNS 设置为阿里 DNS（<code>223.5.5.5</code>）或腾讯 DNS（<code>119.29.29.29</code>），确保国内域名直接走运营商本地解析。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t3">
+          <h3 class="mono-faq-q">Q3.3：关闭代理客户端后，电脑彻底无法上网、浏览器提示“代理服务器连接被拒绝”怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>客户端非正常退出，<strong>残留了系统代理设置未被自动还原</strong>。
+            <br />
+            <strong>深入解释：</strong>在 Windows 中按快捷键 Win+I 打开【设置】→【网络和 Internet】→【代理】，找到“使用代理服务器”开关，将其手动点击【关闭】并保存即可立即恢复网络；或者重新打开一次 Clash Verge Rev 并点击正常退出，程序会自动清理注册表中的残留代理项。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t4">
+          <h3 class="mono-faq-q">Q3.4：为什么有时候明明测速有 500M，看 YouTube 却无限转圈只有几百 Kbps？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>遭遇了<strong>劣质机场的测速白名单欺骗</strong>、或者是<strong>晚高峰骨干网剧烈丢包导致 TCP 窗口塌陷</strong>。
+            <br />
+            <strong>深入解释：</strong>部分低价直连机场针对 Speedtest 测速放行，但面对真实的谷歌视频流，晚高峰丢包率超过 20%，导致 TCP 协议不断重传数据包，实际吞吐呈现断崖式下跌。解决根源只有升级至不丢包的物理内网 IEPL 专线（如光速云）。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t5">
+          <h3 class="mono-faq-q">Q3.5：浏览器提示“您的连接不是私密连接（NET::ERR_CERT_COMMON_NAME_INVALID）”怎么解决？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>多为<strong>局域网杀毒软件（如 360、火绒）开启了 HTTPS 流量过滤</strong>，注入了不受信任的自签名证书。
+            <br />
+            <strong>深入解释：</strong>在杀毒软件设置中关闭“网络保护 / 网页防篡改 / 邮件扫描”模块；如果使用了公共 WiFi，警惕是否存在针对 HTTP/HTTPS 的中间人劫持攻击。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t6">
+          <h3 class="mono-faq-q">Q3.6：为什么使用校园网（CERNET）时，机场总是提示连接被重置？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>高校校园网出口通常部署了深度的安全行为审计设备，<strong>对非标端口（如 10000 以上高位端口）与 UDP 流量实施了强制截断</strong>。
+            <br />
+            <strong>深入解释：</strong>尝试在节点列表中选用采用标准 443 端口的节点（如 Trojan 或 VLESS Reality）；如果客户端支持 IPv6，开启客户端的 IPv6 路由开关，直接经由教育网千兆 IPv6 隧道出海，往往能绕过校园网主防火墙的策略限制。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t7">
+          <h3 class="mono-faq-q">Q3.7：打开某些网站提示“DNS_PROBE_FINISHED_NXDOMAIN”是什么意思？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>域名解析失败，目标域名不存在或<strong>被本地运营商 DNS 污染阻断</strong>。
+            <br />
+            <strong>深入解释：</strong>检查客户端是否开启了 Fake-IP 模式；在客户端常规设置中点击“清空本地 DNS 缓存”，或者在 Windows 命令提示符运行 <code>ipconfig /flushdns</code> 刷新解析表。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t8">
+          <h3 class="mono-faq-q">Q3.8：为什么在晚高峰 20:30–22:30，平时很快的节点突然频繁卡死？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>全国数亿家庭宽带出海流量集中爆发，<strong>公网直连出口骨干网利用率突破 95% 产生硬性拥堵</strong>。
+            <br />
+            <strong>深入解释：</strong>电信 163 与移动 CMI 国际出口在此时段会出现大规模随机丢包。只有独立于公网互联网的端到端二层物理专线（IEPL）因为享有独享物理光纤带宽，能够完全无视公网晚高峰的剧烈拥堵。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t9">
+          <h3 class="mono-faq-q">Q3.9：什么是 MTU（最大传输单元）？节点卡顿时调小 MTU 有用吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>有用！特别是在开启 TUN 虚拟网卡时，<strong>调小 MTU 可以避免数据包跨网分片导致的严重丢包</strong>。
+            <br />
+            <strong>深入解释：</strong>标准以太网 MTU 为 1500 字节，但代理协议自身带有加密头（Overhead）。在多层隧道封装下，若原始数据包大于 1420 字节，路由器会被迫将其拆分成两个包发送，一旦其中一个分片丢失会导致整个数据包重传。在 Clash 配置中将 <code>mtu: 1400</code> 或 <code>1380</code>，通常能显著改善断流体感。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t10">
+          <h3 class="mono-faq-q">Q3.10：更新订阅提示“Network Error: 404 Not Found”或“502 Bad Gateway”怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>机场后端的<strong>订阅分发域名被 GFW 拦截污染</strong>、或者机场后端服务器临时故障。
+            <br />
+            <strong>深入解释：</strong>登录机场官网用户中心，查看首页公告栏是否有最新的防封备用订阅地址；如果官网也打不开，尝试连接手机热点或通过邮件中的备用域名重新获取。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t11">
+          <h3 class="mono-faq-q">Q3.11：为什么打外服游戏（英雄联盟日服、Steam CS2）延迟显示 40ms，但游戏中疯狂丢包瞬移？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>普通中继节点虽然下行大，但<strong>网络抖动（Jitter）超标、且 UDP 数据包缺乏前向纠错（FEC）</strong>。
+            <br />
+            <strong>深入解释：</strong>在线流媒体视频有 5–10 秒的本地预加载缓冲，微小丢包完全感觉不到；但游戏属于高频微小 UDP 数据流，要求单次包丢失率低于 0.1%。打外服竞技游戏必须选用专业的专线游戏加速节点或企业级 IEPL 专线。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t12">
+          <h3 class="mono-faq-q">Q3.12：Windows 11 安装 Clash Verge Rev 后，提示“无法启动核心服务 / Service Error”怎么处理？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>Windows Defender 或第三方杀毒软件<strong>拦截了内核守护进程安装</strong>。
+            <br />
+            <strong>深入解释：</strong>右键点击 Clash Verge Rev 快捷方式，选择【以管理员身份运行】；在设置界面中找到【服务模式（Service Mode）】，点击【卸载】后重新点击【安装】并授权管理员权限。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t13">
+          <h3 class="mono-faq-q">Q3.13：使用代理客户端时，局域网共享打印机或 NAS 突然搜不到了怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>TUN 虚拟网卡接管了本地私有网段，<strong>未将本地局域网（LAN）排除在代理之外</strong>。
+            <br />
+            <strong>深入解释：</strong>在客户端设置中，勾选【Bypass LAN（绕过局域网）】；在规则分流列表中确保第一条规则为 <code>GEOIP,LAN,DIRECT</code>，确保 <code>192.168.x.x</code> 与 <code>10.x.x.x</code> 本地私网请求直接走物理网卡。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t14">
+          <h3 class="mono-faq-q">Q3.14：为什么苹果 Mac 电脑休眠唤醒后，代理客户端经常彻底断连没有网？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>macOS 深度节能模式在休眠时<strong>切断了 TUN 虚拟网络接口（utun）的电源状态</strong>。
+            <br />
+            <strong>深入解释：</strong>休眠唤醒后，客户端内核未收到网卡重置事件导致死锁。在 Clash Verge Rev 中点击重启内核即可瞬间恢复；或在客户端设置中开启【Auto Restart on Wakeup（唤醒后自动重启）】功能。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-t15">
+          <h3 class="mono-faq-q">Q3.15：出现“远程主机强迫关闭了一个现有的连接（WSAECONNRESET）”是什么原因？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>数据包在出境时触发了 GFW 的深度特征拦截，<strong>防火墙直接向你的本地主机伪造下发了 TCP RST 强行复位包</strong>。
+            <br />
+            <strong>深入解释：</strong>这证明当前使用的节点协议加密特征已被识别，或者使用的是直连节点。必须在客户端切换使用抗审查能力更强的 VLESS Reality 协议、或切换至经过内网专线加密的中继节点。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 维度四：流媒体与 AI 风控免检 -->
+    <section class="mono-chapter" id="cat-ai-stream">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">04</span>
+        维度四：流媒体全量解锁与生成式 AI 风控免检（15 问）
+      </h2>
+      <p>
+        针对 OpenAI ChatGPT、Anthropic Claude、Netflix、Disney+、YouTube 4K、TikTok 等平台极其严苛的 IP 审查与风控拦截，提供专著级解锁排障解答。
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item" id="faq-a1">
+          <h3 class="mono-faq-q">Q4.1：为什么访问 OpenAI ChatGPT 或 Claude 会提示 403 Access Denied 报错？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>节点使用的是被批量风控标记的<strong>机房广播 IP（Data Center IP）</strong>，被 Cloudflare 防火墙判定为高危爬虫或代理。
+            <br />
+            <strong>深入解释：</strong>OpenAI 与 Anthropic 通过接入 MaxMind 与 IPinfo 的商业威胁情报库，将 AWS、DigitalOcean、Linode、Oracle 等大型云服务商的机房网段全量列入拒访名单。解决根本手段是切换至拥有<strong>双 ISP 纯净原生住宅 IP</strong>的优质节点（如光速云原生解锁专区）。详见 <a href="/workflow-2">ChatGPT / Claude 原生 IP 与 4K 解锁实测方案</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a2">
+          <h3 class="mono-faq-q">Q4.2：什么是双 ISP 住宅 IP？和单 ISP 或机房 IP 有什么本质区别？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>双 ISP 住宅 IP 是指<strong>ASN 组织与使用类型（Usage Type）均注册为本地真实家庭宽带宽带提供商（如 AT&amp;T、Verizon、Comcast）的纯正商业住宅 IP</strong>。
+            <br />
+            <strong>深入解释：</strong>普通机房 IP 的 Usage Type 标注为 <code>DCH（数据中心）</code>；单 ISP IP 的上游仍是机房网络；而双 ISP 住宅 IP 在 IPinfo 数据库中，ASN 与类型均显示为 <code>ISP / Residential</code>，在风控系统眼中的欺诈分值（Fraud Score）为 0，能够获得最高级别的免检通行权。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a3">
+          <h3 class="mono-faq-q">Q4.3：为什么 Claude 3.5 Sonnet 特别容易封号？有哪些不可逾越的红线？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>Anthropic 实施了全网最极端的<strong>“TLS 指纹与跨国 IP 漂移关联风控”</strong>。
+            <br />
+            <strong>深入解释：</strong>三大致死死穴：① 节点频繁在香港、日本、美国之间来回自动切换（异地登录触发封号）；② 使用了万人共享的脏机房 IP；③ 注册时使用的境外手机号属于已被滥用的虚拟接码平台。必须在客户端将 Claude 域名固定绑定在单一美国原生住宅专线节点上。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a4">
+          <h3 class="mono-faq-q">Q4.4：频繁弹出 Cloudflare Turnstile 人机验证码、且无限死循环验证怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>当前节点的<strong>欺诈分值（Fraud Score）超过 60 分</strong>、或者<strong>浏览器 WebRTC 发生了真实真实 IP 泄露</strong>。
+            <br />
+            <strong>深入解释：</strong>当大量黑产脚本或爬虫与你共用同一个节点出口时，该 IP 会被 Cloudflare 降级信誉；在 Chrome 浏览器中安装 WebRTC Control 扩展彻底禁用 WebRTC，并切换至带有【低风控/原生】标注的专线节点。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a5">
+          <h3 class="mono-faq-q">Q4.5：Netflix（奈飞）只能看自制剧（Netflix Originals），看不了非自制版权剧怎么办？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>当前节点<strong>未实现原生流媒体解锁（被 Netflix 判定为了普通机房代理）</strong>。
+            <br />
+            <strong>深入解释：</strong>Netflix 对自制剧开放全球版权，但绝大部分热门剧集（如《绝命毒师》、《生活大爆炸》）受区域版权限制，只有当用户通过真正的本地居民原生 IP 访问时才会展示完整片库。必须在节点列表中选用经过 DNS 流媒体解锁劫持或具备原生广播 IP 的节点。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a6">
+          <h3 class="mono-faq-q">Q4.6：使用代理观看 YouTube 无法开启 4K 或 8K 超高清画质是什么原因？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>节点单流下载带宽不足、或者电脑硬件<strong>不支持 Google VP9 / AV1 视频硬解码</strong>。
+            <br />
+            <strong>深入解释：</strong>播放 4K 60FPS 视频要求瞬时带宽稳定在 35Mbps 以上且不能出现突发丢包；若网络满足要求但依然卡顿，在 Chrome 地址栏打开 <code>chrome://gpu</code>，检查 Video Decode 是否开启了硬件加速。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a7">
+          <h3 class="mono-faq-q">Q4.7：Disney+ 提示“Error Code 83”或“Service Unavailable”怎么解决？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>迪士尼最严格的<strong>设备指纹 DRM 校验与机房 IP 双重拦截</strong>。
+            <br />
+            <strong>深入解释：</strong>Disney+ 对代理的封杀力度甚至超过 Netflix。尝试更换新加坡或美国原生专线节点；在安卓电视或 Apple TV 上，必须将系统所在地区和 Apple ID 地区保持完全一致。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a8">
+          <h3 class="mono-faq-q">Q4.8：为什么有些机场虽然能解锁流媒体，但到了晚上 9 点就画质自动降为 480P？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>机场采购的海外落地机器与 Netflix OCA（本地内容分发服务器）之间的<strong>对等互联带宽超载严重</strong>。
+            <br />
+            <strong>深入解释：</strong>晚高峰大量用户涌入看剧，落地机房的国际出口管道被占满，动态码率（ABR）检测到网络拥塞，自动将视频流压缩降级。只有具备充沛专线储备的头部大厂才能保障全时段 4K 满血。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a9">
+          <h3 class="mono-faq-q">Q4.9：国内手机如何免拔卡正常刷国际版 TikTok（抖音海外版）？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>TikTok 会在底层同时读取 <strong>SIM 卡国家代码（MCC/MNC）</strong>、<strong>系统语言/时区</strong>、以及 <strong>IP 地理位置</strong>。
+            <br />
+            <strong>深入解释：</strong>单纯开代理无法绕过 SIM 卡检测。解决方案：① 拔出大陆 SIM 卡或使用境外实体卡；② 将手机系统语言改为英文，时区改为目标国时区；③ 开启客户端 TUN 模式分流至美国或东南亚原生住宅节点；④ 或使用越狱/Root 后的免拔卡专用修改版客户端。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a10">
+          <h3 class="mono-faq-q">Q4.10：使用代理订阅海外 Spotify，为什么每隔 14 天提示必须回原地区登录一次？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>这是 Spotify 免费版用户的防滥用风控机制。
+            <br />
+            <strong>深入解释：</strong>免费版用户在海外出差漫游最多只能维持 14 天，每隔 14 天必须切换至你注册时所在国家的代理节点重新登录一次刷新 Token；如果升级为 Premium 付费会员，则完全不受 14 天漫游限制。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a11">
+          <h3 class="mono-faq-q">Q4.11：用同一个节点同时登录两个不同的 ChatGPT 账号，会导致两个号都被关联封禁吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>只要没有触发违规生成操作，<strong>单纯同 IP 登录多账号不会导致封号</strong>。
+            <br />
+            <strong>深入解释：</strong>现实中整个大学校园或整栋办公楼对外往往只有一个公网 IP，OpenAI 允许同 IP 存在正常的多人使用行为。封号通常是因为其中一个账号频繁生成违规违禁内容、或者短时间内发起了超高并发的自动化脚本调用。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a12">
+          <h3 class="mono-faq-q">Q4.12：在 Apple TV 上看 Netflix 和 YouTube，如何保证代理最高画质与极低延迟？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>在 Apple TV 上安装 <strong>Sing-box tvOS 版</strong>、<strong>Loon tvOS 版</strong>，或通过软路由 OpenClash 进行透明代理。
+            <br />
+            <strong>深入解释：</strong>Apple TV 支持原生运行 Sing-box，将 Apple TV 设为局域网旁路由或直接在电视端开启 TUN 虚拟网卡接管全部流量，配合光速云香港或新加坡 IEPL 专线，可以实现秒开杜比视界（Dolby Vision）与杜比全景声（Atmos）。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a13">
+          <h3 class="mono-faq-q">Q4.13：访问海外学术数据库（IEEE Xplore、ScienceDirect）需要特定节点吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>绝大多数学术数据库无特定封锁，<strong>首选低延迟香港或日本专线节点</strong>。
+            <br />
+            <strong>深入解释：</strong>学术检索注重的是网页点击响应速度（TTFB），低延迟专线能让翻阅 PDF 文献与搜索文献引用毫无延迟感；如果使用高校购买的机构远程访问权限（Shibboleth / OpenAthens），代理 IP 只要保持稳定不跳即可。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a14">
+          <h3 class="mono-faq-q">Q4.14：如何使用脚本自行检测手头节点的流媒体与 AI 解锁真实情况？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>在 Linux 或 VPS 终端运行开源的 <strong>RegionRestrictionCheck</strong> 或 <strong>MediaUnlockTest</strong> 脚本。
+            <br />
+            <strong>深入解释：</strong>运行命令 <code>bash &lt;(curl -L -s media.ispvps.com)</code>，脚本会自动向 Netflix、Disney+、OpenAI、YouTube 等二十余家海外服务商发起真实握手探测，并在终端输出全量“Yes（原生解锁）/ No（仅自制剧或被拒）”的彩色审计报告。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-a15">
+          <h3 class="mono-faq-q">Q4.15：为什么有些节点显示为“香港”，但访问 Google 时自动跳转到了“google.com.tw”或日本？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>遭遇了 <strong>Google 区域重定向（Google IP Location Mismatch）</strong>。
+            <br />
+            <strong>深入解释：</strong>Google 拥有独立的全球 IP 地理数据库，如果某个 IP 段历史上长期在日本使用，即便机房后来将其广播至香港，Google 数据库未及时更新之前仍会将其判定为日本地区；在浏览器访问 <code>google.com/ncr</code>（No Country Redirect）即可强制使用全球通用版。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 维度五：底层协议与加密原理 -->
+    <section class="mono-chapter" id="cat-protocol">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">05</span>
+        维度五：底层代理协议与加密抗封锁机理深度科普（12 问）
+      </h2>
+      <p>
+        深入拆解 VLESS Reality、Shadowsocks 2022、Hysteria2、Trojan、TUIC 等主流出海协议在算法层面的异同，为极客用户揭秘 GFW 防火墙的审查逻辑。
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item" id="faq-p1">
+          <h3 class="mono-faq-q">Q5.1：2026 年主流协议大乱斗：VLESS Reality、Shadowsocks 与 Hysteria2 到底谁更强？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>各有专精！<strong>抗公网封锁首选 VLESS Reality；低延迟专线首选 Shadowsocks 2022；弱网抢带宽首选 Hysteria2</strong>。
+            <br />
+            <strong>深入解释：</strong>VLESS Reality 伪装成正规微软/苹果官方的 TLS 握手，GFW 无法通过统计学特征分辨；Shadowsocks 算法极轻，在专线内网下吞吐最高且最省电；Hysteria2 基于魔改 UDP/QUIC 协议，在恶劣丢包网络下具备暴力抢带宽能力，但容易遭遇运营商 UDP QoS 限速。详见 <a href="/blog/vless-reality-vs-shadowsocks-protocol">主流科学上网协议深度横评</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p2">
+          <h3 class="mono-faq-q">Q5.2：什么是 VLESS Reality 协议？它为什么不需要自购域名和证书？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>通过<strong>直接借用别人的正规海外大厂 TLS 证书（如 www.apple.com / www.microsoft.com）</strong>进行偷天换日伪装。
+            <br />
+            <strong>深入解释：</strong>以往 Trojan 协议必须自建域名并申请证书，GFW 可以通过主动探测审查域名真伪；Reality 协议通过非对称公私钥校验，真实客户端可以伪装成访问微软官网的正常 HTTPS 流量，而 GFW 发起主动探测时，Reality 服务端会全量将流量原样反向代理给微软官方，防火墙收到的是真实的微软证书响应，彻底破解了主动探测机制。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p3">
+          <h3 class="mono-faq-q">Q5.3：Shadowsocks 2022 相比老版本的 SS 协议做了哪些重大安全改进？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>彻底消除了密文数据包前几个字节的特征熵，<strong>从根源上防御重放攻击（Replay Attack）与主动探测</strong>。
+            <br />
+            <strong>深入解释：</strong>老版本 SS 存在头部校验漏洞，GFW 可以将捕获的密文数据包再次发送给服务器，观察响应行为来确认其是否为代理；SS 2022 引入了严格的时间戳窗口校验与独立的会话密钥衍生机制，重放的数据包会被系统静默丢弃，大幅提升了抗特征审查能力。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p4">
+          <h3 class="mono-faq-q">Q5.4：为什么基于 UDP 的 Hysteria2 协议在白天很快，晚上却偶尔卡顿？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>遭遇了国内部分省份电信或移动运营商实施的 <strong>UDP QoS 流量整形限速</strong>。
+            <br />
+            <strong>深入解释：</strong>Hysteria2 使用标准的 UDP 协议进行单边加速，在骨干网拥塞时，运营商为了保护高优先级的 TCP 网页与业务数据，会对大流量长连接的非标 UDP 端口实施随机丢包惩罚。此时切换回基于 TCP 的 Shadowsocks 或专线线路更加平稳。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p5">
+          <h3 class="mono-faq-q">Q5.5：什么是 ECH（Encrypted Client Hello）？它能否终结 GFW 的 SNI 阻断？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>ECH 能够将 TLS 握手中的<strong>目标域名（SNI）彻底加密</strong>，但 GFW 目前采取了“宁可错杀、全网阻断 ECH 扩展包”的强力反制策略。
+            <br />
+            <strong>深入解释：</strong>过去 GFW 通过明文审查 Client Hello 中的域名来阻断连接；ECH 技术使得域名被公钥加密；但目前在国内公网环境下，一旦防火墙识别到带有 ECH 协商字段的数据包，会直接下发 TCP RST 强行中断连接，因此公网 ECH 普及仍面临工程博弈。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p6">
+          <h3 class="mono-faq-q">Q5.6：为什么物理专线（IEPL / IPLC）压根不需要复杂的加密伪装？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>因为专线走的是<strong>完全物理隔离的跨境海底内网光纤</strong>，压根不经过公共 GFW 过滤设备！
+            <br />
+            <strong>深入解释：</strong>公网直连需要拼命伪装，是因为数据包必须穿过国家互联网出口的深度包检测探针；而 IEPL 是大企业和运营商内部租赁的二层专线，数据包在深圳机房直接进入物理光缆直达香港，全程处于私有内网状态。既然没有防火墙审查，自然不需要消耗 CPU 去做复杂的特征混淆。详见 <a href="/workflow-1">IEPL 专线全面解析</a>。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p7">
+          <h3 class="mono-faq-q">Q5.7：什么是 TLS 1.3 握手？为什么比老版 TLS 1.2 快一倍？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>TLS 1.3 实现了 <strong>1-RTT 快速握手</strong>（甚至 0-RTT 会话恢复），握手阶段即完成密钥交换。
+            <br />
+            <strong>深入解释：</strong>老版本 TLS 1.2 需要客户端与服务端来回往返两次（2-RTT）才能开始传输加密数据；TLS 1.3 优化了密码套件协商流程，单次往返即可完成密钥派生并直接附带加密载荷，大幅缩减了出海网页的首屏渲染耗时。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p8">
+          <h3 class="mono-faq-q">Q5.8：为什么自建的 Trojan 节点经常在敏感期被封锁端口？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>自建 VPS 缺乏前置抗 DDoS 与 BGP 隧道保护，且<strong>境外服务器 IP 长期暴露在公网遭到了 GFW 流量统计学识别</strong>。
+            <br />
+            <strong>深入解释：</strong>GFW 具备强大的机器学习流量分析引擎，如果一台海外机器长期只有来自单一国内 IP 的高频大流量下行数据，即便内容全加密，也会被判定为高概率代理服务器并直接对 IP 实施阻断封锁。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p9">
+          <h3 class="mono-faq-q">Q5.9：什么是“单臂路由与透明代理”？家庭千兆宽带跑满代理需要什么软路由配置？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>跑满 1000M 加密代理，推荐至少配备 <strong>Intel J4125、N5105 或 N100 以上 x86 软路由处理器</strong>。
+            <br />
+            <strong>深入解释：</strong>软路由需要实时对海量数据包进行 AES 加密解密运算与 Fake-IP 虚拟网卡转发，老旧 ARM 架构路由器（如红米 AX6000）在运行复杂加密时 CPU 占用容易打满 100% 成为瓶颈；而 x86 芯片具备完整的硬件加速指令集，能确保千兆带宽满速狂飙。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p10">
+          <h3 class="mono-faq-q">Q5.10：TUIC 协议是什么？和 Hysteria2 相比有何区别？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>两者均基于 QUIC 协议，但 <strong>Hysteria2 激进暴力抢网，TUIC 更遵循标准 BBR 拥塞控制更加平稳克制</strong>。
+            <br />
+            <strong>深入解释：</strong>Hysteria2 适合在恶劣无线电环境（如高铁、弱信号移动网络）中强行拉升吞吐；TUIC 则更适合多路复用长连接，对服务器 CPU 的单核占用更加温和。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p11">
+          <h3 class="mono-faq-q">Q5.11：什么是 DNS 泄漏（DNS Leak）？如何彻底杜绝？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>开启代理后，<strong>电脑依然向国内运营商 DNS（如电信 114.114.114.114）查询你访问的海外敏感网站</strong>。
+            <br />
+            <strong>深入解释：</strong>这不仅会导致目标域名被本地防火墙直接下发错误解析，还会将你的完整浏览历史暴露给本地运营商网络日志。在客户端中开启 Fake-IP 模式，并将远程 DNS 指向 Cloudflare（<code>1.1.1.1</code>）或 Google（<code>8.8.8.8</code>），所有境外域名均交由落地节点在远程解析，彻底根绝 DNS 泄漏。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-p12">
+          <h3 class="mono-faq-q">Q5.12：物理专线（IEPL）如果发生突发故障，通常需要多久能恢复？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>顶级专线服务商配备了<strong>主备双光缆双路由（Dual Ring HA）</strong>，可在 50 毫秒内实现物理倒换。
+            <br />
+            <strong>深入解释：</strong>大厂（如光速云）采购的专线具备保护环（Ring Protection），即便沪港主光缆发生意外，硬件系统会在毫秒级将数据自动切换至广港或京港备用光缆，普通用户在终端上几乎察觉不到任何中断。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 维度六：隐私审计与法律合规 -->
+    <section class="mono-chapter" id="cat-safety">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">06</span>
+        维度六：账号安全、隐私审计与法律合规边界（10 问）
+      </h2>
+      <p>
+        直面普通出海用户最关心的隐私底线、数据安全性、日志审计机制与法律合规红线，提供理性、合规、中立的避坑准则。
+      </p>
+
+      <div class="mono-faq-list">
+        <div class="mono-faq-item" id="faq-s1">
+          <h3 class="mono-faq-q">Q6.1：使用机场科学上网，机场管理员能看到我浏览的具体网页内容或银行密码吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>绝对看不到！现代互联网已实现全网 <strong>HTTPS 端到端全加密（TLS 1.3）</strong>。
+            <br />
+            <strong>深入解释：</strong>你的浏览器与目标网站（如 Google、PayPal、银行网银）之间的所有通信数据均经过高强度公钥加密，机场服务器充当的只是“密文快递员”的角色，机场主最多只能在日志中看到你连接了哪个域名（如 <code>google.com</code>）以及传输了多少字节的数据流，但绝不可能破解密文去窥探你的账号、密码、聊天记录或具体网页内容。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s2">
+          <h3 class="mono-faq-q">Q6.2：普通人查学术资料、看技术文档、日常追剧，会有所谓的“被喝茶”法律风险吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>遵纪守法的正常出海科研、学习、办公与娱乐，<strong>切勿参与政治谣言、诈骗黑产与恐怖主义信息传播</strong>。
+            <br />
+            <strong>深入解释：</strong>执法机关重点打击的是未经许可擅自建立跨境信道牟利的非法倒卖团伙、以及利用海外工具实施电信网络诈骗、发布政治反动言论与洗钱黑产的违法犯罪分子。广大高校师生查阅文献、程序员拉取开源代码、外贸从业者与客户正常沟通，只要恪守法律红线，不信谣不传谣，无需过分焦虑。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s3">
+          <h3 class="mono-faq-q">Q6.3：什么是“零日志审计政策（No-Logs Policy）”？如何判断机场是否真无日志？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>指服务器内存中<strong>绝不持久化存储用户的原始访问目标 IP 与访问时间戳</strong>。
+            <br />
+            <strong>深入解释：</strong>正规老牌大厂在后台系统架构上实施了 RAM-Only（纯内存运行）策略，每次机器重启所有临时连接日志全量物理擦除，仅保留计费系统中的流量数值；而某些劣质小作坊机房因合规漏洞，在后台硬盘以明文保存全量日志，存在重大数据泄露风险。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s4">
+          <h3 class="mono-faq-q">Q6.4：为什么在机场注册账号时，强烈建议使用全新的独立随机密码？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>防止劣质机场数据库遭遇渗透后，黑产团伙对你的核心账号进行<strong>“撞库攻击（Credential Stuffing）”</strong>。
+            <br />
+            <strong>深入解释：</strong>很多小机场采用开源的 SSPanel 面板，一旦其网站被黑客攻破，注册邮箱与密码哈希会被拖库并在暗网流通。如果你在机场使用的密码与主力邮箱、微信、支付宝密码相同，会导致其他高危账户面临连锁盗号风险。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s5">
+          <h3 class="mono-faq-q">Q6.5：为什么机场通常明令禁止发布、浏览或传播儿童色情与暴恐违法内容？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>触犯了全球所有文明国家与国际刑警组织的<strong>绝对零容忍法律红线</strong>。
+            <br />
+            <strong>深入解释：</strong>任何海外正规机房一旦侦测到此类违禁流量，会立即启动全球协查机制，不但立刻永久查封涉案节点与封禁账号，还会将关联 IP 与审计特征上报国际执法机构。所有正规服务商均对此类恶意违规者实施全网拉黑封禁。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s6">
+          <h3 class="mono-faq-q">Q6.6：在公共场所（咖啡厅、机场、酒店）连接无密码 WiFi，开代理能防黑客监听吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>能！开启全流量代理后，你的手机与机场节点之间建立了<strong>端到端的加密虚拟通道</strong>。
+            <br />
+            <strong>深入解释：</strong>公共 WiFi 极易被黑客搭建“菠萝派（WiFi Pineapple）”发起中间人欺骗监听；开启代理后，你发出的所有数据包在离开设备前已被高强度加密，黑客在局域网内抓包只能抓到一堆无意义的密文乱码，有效守护了公共网络下的数据安全。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s7">
+          <h3 class="mono-faq-q">Q6.7：使用代理登录微信或国内手机银行，会不会被银行或腾讯封号？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>如果开启了“规则分流（Rule Mode）”，完全不会受任何影响；但若开“全局代理”，可能触发风控拦截。
+            <br />
+            <strong>深入解释：</strong>规则分流模式下，微信与国内银行的数据包直接走国内本地网络，根本不经过境外代理；若误开全局代理，国内银行系统会检测到你的登录 IP 瞬间从北京漂移到香港或美国，属于典型的异常异地登录行为，系统会自动限制交易以保障资金安全。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s8">
+          <h3 class="mono-faq-q">Q6.8：机场提供的节点列表里有“政治、黑产拦截提示”，这是正常的吗？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>非常正常，这是<strong>合规服务商对节点进行自我保护的必要审计规则</strong>。
+            <br />
+            <strong>深入解释：</strong>正规机场为了确保自身国内前置入口不被运营商关停，会在服务端屏蔽恶意发信服务器（SMTP 垃圾邮件）、黑客攻击端口、以及高危欺诈网站。这不仅不会影响正常合法上网，反而是该平台注重长期稳定运营的良心体现。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s9">
+          <h3 class="mono-faq-q">Q6.9：如果手头的机场真的突然失联，在社群或论坛公开发帖维权需要注意什么？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>陈述客观事实，<strong>严禁在截图或帖子中公开泄露个人的真实姓名、手机号与真实 IP</strong>。
+            <br />
+            <strong>深入解释：</strong>维权时将订单编号中的敏感身份信息打码，避免二次泄露隐私给不良网络爬虫；重点通过正规的银行与官方支付争议通道挽回损失，切勿相信网上所谓的“黑客代追款、付费维权”二次骗局。
+          </p>
+        </div>
+
+        <div class="mono-faq-item" id="faq-s10">
+          <h3 class="mono-faq-q">Q6.10：如何选择一家能够长期放心托付、真正保护个人隐私的老牌服务商？</h3>
+          <p class="mono-faq-a">
+            <strong>核心结论：</strong>认准<strong>“运营超 3 年 + 纯内网物理专线 + 独立健康造血 + 良好社群口碑”</strong>的标杆品牌。
+            <br />
+            <strong>深入解释：</strong>正如本站长期监测的 <strong>光速云</strong>，凭借 2.5Gbps IEPL 纯物理专线切片、首创的 147 永久不限时包、以及不参与任何恶性资金盘炒作的扎实作风，赢得了全球数十万跨境外贸与科研用户的长久信赖。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 转化卡片与 Topic Cluster 内链 -->
+    <section class="mono-chapter" id="cta-cluster">
+      <h2 class="mono-h2">
+        <span class="mono-step-num" style="background:#0284c7;">07</span>
+        推荐专线转化卡片与全站 Topic Cluster 主题内链
+      </h2>
+      <p>
+        阅读完全景百科与排障指南后，如果你希望一劳永逸告别频繁断流、节点超时与风控报错，推荐直接接入 missavaiVPN 评测实验室长期实机验证的<strong>避风港老牌物理专线</strong>：
+      </p>
+
+      <div class="mono-cta-box">
+        <div class="mono-cta-header">
+          <div class="mono-cta-badge" style="color:#0284c7;">missavaiVPN 评测实验室 · 2026 年度最值得信赖标杆专线</div>
+          <h3 class="mono-cta-title">光速云（Guangsu Cloud）· 2.5Gbps IEPL 物理专线与永久不限时包</h3>
+          <p class="mono-cta-desc">
+            全节点搭载原生双 ISP 住宅出口，晚高峰丢包率 0.00%，全绿秒开 4K 与 OpenAI / Claude 3.5。首创 147 永久不限时包，流量永不清零，为你的学术科研与出海业务提供磐石般的网络保障。
+          </p>
+        </div>
+
+        <div class="mono-cta-tiers">
+          <div class="mono-cta-card mono-cta-card-hot">
+            <div class="mono-cta-pill">终生备用首选 · 永不清零</div>
+            <h4 class="mono-tier-name">致敬斯诺克 147 永久不限时包</h4>
+            <div class="mono-tier-price">¥147 <span class="mono-tier-unit">/ 一次性付费买断</span></div>
+            <p class="mono-tier-desc">247GB 纯内网 IEPL 专线流量，长期有效不设到期时间，设备闲置不扣费，多设备全家共用。</p>
+            <ul class="mono-tier-list">
+              <li>折合仅 <strong>¥0.59 / GB</strong> 极致专线单价</li>
+              <li>2.5Gbps 纯内网物理直连，晚高峰 0 丢包</li>
+              <li>全节点 OpenAI、Claude 3.5 与 Netflix 4K 全绿解锁</li>
+              <li>支持多公网 IP 同时并发在线</li>
+            </ul>
+            <a 
+              href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y" 
+              target="_blank" 
+              rel="nofollow sponsored noopener" 
+              class="mono-cta-btn"
+            >
+              立即开通 147 永久不限时包 →
+            </a>
+          </div>
+
+          <div class="mono-cta-card">
+            <div class="mono-cta-pill mono-cta-pill-sub">高性价比专线首选 · 年度标杆</div>
+            <h4 class="mono-tier-name">IEPL 专线入门轻量年付版</h4>
+            <div class="mono-tier-price">¥99 <span class="mono-tier-unit">/ 年（使用优惠码 AMM）</span></div>
+            <p class="mono-tier-desc">每月享有 120GB 独享专线配额，折合每月仅需 8.2 元，百元以内即可享受不过 GFW 的物理内网品质。</p>
+            <ul class="mono-tier-list">
+              <li>年付百元内极高性价比专线标杆</li>
+              <li>畅快克隆 GitHub 仓库、秒开 Google Scholar</li>
+              <li>专属优惠码 <code>AMM</code> 享折上折特权</li>
+              <li>支持全平台客户端一键订阅导入</li>
+            </ul>
+            <a 
+              href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y" 
+              target="_blank" 
+              rel="nofollow sponsored noopener" 
+              class="mono-cta-btn mono-cta-btn-sub"
+            >
+              使用优惠码 AMM 优惠开通 →
+            </a>
+          </div>
+        </div>
+
+        <div class="mono-coupon-strip">
+          <span class="mono-coupon-label">missavaiVPN 专属官方折扣码：</span>
+          <span class="mono-coupon-code">AMM</span>
+          <span class="mono-coupon-hint">（结账结算时输入即享全场折扣优惠）</span>
+        </div>
+      </div>
+
+      <!-- Topic Cluster 全站主题集群内链 -->
+      <div class="mono-cluster-box">
+        <h3 class="mono-cluster-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Topic Cluster：全站出海科学上网知识集群与延伸阅读
+        </h3>
+        <p class="mono-cluster-desc">
+          为了构建完整的出海网络认知体系，建议读者结合以下实验室二级专题与实测长文协同阅读：
+        </p>
+
+        <div class="mono-cluster-links">
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">进阶企业专线专题</span>
+            <a href="/workflow-1" class="mono-cl-link">IEPL / IPLC 跨境企业级专线与抗封锁选型权威指南 →</a>
+            <p class="mono-cl-desc">深入剖析二层内网光纤物理拓扑、不过 GFW 抗封锁机理，适合对外贸电商与低延迟竞技有极致要求的用户。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">AI 与流媒体专栏</span>
+            <a href="/workflow-2" class="mono-cl-link">ChatGPT / Claude 原生 IP 与 4K 流媒体解锁实测方案 →</a>
+            <p class="mono-cl-desc">实操解决 OpenAI 与 Claude 3.5 封号与 403 拦截难题，剖析双 ISP 纯净原生住宅 IP 的辨识技巧。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">平价与不限时专栏</span>
+            <a href="/workflow-3" class="mono-cl-link">百元内超高性价比与入门不限时轻量包选型指南 →</a>
+            <p class="mono-cl-desc">精算 8 大平价品牌真实单 GB 成本与晚高峰丢包，教你如何花最少的钱买到最稳的备用线路。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">安全与防坑雷达</span>
+            <a href="/scam-warning" class="mono-cl-link">机场跑路预警与避坑黑名单权威指南 →</a>
+            <p class="mono-cl-desc">公布 Scam Index 跑路风险打分模型、四年历史重大失联案例大复盘与 48 小时紧急挽损指南。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">全网横评大库</span>
+            <a href="/airports" class="mono-cl-link">42 家主流翻墙机场真实晚高峰测速红黑榜大数据库 →</a>
+            <p class="mono-cl-desc">收录全网 42 家机场千兆实机压测数据、运营周期、协议支持与价格带透视图。</p>
+          </div>
+
+          <div class="mono-cluster-item">
+            <span class="mono-cl-cat">客户端保姆教程</span>
+            <a href="/blog/clash-verge-rev-sing-box-tutorial" class="mono-cl-link">2026 最新主流客户端配置：Clash Verge Rev 保姆级教程 →</a>
+            <p class="mono-cl-desc">从官方下载、订阅导入到开启 TUN 模式与规则分流，小白 3 分钟即可掌握。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <style>
+    /* 专著级深度单页专有样式规范 */
+    .mono-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .mono-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--grey-600);
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+    .mono-breadcrumb a {
+      color: var(--grey-600);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .mono-breadcrumb a:hover {
+      color: #0284c7;
+    }
+    .mono-sep {
+      color: var(--grey-400);
+    }
+    .mono-current {
+      color: var(--grey-900);
+      font-weight: 500;
+    }
+    .mono-hero {
+      padding: 40px 0 32px;
+      text-align: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .mono-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .mono-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--grey-900);
+      margin-bottom: 20px;
+    }
+    .mono-title-sub {
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 600;
+      color: var(--grey-800);
+    }
+    .mono-lede {
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.65;
+      color: var(--grey-600);
+      margin-bottom: 32px;
+    }
+    .mono-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 16px;
+      margin-bottom: 40px;
+    }
+    .mono-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .mono-avatar {
+      border-radius: 50%;
+      border: 2px solid #0284c7;
+    }
+    .mono-author-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .mono-author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--grey-900);
+    }
+    .mono-date {
+      font-size: 12px;
+      color: var(--grey-500);
+    }
+
+    /* FAQ Tabs 导览胶囊 */
+    .mono-toc {
+      background: #fbfbf9;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .mono-toc-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 16px;
+    }
+    .mono-faq-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .mono-faq-tab-btn {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--grey-800);
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .mono-faq-tab-btn:hover {
+      background: #0284c7;
+      color: #fff;
+      border-color: #0284c7;
+      transform: translateY(-1px);
+    }
+
+    /* 章节与排版 */
+    .mono-chapter {
+      margin-bottom: 64px;
+    }
+    .mono-h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.2vw, 34px);
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-top: 48px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+    }
+    .mono-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .mono-h3 {
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.4;
+      font-weight: 600;
+      color: var(--grey-900);
+      margin-top: 36px;
+      margin-bottom: 16px;
+    }
+    .mono-chapter p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--grey-800);
+      margin-bottom: 16px;
+    }
+
+    /* 列表 */
+    .mono-list, .mono-ordered {
+      margin: 16px 0 24px;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--grey-800);
+    }
+
+    /* FAQ 列表 */
+    .mono-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin: 28px 0;
+    }
+    .mono-faq-item {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.15s ease;
+    }
+    .mono-faq-item:hover {
+      border-color: #0284c7;
+    }
+    .mono-faq-q {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .mono-faq-a {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--grey-700);
+      margin: 0;
+    }
+
+    /* 转化模块 */
+    .mono-cta-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #fff 100%);
+      border: 1px solid rgba(2, 132, 199, 0.2);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin: 40px 0;
+      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.05);
+    }
+    .mono-cta-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 32px;
+    }
+    .mono-cta-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .mono-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 12px;
+    }
+    .mono-cta-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--grey-700);
+    }
+    .mono-cta-tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .mono-cta-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .mono-cta-card-hot {
+      border: 2px solid #0284c7;
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.1);
+    }
+    .mono-cta-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      background: #0284c7;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 999px;
+      align-self: flex-start;
+      margin-bottom: 12px;
+    }
+    .mono-cta-pill-sub {
+      background: var(--grey-800);
+    }
+    .mono-tier-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 8px;
+    }
+    .mono-tier-price {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      color: #0284c7;
+      margin-bottom: 8px;
+    }
+    .mono-tier-unit {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--grey-500);
+    }
+    .mono-tier-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--grey-600);
+      margin-bottom: 16px;
+    }
+    .mono-tier-list {
+      margin: 0 0 24px 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--grey-700);
+      flex-grow: 1;
+    }
+    .mono-cta-btn {
+      display: block;
+      text-align: center;
+      background: #0284c7;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .mono-cta-btn:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+    }
+    .mono-cta-btn-sub {
+      background: var(--grey-900);
+    }
+    .mono-cta-btn-sub:hover {
+      background: #000;
+    }
+    .mono-coupon-strip {
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(2, 132, 199, 0.2);
+      font-size: 14px;
+      color: var(--grey-700);
+    }
+    .mono-coupon-code {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 17px;
+      color: #0284c7;
+      background: rgba(2, 132, 199, 0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin: 0 4px;
+    }
+
+    /* Topic Cluster 网格 */
+    .mono-cluster-box {
+      margin-top: 56px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .mono-cluster-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--grey-900);
+      margin-bottom: 10px;
+    }
+    .mono-cluster-desc {
+      font-size: 14px;
+      color: var(--grey-600);
+      margin-bottom: 24px;
+    }
+    .mono-cluster-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .mono-cluster-item {
+      background: #fbfbf9;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .mono-cluster-item:hover {
+      border-color: #0284c7;
+      transform: translateY(-2px);
+    }
+    .mono-cl-cat {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #0284c7;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .mono-cl-link {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--grey-900);
+      text-decoration: none;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .mono-cl-link:hover {
+      color: #0284c7;
+    }
+    .mono-cl-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--grey-600);
+      margin: 0;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+      .mono-container {
+        padding: 0 16px;
+      }
+      .mono-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .mono-faq-tabs {
+        flex-direction: column;
+      }
+      .mono-cta-tiers {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Base>

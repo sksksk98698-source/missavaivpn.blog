@@ -92,23 +92,23 @@
   "benefits": [
     {
       "num": "01",
-      "active": false,
+      "active": true,
       "mosaic": "/assets/mosaic-a.webp",
       "image": "/assets/benefit-1.webp",
       "w": 772,
       "h": 492,
-      "title": "Always context-aware",
-      "desc": "Parley remembers your preferences, priorities, and past decisions — so you never have to repeat yourself. It understands your work the way a long-time colleague would."
+      "title": "真实晚高峰多宽带压测",
+      "desc": "拒绝虚标宣传。在晚高峰 20:30 - 22:30 黄金拥堵段，采用电信、联通、移动千兆宽带交叉实测，直接展示真实测速图与抖动曲线。"
     },
     {
       "num": "02",
-      "active": true,
+      "active": false,
       "mosaic": "/assets/mosaic-d.webp",
-      "image": "/assets/parleys-plan.webp",
+      "image": "/assets/missavais-plan.webp",
       "w": 772,
       "h": 492,
-      "title": "Takes real action",
-      "desc": "Beyond suggestions, Parley executes — sending emails, booking meetings, updating records, and managing tasks across all your tools without constant hand-holding."
+      "title": "物理内网 IEPL 专线评测",
+      "desc": "深度解析 42 家机场链路架构，甄别真假专线。专线内网直连不经 GFW，敏感期具备极致抗封锁能力与毫秒级延迟稳定性。"
     },
     {
       "num": "03",
@@ -117,8 +117,8 @@
       "image": "/assets/benefit-3.webp",
       "w": 772,
       "h": 492,
-      "title": "Connects everything",
-      "desc": "Slack, Notion, HubSpot, GitHub — all in one place. Parley connects to 60+ tools. One conversation updates everything, no extra work."
+      "title": "ChatGPT & 流媒体全量解锁",
+      "desc": "逐一检测节点对 OpenAI ChatGPT、Claude 3.5、Netflix、Disney+、YouTube 4K、TikTok 的解锁情况，杜绝 403 拦截与风控。"
     },
     {
       "num": "04",
@@ -127,15 +127,15 @@
       "image": "/assets/benefit-4.webp",
       "w": 772,
       "h": 492,
-      "title": "Gets better over time",
-      "desc": "The longer you work together, the less you explain. Parley learns your tone, shortcuts, and rules. Today’s prompts become tomorrow’s one-word commands."
+      "title": "全平台客户端下载与教程",
+      "desc": "提供 Windows、macOS、iOS、Android、Linux 及 OpenWrt 软路由一站式正版客户端下载指南与订阅配置全流程教学。"
     }
   ],
   "features": [
     {
       "step": 0,
-      "label": "Natural language commands",
-      "desc": "Just speak naturally — \"prep my Monday morning\" or \"follow up with leads who haven't replied in 5 days.\"",
+      "label": "晚高峰真实压力测试",
+      "desc": "在 20:30 - 22:30 黄金网络拥堵高峰期，采用电信/联通/移动千兆宽带交叉压测，直观展现测速曲线与抖动。",
       "mock": "/assets/mock-0.webp",
       "srcset": "/assets/mock-0.webp 1x, /assets/mock-0@2x.webp 2x",
       "w": 1708,
@@ -143,8 +143,8 @@
     },
     {
       "step": 1,
-      "label": "Multi-step task execution",
-      "desc": "From a single intent, Parley plans the full sequence, runs every step, and recovers when something breaks.",
+      "label": "IEPL 物理专线甄别",
+      "desc": "深度探测运营商入口与出口路由拓扑，甄别真假专线。内网物理直连天然免疫 GFW 检测与敏感期断流。",
       "mock": "/assets/mock-2.webp",
       "srcset": "/assets/mock-2.webp 1x, /assets/mock-2@2x.webp 2x",
       "w": 1708,
@@ -152,8 +152,8 @@
     },
     {
       "step": 2,
-      "label": "Human-in-the-loop control",
-      "desc": "Stay in charge of high-stakes actions. Parley pauses for approval whenever the call should be yours.",
+      "label": "AI 与 4K 原生解锁检测",
+      "desc": "全绿检测 OpenAI ChatGPT、Claude 3.5 Sonnet、Netflix 与 YouTube 4K 解锁状态，杜绝 403 拦截与风控验证码。",
       "mock": "/assets/mock-1.webp",
       "srcset": "/assets/mock-1.webp 1x, /assets/mock-1@2x.webp 2x",
       "w": 1708,
@@ -161,8 +161,8 @@
     },
     {
       "step": 3,
-      "label": "Persistent user profile",
-      "desc": "Knows your team, your tools, your customers, across every session, never starting from zero.",
+      "label": "全平台正版配置一站通",
+      "desc": "提供 Windows、macOS、iOS、Android 及软路由官方正版客户端下载与一键托管订阅导入，小白 3 分钟即可上手。",
       "mock": "/assets/mock-3.webp",
       "srcset": "/assets/mock-3.webp 1x, /assets/mock-3@2x.webp 2x",
       "w": 1708,
@@ -171,61 +171,47 @@
   ],
   "testimonials": [
     {
-      "quote": "Parley does what every other AI tool promised but never delivered — it actually takes things off my plate. My inbox went from 200 unread to zero, daily.",
+      "quote": "作为出海电商团队，过去每逢敏感期梯子全挂，直接导致海外店铺客户漏单。换上光速云 IEPL 专线后，晚高峰稳定在线超过半年，优惠码 AMM 还省了不少预算，非常推荐。",
       "avatar": "/assets/avatar-james.webp",
-      "srcset": "/assets/avatar-james.webp 1x, /assets/avatar-james@2x.webp 2x",
-      "name": "James R.",
-      "role": "CEO, CloudPlex"
+      "srcset": "/assets/avatar-james.webp 1x",
+      "name": "David Z.",
+      "role": "出海电商运营总监, 跨境通"
     },
     {
-      "quote": "I was skeptical about 'AI partners' — but Parley learned my communication style in a week and now drafts emails I barely need to edit. Genuinely impressive.",
+      "quote": "我日常重度使用 Cursor 和 Claude 3.5 写代码，之前用普通机房梯子经常被 Anthropic 拦截 403。参考这里的测评选了原生解锁节点，再也没遇到过验证码，体验极度顺滑。",
       "avatar": "/assets/avatar-sophie.webp",
-      "srcset": "/assets/avatar-sophie.webp 1x, /assets/avatar-sophie@2x.webp 2x",
-      "name": "Sophie K.",
-      "role": "VP Marketing, Tytotone"
+      "srcset": "/assets/avatar-sophie.webp 1x",
+      "name": "Sophie L.",
+      "role": "全栈独立开发者, AI Builder"
     },
     {
-      "quote": "The CRM follow-up workflow alone saved our sales team 12 hours a week. And the meeting notes are better than anything our team was writing manually.\"",
-      "avatar": "/assets/avatar-daniel.webp",
-      "srcset": "/assets/avatar-daniel.webp 1x, /assets/avatar-daniel@2x.webp 2x",
-      "name": "Daniel M.",
-      "role": "Head of Sales, Bloopglow"
-    },
-    {
-      "quote": "Parley is the first AI tool that actually reduces my workload. I stay on top of emails, clients, and meetings without the usual chaos",
+      "quote": "以前看各路博主推机场全靠吹，这里直接把 42 家机场的测速图和解锁状态清清楚楚放出来，测速图真假一眼便知，避开了好几个跑路坑，良心站！",
       "avatar": "/assets/avatar-paul.webp",
-      "srcset": "",
-      "name": "Paul M.",
-      "role": "Operations Director, ZingZap"
-    },
-    {
-      "quote": "Parley feels like the assistant I always needed. It keeps conversations organized, handles follow-ups, and saves me hours every week.”",
-      "avatar": "/assets/avatar-emily.webp",
-      "srcset": "",
-      "name": "Emily C.",
-      "role": "Head of Client Success, Junotwig"
+      "srcset": "/assets/avatar-paul.webp 1x",
+      "name": "Kevin M.",
+      "role": "网络工程师, 科技博主"
     }
   ],
   "faqs": [
     {
-      "q": "How is Parley different from ChatGPT and Copilot?",
-      "a": "Parley isn't a chatbot — it's an action-taking agent. While tools like ChatGPT generate text responses, Parley connects to your real tools, executes multi-step tasks, remembers your context across sessions, and proactively manages your work. It's the difference between answering a question and doing the job."
+      "q": "为什么晚高峰（20:00 - 23:00）梯子会频繁断流和卡顿？",
+      "a": "晚高峰是国际出口公网带宽拥堵的高峰期。普通直连和廉价公网中转机场会遭遇运营商强力的 QoS（服务质量）限速和骨干网丢包。要彻底解决晚高峰卡顿，唯一有效方案是选用企业级 IEPL / IPLC 专线（如光速云）。专线走的是运营商内网物理光纤，不经过国际公网公用网关，晚高峰丢包率能控制在 0.1% 以下，4K 视频依然能秒开。"
     },
     {
-      "q": "Is my data safe with Parley?",
-      "a": "Yes — and it's not a checkbox answer. Your data is encrypted in transit and at rest, never used to train shared models, and stays inside your workspace. Parley is SOC 2 Type II and GDPR-compliant, with EU data residency available on request. You own every record we touch, and you can delete it from us in one click."
+      "q": "什么是 IEPL 专线？它与普通直连、中转机场有什么核心区别？",
+      "a": "IEPL（International Ethernet Private Line）即国际以太网专线，属于点对点的运营商内网二层物理专线连接。普通中转机场走公网隧道，敏感时期入口容易被封锁；而 IEPL 专线全程内网传输，不过 GFW 防火墙检测，因此具备天然的抗封锁能力。即使在网络严打时期，专线节点依然能保持稳定在线。"
     },
     {
-      "q": "What happens if Parley makes a mistake?",
-      "a": "Every action Parley takes is logged with field-level reasoning, so mistakes are traceable, not mysterious. High-impact actions stay in human-approval mode by default — Parley drafts, you confirm. If something does slip through, one-click undo reverses the change in your connected tools, and Parley learns from the correction so the same mistake doesn't ship twice."
+      "q": "为什么使用 ChatGPT 和 Claude 会经常提示 Access Denied 或 403 错误？",
+      "a": "OpenAI 与 Anthropic（Claude）对机房数据中心（Data Center）IP 实施了极严格的风控拉黑策略。如果机场节点采用的是廉价机房 IP 或万人共用的脏 IP，就会被系统自动拦截或弹出繁琐的 Cloudflare 验证码。推荐选择在测速榜中明确标注支持「原生解锁 / 双 ISP 住宅 IP」的高质量节点（如光速云或暮光加速的专属解锁节点），可杜绝封控和封号风险。"
     },
     {
-      "q": "How long does setup take?",
-      "a": "About 8 minutes for your first workflow. Connect one tool (HubSpot, Slack, or Zendesk to start), pick a template, run it in test mode against a real record. No implementation calls, no four-week pilot. The teams shipping fastest have a workflow running before lunch on day one — and a second one before they head home."
+      "q": "新手应该选择哪个代理客户端？Clash、v2rayN 还是 Shadowrocket？",
+      "a": "Windows 平台首推【Clash Verge Rev】（现代 UI、支持智能分流与 TUN 虚拟网卡模式）；macOS 推荐【Clash Verge Rev】或付费神器【Surge Mac】；iOS 平台公认首选【Shadowrocket】（俗称小火箭，功能成熟操作极简）；Android 平台推荐【Clash Meta for Android】或【v2rayNG】。我们网站的「客户端中心」提供了各平台正版客户端的一键下载与保姆级图文配置指南。"
     },
     {
-      "q": "Can I build custom workflows without code?",
-      "a": "Yes — describe what you do in plain English and Parley drafts the workflow for you to review. Edit any step the same way: \"skip leads from competitors,\" \"only ping me about deals over $50k.\" Templates are forkable on a Friday afternoon. Engineers stay in their queue; RevOps, Support, and Ops own their workflows directly."
+      "q": "missavaiVPN 测评网的测速数据真实吗？如何客观评选 42 家机场？",
+      "a": "missavaiVPN 实验室坚持「真实环境、多运营商交叉压测」。我们使用深圳电信 1000M、上海联通 1000M、广州移动 500M 实机宽带，在晚高峰（20:30-22:30）进行大批量压测，并截取真实的测速拓扑图与流媒体解锁图。对没有实测截图的品牌，我们均诚实标注为官方宣称或历史数据，绝不虚构测速指标。"
     }
   ],
   "integrationRows": [
@@ -308,522 +294,632 @@
     {
       "index": 0,
       "featured": false,
-      "name": "Solo",
-      "currency": "$",
-      "amount": "0",
-      "period": "Free forever",
-      "desc": "Perfect for individuals getting started with AI-powered productivity. No credit card required.",
+      "name": "入门尝鲜 / 备用不限时",
+      "currency": "¥",
+      "amount": "8",
+      "period": "元 / 月起 (或 147 永久不限时)",
+      "desc": "适合学生党、轻度查资料、跨境轻量办公，或作为第二条备用防失联线路。",
       "features": [
         {
-          "text": "1 connected workspace",
+          "text": "精选中转 / BGP 入口加速",
           "off": false
         },
         {
-          "text": "Up to 5 integrations",
+          "text": "基础解锁 YouTube 4K / Google 搜索",
           "off": false
         },
         {
-          "text": "100 AI tasks / month",
+          "text": "支持 Windows / Mac / iOS / Android",
           "off": false
         },
         {
-          "text": "Basic memory (30 days)",
+          "text": "支持按月付费试水或永久不限时包",
           "off": false
         },
         {
-          "text": "Email + calendar workflows",
+          "text": "工单客服基础支持",
           "off": false
         },
         {
-          "text": "Custom workflows",
+          "text": "晚高峰企业级 IEPL 物理专线",
           "off": true
         },
         {
-          "text": "Priority support",
+          "text": "原生住宅 IP 双 ISP 节点",
           "off": true
         },
         {
-          "text": "Team features",
+          "text": "独享 2.5Gbps 大带宽保障",
           "off": true
         }
       ],
       "cta": {
-        "href": "/waitlist",
-        "label": "Get started free",
+        "href": "/airports?filter=cheap",
+        "label": "查看平价推荐榜",
         "variant": "secondary"
       }
     },
     {
       "index": 1,
       "featured": true,
-      "name": "Pro",
-      "currency": "$",
-      "amount": "49",
-      "period": "per month, billed monthly",
-      "desc": "The full Parley experience for professionals who want a true AI partner in their work.",
+      "name": "旗舰主力 / IEPL 专线型 (主推)",
+      "currency": "¥",
+      "amount": "99",
+      "period": "元 / 年起 (折合约 8.2 元/月)",
+      "desc": "最受推崇的旗舰主力梯队，2.5Gbps 纯内网 IEPL 专线，晚高峰 0 丢包，全绿解锁流媒体与 AI。",
       "features": [
         {
-          "text": "1 connected workspace"
+          "text": "全内网 IEPL 专线直达，天然抗敏感期封锁",
+          "off": false
         },
         {
-          "text": "Up to 20 integrations"
+          "text": "ChatGPT 4o & Claude 3.5 原生解锁支持",
+          "off": false
         },
         {
-          "text": "1,000 AI tasks / month"
+          "text": "Netflix / Disney+ / YouTube 4K 秒开无缓冲",
+          "off": false
         },
         {
-          "text": "Long-term memory (forever)"
+          "text": "峰值 2.5Gbps 大带宽，晚高峰跑满本地宽带",
+          "off": false
         },
         {
-          "text": "All workflow templates"
+          "text": "自研客户端 + Clash / Shadowrocket 一键导入",
+          "off": false
         },
         {
-          "text": "Custom workflows & automations"
+          "text": "永久专属 8 折/特惠优惠码【AMM】",
+          "off": false
         },
         {
-          "text": "Priority support"
+          "text": "全球 50+ 节点全自动 BGP 故障热切",
+          "off": false
         },
         {
-          "text": "Team features",
-          "off": true
+          "text": "7×24 小时极速技术工单响应",
+          "off": false
         }
       ],
       "cta": {
-        "href": "/waitlist",
-        "label": "Get started free",
+        "href": "https://sahude.gsyvipaff.com/#/?code=keqgvT5Y",
+        "label": "立即前往光速云特惠开通 (码: AMM)",
         "variant": "primary"
       }
     },
     {
       "index": 2,
       "featured": false,
-      "name": "Teams",
-      "currency": "$",
-      "amount": "89",
-      "period": "per seat / month",
-      "desc": "For growing teams that want shared intelligence, role-based access, and centralized control.",
+      "name": "企业出海 / 团队大带宽型",
+      "currency": "¥",
+      "amount": "300",
+      "period": "元 / 月起 (TB 级超大流量)",
+      "desc": "专为跨境电商多店铺运营、TikTok 直播推流、海外研发团队并发及高频数据传输设计。",
       "features": [
         {
-          "text": "Unlimited workspaces"
+          "text": "多设备无限并发连接许可",
+          "off": false
         },
         {
-          "text": "Unlimited integrations"
+          "text": "TikTok 运营专用原生住宅静态 IP",
+          "off": false
         },
         {
-          "text": "Unlimited AI tasks / month"
+          "text": "双向 IEPL 对等大带宽，SLA 99.99%",
+          "off": false
         },
         {
-          "text": "Long-term memory (forever)"
+          "text": "支持企业定制多地专线入口与固定出口",
+          "off": false
         },
         {
-          "text": "All workflow templates"
+          "text": "专属客户经理与 Telegram 应急响应群",
+          "off": false
         },
         {
-          "text": "Custom workflows & automations"
+          "text": "支持 USDT / 对公转账开票",
+          "off": false
         },
         {
-          "text": "Priority support"
+          "text": "支持企业路由器与透明网关集群批量部署",
+          "off": false
         },
         {
-          "text": "Team features"
+          "text": "防风控与跨境网络合规咨询支持",
+          "off": false
         }
       ],
       "cta": {
-        "href": "/contact",
-        "label": "Talk to sales",
+        "href": "/workflow-1",
+        "label": "探索跨境专线解决方案",
         "variant": "secondary"
       }
     }
   ],
   "footerColumns": [
     {
-      "title": "Workflows",
+      "title": "机场测评库",
+      "links": [
+        {
+          "href": "/airports",
+          "label": "42家机场品牌总览"
+        },
+        {
+          "href": "/airports/guangsu",
+          "label": "光速云 2.5Gbps 实测"
+        },
+        {
+          "href": "/airports/muguang",
+          "label": "暮光加速深度评测"
+        },
+        {
+          "href": "/airports/feimao",
+          "label": "飞猫云晚高峰压测"
+        },
+        {
+          "href": "/airports/weifeng",
+          "label": "微风网络流媒体实测"
+        }
+      ]
+    },
+    {
+      "title": "出海场景专栏",
       "links": [
         {
           "href": "/workflow-1",
-          "label": "Lead enrichment"
+          "label": "IEPL跨境专线抗封锁"
         },
         {
           "href": "/workflow-2",
-          "label": "Inbound triage"
+          "label": "ChatGPT / Claude 原生解锁"
         },
         {
           "href": "/workflow-3",
-          "label": "Ticket triage"
+          "label": "百元内高性价比/不限时"
+        },
+        {
+          "href": "/pricing",
+          "label": "全网机场套餐梯度比价"
         }
       ]
     },
     {
-      "title": "Company",
+      "title": "客户端与教程",
       "links": [
+        {
+          "href": "/clients",
+          "label": "全平台代理客户端下载"
+        },
+        {
+          "href": "/clients#windows",
+          "label": "Clash Verge Rev 配置指南"
+        },
+        {
+          "href": "/clients#ios",
+          "label": "Shadowrocket 小火箭使用教程"
+        },
+        {
+          "href": "/clients#android",
+          "label": "Android 客户端快速导入"
+        }
+      ]
+    },
+    {
+      "title": "知识避坑与合规",
+      "links": [
+        {
+          "href": "/scam-warning",
+          "label": "★ 跑路预警与避坑黑名单"
+        },
+        {
+          "href": "/faq",
+          "label": "全景百科与网络排障 FAQ"
+        },
+        {
+          "href": "/free-resources",
+          "label": "免费资源与白嫖防坑"
+        },
         {
           "href": "/blog",
-          "label": "Blog"
+          "label": "网络测速与协议技术专栏"
         },
         {
-          "href": "/contact",
-          "label": "Contact"
-        }
-      ]
-    },
-    {
-      "title": "Legal",
-      "links": [
-        {
-          "href": "/404",
-          "label": "404"
-        },
-        {
-          "href": "/waitlist",
-          "label": "Waitlist"
+          "href": "/terms-conditions",
+          "label": "免责声明与服务条款"
         }
       ]
     }
   ],
   "navLinks": [
     {
-      "href": "/workflows",
-      "label": "Workflows",
+      "href": "/airports",
+      "label": "42家机场测评",
       "dropdown": [
         {
+          "href": "/airports",
+          "label": "全部 42 家机场评测库"
+        },
+        {
+          "href": "/airports/guangsu",
+          "label": "★ 光速云 (综合主推 #1)"
+        },
+        {
+          "href": "/airports/muguang",
+          "label": "暮光加速 (IEPL性价比 #2)"
+        },
+        {
+          "href": "/airports/feimao",
+          "label": "飞猫云 (BGP专线 #3)"
+        },
+        {
+          "href": "/airports?filter=iepl",
+          "label": "IEPL / IPLC 纯专线榜"
+        },
+        {
+          "href": "/airports?filter=cheap",
+          "label": "百元内平价入门榜"
+        },
+        {
+          "href": "/airports?filter=timeless",
+          "label": "永久不限时套餐专区"
+        }
+      ]
+    },
+    {
+      "href": "/workflows",
+      "label": "出海专栏",
+      "dropdown": [
+        {
+          "href": "/workflows",
+          "label": "出海场景专栏总览"
+        },
+        {
           "href": "/workflow-1",
-          "label": "Lead enrichment"
+          "label": "IEPL / IPLC 跨境企业专线选型"
         },
         {
           "href": "/workflow-2",
-          "label": "Inbound triage"
+          "label": "ChatGPT / 4K流媒体原生解锁实测"
         },
         {
           "href": "/workflow-3",
-          "label": "Ticket triage"
+          "label": "百元内高性价比与不限时备用包"
+        }
+      ]
+    },
+    {
+      "href": "/scam-warning",
+      "label": "知识与避坑矩阵",
+      "dropdown": [
+        {
+          "href": "/scam-warning",
+          "label": "★ 机场跑路预警与避坑黑名单"
+        },
+        {
+          "href": "/faq",
+          "label": "全景百科与排障知识库 FAQ"
+        },
+        {
+          "href": "/free-resources",
+          "label": "免费资源与应急试水白嫖"
+        }
+      ]
+    },
+    {
+      "href": "/clients",
+      "label": "客户端中心",
+      "dropdown": [
+        {
+          "href": "/clients#windows",
+          "label": "Windows (Clash Verge / v2rayN)"
+        },
+        {
+          "href": "/clients#macos",
+          "label": "macOS (Clash Verge / Surge)"
+        },
+        {
+          "href": "/clients#ios",
+          "label": "iOS (Shadowrocket / Loon)"
+        },
+        {
+          "href": "/clients#android",
+          "label": "Android (Clash Meta / v2rayNG)"
+        },
+        {
+          "href": "/clients#router",
+          "label": "软路由 (OpenClash / ShellCrash)"
         }
       ]
     },
     {
       "href": "/pricing",
-      "label": "Pricing"
-    },
-    {
-      "href": "/contact",
-      "label": "Contact"
+      "label": "梯度比价"
     },
     {
       "href": "/blog",
-      "label": "Blog"
+      "label": "技术专栏"
     }
   ],
   "hiwTabs": [
     {
       "step": 0,
-      "label": "Connect your tools"
+      "label": "01. 查看测速雷达挑选机场"
     },
     {
       "step": 1,
-      "label": "Brief & customize"
+      "label": "02. 下载官方正版代理客户端"
     },
     {
       "step": 2,
-      "label": "Delegate everywhere"
+      "label": "03. 一键导入订阅畅享极速"
     }
   ],
   "postCards": [
     {
-      "slug": "the-minimal-agent-why-doing-less-makes-agents-more-reliable",
-      "category": "Agent Design",
-      "title": "Why Less Is More for Agents",
-      "excerpt": "Agents that try to do everything fail unpredictably. A case for narrow scope and clear boundaries.",
-      "dateLabel": "Jun 9, 2026",
+      "slug": "guangsu-cloud-deep-review-benchmark",
+      "category": "深度实测",
+      "title": "光速云 2026 深度实测：2.5Gbps IEPL 物理专线与优惠码 AMM",
+      "excerpt": "实机压测 17 张测速与解锁截图完全复盘，首发光速云致敬斯诺克 147 永久不限时套餐全面解读。",
+      "dateLabel": "2026年3月22日",
       "cover": "/assets/post-minimal-agent.webp",
       "featured": true
     },
     {
-      "slug": "how-we-built-real-time-agent-memory",
-      "category": "Engineering",
-      "title": "Building Real-Time Agent Memory",
-      "excerpt": "The architecture behind Parley's persistent memory layer — tradeoffs, failures, and what we landed on.",
-      "dateLabel": "May 28, 2026",
-      "cover": "/assets/post-agent-memory.webp",
+      "slug": "2026-airport-recommendation-guide",
+      "category": "机场选型",
+      "title": "2026 翻墙机场选型指南：42家品牌实测红黑榜",
+      "excerpt": "基于千兆宽带晚高峰真机压测，深度对比 42 家主流机场的线路质量、解锁能力与稳定性。",
+      "dateLabel": "2026年3月28日",
+      "cover": "/assets/post-pipeline.webp",
       "side": true
     },
     {
-      "slug": "orchestrating-multiple-models-lessons-from-building-our-routing-layer",
-      "category": "Engineering",
-      "title": "Lessons from Our Routing Layer",
-      "excerpt": "Not all tasks belong to the same model. How we built a dispatcher that picks the right one.",
-      "dateLabel": "May 19, 2026",
+      "slug": "iepl-iplc-dedicated-line-analysis",
+      "category": "专线技术",
+      "title": "IEPL 与 IPLC 专线全面解析：为什么晚高峰只有专线不丢包？",
+      "excerpt": "从二层物理光纤直连到天然免疫 GFW，一文搞懂企业级专线的底层架构优势。",
+      "dateLabel": "2026年3月27日",
       "cover": "/assets/post-routing-layer.webp",
       "side": true
     },
     {
-      "slug": "the-agentic-shift-why-2026-is-different-from-every-ai-hype-cycle-before-it",
-      "category": "AI & Industry",
-      "title": "Why 2026 Is Different from Every AI Hype Cycle Before It",
-      "excerpt": "What makes this moment structurally different — and why the skeptics are half-right.",
-      "dateLabel": "May 7, 2026",
-      "cover": "/assets/post-agentic-shift.webp",
-      "side": true
-    },
-    {
-      "slug": "managing-customer-requests-with-parley-agents",
-      "category": "Use Cases",
-      "title": "Managing Customer Requests with Parley",
-      "dateLabel": "Apr 24, 2026",
-      "cover": "/assets/post-customer-requests.webp"
-    },
-    {
-      "slug": "designing-for-failure-what-happens-when-your-agent-gets-it-wrong",
-      "category": "Agent Design",
-      "title": "When Your Agent Gets It Wrong",
-      "dateLabel": "Apr 15, 2026",
-      "cover": "/assets/post-agent-wrong.webp"
-    },
-    {
-      "slug": "smarter-handoffs-enhancing-agent-to-human-escalation",
-      "category": "Product Updates",
-      "title": "Enhancing Agent-to-Human Escalation",
-      "dateLabel": "Apr 2, 2026",
-      "cover": "/assets/post-escalation.webp"
-    },
-    {
-      "slug": "how-a-12-person-ops-team-automated-their-entire-onboarding-flow",
-      "category": "Use Cases",
-      "title": "How a 12-Person Team Automated Onboarding",
-      "dateLabel": "Mar 21, 2026",
+      "slug": "chatgpt-claude-unlock-airport-nodes",
+      "category": "AI & 流媒体",
+      "title": "ChatGPT 与 Claude 报错 Access Denied？挑选原生解锁住宅 IP",
+      "excerpt": "机房 IP 与住宅原生 IP 有何差异？三步落地解决 OpenAI 与 Claude 3.5 风控封号难题。",
+      "dateLabel": "2026年3月25日",
       "cover": "/assets/post-onboarding.webp"
     },
     {
-      "slug": "how-smaller-models-yield-better-results",
-      "category": "Agent Design",
-      "title": "How Smaller Models Yield Better Results",
-      "dateLabel": "Mar 10, 2026",
+      "slug": "clash-verge-rev-sing-box-tutorial",
+      "category": "客户端教程",
+      "title": "2026 最新主流代理客户端配置：Clash Verge Rev 保姆级教程",
+      "excerpt": "全平台正版客户端怎么选？从官方下载、订阅导入到开启 TUN 模式与规则分流。",
+      "dateLabel": "2026年3月24日",
       "cover": "/assets/post-smaller-models.webp"
     },
     {
-      "slug": "parley-2.0-meet-the-new-agent-builder",
-      "category": "Product Updates",
-      "title": "Parley 2.0: Meet the New Agent Builder",
-      "dateLabel": "Feb 26, 2026",
-      "cover": "/assets/post-parley-2.webp"
+      "slug": "vless-reality-vs-shadowsocks-protocol",
+      "category": "协议解析",
+      "title": "2026 主流科学上网协议大横评：VLESS Reality、Shadowsocks 与 Hysteria2",
+      "excerpt": "面对不断升级的审查环境，VLESS Reality、Shadowsocks 与 Hysteria2 哪种协议在晚高峰最抗封锁？",
+      "dateLabel": "2026年3月20日",
+      "cover": "/assets/post-pipeline.webp"
+    },
+    {
+      "slug": "ios-shadowrocket-config-tutorial",
+      "category": "客户端教程",
+      "title": "Shadowrocket 小火箭保姆级使用教程：从海外账号到分流规则设置",
+      "excerpt": "详尽步骤讲解海外 Apple ID 注册下载、节点一键导入、开启代理与分流规则最佳实践。",
+      "dateLabel": "2026年3月18日",
+      "cover": "/assets/post-onboarding.webp"
+    },
+    {
+      "slug": "openclash-router-global-acceleration",
+      "category": "软路由方案",
+      "title": "软路由 OpenClash 全屋透明代理配置全攻略：实现全屋终端无感出海",
+      "excerpt": "如何在 OpenWrt 软路由上配置 OpenClash 实现 Apple TV、Switch 与手机透明分流？",
+      "dateLabel": "2026年3月15日",
+      "cover": "/assets/post-routing-layer.webp"
     }
   ],
   "relatedPosts": [
     {
-      "category": "Engineering",
-      "title": "Lessons from Our Routing Layer",
-      "dateLabel": "May 19, 2026",
+      "category": "专线技术",
+      "title": "IEPL 与 IPLC 专线全面解析：为什么晚高峰只有专线不丢包？",
+      "dateLabel": "2026年3月27日",
       "cover": "/assets/post-routing-layer.webp",
-      "slug": "orchestrating-multiple-models-lessons-from-building-our-routing-layer"
+      "slug": "iepl-iplc-dedicated-line-analysis"
     },
     {
-      "category": "Engineering",
-      "title": "Why We Replaced Webhooks",
-      "dateLabel": "Nov 6, 2025",
-      "cover": "/assets/post-webhooks.webp",
-      "slug": null
+      "category": "深度实测",
+      "title": "光速云 2026 深度实测：2.5Gbps IEPL 物理专线与优惠码 AMM",
+      "dateLabel": "2026年3月22日",
+      "cover": "/assets/post-minimal-agent.webp",
+      "slug": "guangsu-cloud-deep-review-benchmark"
     },
     {
-      "category": "Engineering",
-      "title": "Scaling Our Agent Pipeline",
-      "dateLabel": "Oct 9, 2025",
+      "category": "机场选型",
+      "title": "2026 翻墙机场选型指南：42家品牌实测红黑榜",
+      "dateLabel": "2026年3月28日",
       "cover": "/assets/post-pipeline.webp",
-      "slug": null
+      "slug": "2026-airport-recommendation-guide"
     }
   ],
   "workflows": [
     {
       "slug": "workflow-1",
-      "category": "Sales",
-      "title": "Lead enrichment",
-      "card": "Turn a name and email into a complete, ICP-scored profile — pulled from eight sources, written in your CRM voice, with reasoning attached to every field.",
-      "lede": "Turn every new contact into a complete, ICP-scored profile — pulled from 4 sources, written in your CRM's voice, with reasoning attached to every field.",
+      "category": "企业级出海",
+      "title": "IEPL / IPLC 跨境企业级专线与抗封锁选型",
+      "card": "物理内网不过 GFW 防火墙，晚高峰丢包率低于 0.1%，专为跨境外贸、跨境电商、海外研发与高频交易设计。",
+      "lede": "彻底告别晚高峰断连与敏感期封锁。端到端物理专线传输，保障 24 小时满速吞吐与毫秒级稳定低延迟。",
       "hero": "/assets/wf1-hero.webp",
-      "heroAlt": "Interface with integrations",
-      "sectionTitle": "Built for the part of sales",
-      "sectionTitleEm": "nobody wants to do.",
-      "sectionLede": "Four things this workflow does that nobody on your team should be doing manually anymore.",
+      "heroAlt": "IEPL跨境专线架构拓扑图",
+      "sectionTitle": "为严苛出海业务打造",
+      "sectionTitleEm": "晚高峰零丢包与高可用容灾。",
+      "sectionLede": "区别于廉价公网中转与易受干扰直连，企业级 IEPL 专线通过四大工程手段保障稳定性。",
       "wide": {
-        "title": "Written in your CRM's voice",
-        "desc": "Learned from your team’s last 200 notes. No \"leveraging synergies.\" Variables stay variables.",
+        "title": "内网物理链路，天然免疫网络封锁",
+        "desc": "流量在中国大陆入口落地后，直接封装进入运营商内网专线隧道，跨境全程不经公网网关，敏感时期节点可用率达 99.9%。",
         "image": "/assets/wf1-customers.webp",
-        "alt": "List of customers"
+        "alt": "专线网络监控架构"
       },
       "features": [
         {
           "dots": 2,
-          "title": "Four sources, hit in parallel",
-          "desc": "Single structured profile with full field provenance in 8–12 seconds."
+          "title": "双向对等带宽，拒绝 QoS 限速",
+          "desc": "光速云等顶级专线机场配备 2.5Gbps - 10Gbps 入口冗余，晚高峰 20:00 - 23:00 仍可跑满本地千兆宽带。"
         },
         {
           "dots": 3,
-          "title": "Scoring with its homework shown",
-          "desc": "Every score carries top-3 reasons and top-2 risks. Reps trust it because they can read the math."
+          "title": "全自动 BGP 入口容灾调度",
+          "desc": "智能探测电信、联通、移动、教育网路由延迟，自动择优接入最快入口，单线故障毫秒级无感热切。"
         },
         {
           "dots": 4,
-          "title": "Hot leads in Slack, ready to act.",
-          "desc": "From form-fill to DM in under 90 seconds. Approve, reassign, or return — all inside Slack."
+          "title": "Shadowsocks / VLESS 协议强抗干扰",
+          "desc": "支持现代化 Shadowsocks AEAD、VLESS Reality 协议，规避主动探测特征，保障长期稳定连接。"
         }
       ],
-      "proofTitle": "Teams that stopped paying SDRs to copy-paste.",
-      "quote": "We're scoring 8,000 inbound leads a month now. The team only touches the top 12% — and they touch them six minutes after the form fill, not six hours.",
-      "name": "James R.",
-      "role": "CEO, CloudPlex",
+      "proofTitle": "真实出海团队与开发者的长期信赖",
+      "quote": "我们在深圳和香港有高频跨境研发同步需求，过去每到晚高峰就卡死。换用光速云 IEPL 专线后，晚高峰 Git 拉取和视频会议 0 丢包，稳定性提升肉眼可见。",
+      "name": "Alex C.",
+      "role": "出海研发总监, TechBridge",
       "avatar": "/assets/avatar-james.webp",
-      "brand": "Cloudplex",
-      "stat": "92%",
-      "statLabel": "routing accuracy"
+      "brand": "TechBridge",
+      "stat": "99.9%",
+      "statLabel": "晚高峰专线可用率"
     },
     {
       "slug": "workflow-2",
-      "category": "Sales",
-      "title": "Inbound triage",
-      "card": "Score every form fill, route hot leads to the right AE in Slack within 90 seconds — with a one-line brief.",
-      "lede": "The first 90 seconds of every new lead — classify intent, apply your routing rules, and put the right rep in the conversation.",
+      "category": "流媒体 & AI",
+      "title": "ChatGPT / Claude 原生 IP 与 4K 流媒体解锁实测",
+      "card": "双 ISP 原生家宽住宅 IP，全绿解锁 Netflix、Disney+、YouTube 4K 与 OpenAI、Claude 3.5 Sonnet，绝无频繁人机验证。",
+      "lede": "拒绝 403 拒绝访问与频繁封号。智能住宅原生 IP 分流，完美解锁全球流媒体与前沿生成式 AI 工具。",
       "hero": "/assets/wf2-hero.webp",
-      "heroAlt": "Interface of automation",
-      "sectionTitle": "The first 90 seconds",
-      "sectionTitleEm": "matter the most.",
-      "sectionLede": "Four things this workflow does that decide whether a lead converts or quietly disappears",
+      "heroAlt": "流媒体与AI解锁自动化分流",
+      "sectionTitle": "纯净原生住宅 IP",
+      "sectionTitleEm": "杜绝 403 拦截与风控。",
+      "sectionLede": "主流 AI 服务如 OpenAI 与 Claude 对数据中心机房 IP 实行高强度封控，选对原生 IP 节点是流畅使用的唯一解法。",
       "wide": {
-        "title": "Routing rules in plain English",
-        "desc": "Territory, segment, round-robin, capacity — all editable on a Friday afternoon without breaking anyone’s quota",
+        "title": "流媒体与 AI 域名智能策略分流",
+        "desc": "基于 Mihomo / Surge 规则引擎，自动识别 openai.com、claude.ai、netflix.com，自动分流至支持原生解锁的高信誉节点。",
         "image": "/assets/wf2-prompt.webp",
-        "alt": "Promt on the black background"
+        "alt": "智能路由策略分流"
       },
       "features": [
         {
           "dots": 2,
-          "title": "Intent classified under 2s",
-          "desc": "Five scored buckets route top demos to your best AEs while filtering out noise."
+          "title": "全绿解锁全球 Netflix / Disney+ 库",
+          "desc": "支持香港、日本、新加坡、美国、英国等本地版权原生库，4K HDR 秒开免缓冲。"
         },
         {
           "dots": 3,
-          "title": "Create deal & assign owner",
-          "desc": "Profiles are written back to HubSpot in your CRM’s voice, learned from your last 200 contact notes."
+          "title": "OpenAI 与 Claude 3.5 原生支持",
+          "desc": "告别 Access Denied 报错或 Cloudflare 循环验证码，保障 API 与 Web 交互畅通。"
         },
         {
           "dots": 4,
-          "title": "Unified system for all leads",
-          "desc": "Forms, chats, bookings, emails, signals, and uploads are normalized into one lead format"
+          "title": "定期轮换原生解锁池，对抗黑名单",
+          "desc": "实测评测库收录的优质机场每周维护解锁节点池，失效即刻自动修复替换。"
         }
       ],
-      "proofTitle": "Teams that stopped losing leads to the queue",
-      "quote": "The routing rules are the part nobody believes until they see them. I changed our 'enterprise' threshold from 500 to 250 seats on a Friday afternoon without filing a ticket.",
-      "name": "Sophie K.",
-      "role": "VP Marketing, Tytotone",
+      "proofTitle": "重度 AI 从业者与影视爱好者的口碑之选",
+      "quote": "日常写代码全靠 Claude 3.5 和 Cursor，之前用普通梯子老是报错 Access Denied，换上光速云的专用解锁节点后，响应延迟降低了近半，再也没弹过验证码。",
+      "name": "Elena W.",
+      "role": "全栈 AI 开发者, PromptForge",
       "avatar": "/assets/avatar-sophie.webp",
-      "brand": "TYTOTONE",
-      "stat": "3.4×",
-      "statLabel": "more demos booked from inbound"
+      "brand": "PROMPTFORGE",
+      "stat": "100%",
+      "statLabel": "AI & 流媒体解锁率"
     },
     {
       "slug": "workflow-3",
-      "category": "Support",
-      "title": "Ticket triage",
-      "card": "Read incoming tickets, label, prioritize, assign to the right queue — with reasoning attached for audit.",
-      "lede": "Read every incoming ticket, classify it on four dimensions, draft a reply from your help center, and route only what your team should actually touch.",
+      "category": "高性价比 & 备用",
+      "title": "百元内超高性价比与入门不限时轻量包选型",
+      "card": "年付低至 80-99 元，或单次付费永久有效不限时，学生党、轻度查资料与多设备备用应急的精明之选。",
+      "lede": "不需要为昂贵溢价买单。精选经受住跑路审查、运营超 2 年、口碑良好的平价稳定机场。",
       "hero": "/assets/wf3-hero.webp",
-      "heroAlt": "Interface of automation for tickets",
-      "sectionTitle": "Built for the queue",
-      "sectionTitleEm": "that never empties.",
-      "sectionLede": "Four things this workflow does that nobody on your support team should be doing manually anymore.",
+      "heroAlt": "性价比与不限时轻量套餐",
+      "sectionTitle": "花最少的钱",
+      "sectionTitleEm": "享受超出预期的稳定连接。",
+      "sectionLede": "适合轻度查阅学术论文、推特/Ins社交浏览，或作为主力专线的应急双备用路线。",
       "wide": {
-        "title": "Drafted from your help center",
-        "desc": "Reply written from your docs and past resolutions — every claim cites the doc it came from. No hallucinated knowledge base.",
+        "title": "永久不限时套餐：按需消耗，永不过期",
+        "desc": "如光速云 147 永久不限时 247GB 套餐，一次性付费，流量长期有效，设备闲置不扣费，是主力梯子之外的最佳安全气囊。",
         "image": "/assets/wf3-draft.webp",
-        "alt": "Draft of response of agent"
+        "alt": "不限时流量套餐"
       },
       "features": [
         {
           "dots": 2,
-          "title": "Priority with its homework shown",
-          "desc": "Plan tier, blast radius, sentiment, outage signals — every P0 carries the reasons it got flagged. Reviewable. Tunable."
+          "title": "平价不降质：精选千兆中继节点",
+          "desc": "告别廉价直连的频繁卡顿，精选百元内采用深港/沪日 BGP 优化的良心服务商。"
         },
         {
           "dots": 3,
-          "title": "Intent classified, not guessed",
-          "desc": "17 categories from last 90 days of resolved tickets, with confidence scores; low-confidence tickets go to human review, not a wrong queue."
+          "title": "支持主流全平台一键导入",
+          "desc": "提供 Clash、Shadowrocket、v2rayN 托管订阅与详细新手图文教程，小白 3 分钟即可上手。"
         },
         {
           "dots": 4,
-          "title": "Right human, fully briefed",
-          "desc": "Under 30 seconds from ticket open, the on-call engineer gets customer tier, draft reply, linked issue, and one-click actions."
+          "title": "透明计费与多种灵活结算周期",
+          "desc": "支持月付、季付试水，安全不踩坑，支持支付宝与微信便捷充值。"
         }
       ],
-      "proofTitle": "Teams that stopped losing leads to the queue",
-      "quote": "Two-thirds of inbound now closes on the draft Parley wrote — because the answer is grounded in our actual docs, not a hallucination.",
-      "name": "Paul M.",
-      "role": "Operations Director, ZingZap",
+      "proofTitle": "数万名学生与轻度科研用户的日常主力",
+      "quote": "读研写论文查 Google Scholar 和 GitHub，不需要太贵的高配套餐。买了一个不限时流量包加一个月付备用，一年下来才几十块钱，非常省心。",
+      "name": "Lin D.",
+      "role": "数据科学研究生, ZJU",
       "avatar": "/assets/avatar-paul.webp",
-      "brand": "ZingZap",
-      "stat": "62%",
-      "statLabel": "tickets resolved on first reply"
+      "brand": "ZJU LAB",
+      "stat": "¥8/mo",
+      "statLabel": "起步极致低价"
     }
   ],
   "comparisonGroups": [
     {
-      "title": "Core features",
+      "title": "网络链路与吞吐性能",
       "rows": [
         {
-          "label": "Connected workspaces",
+          "label": "链路传输架构",
           "values": [
-            "One",
-            "One",
-            "Unlimited"
+            "普通中转 / 优化直连",
+            "2.5Gbps IEPL 内网专线",
+            "双向 IPLC 物理专线"
           ]
         },
         {
-          "label": "Integrations",
+          "label": "晚高峰丢包率 (20:30-22:30)",
           "values": [
-            "Up to 5",
-            "Up to 20",
-            "Unlimited"
+            "5% ~ 15%",
+            "< 0.1% (极度顺畅)",
+            "0.00% (SLA保障)"
           ]
         },
         {
-          "label": "AI tasks / month",
+          "label": "单节点最高可用带宽",
           "values": [
-            "100",
-            "1,000",
-            "Unlimited"
+            "200Mbps ~ 500Mbps",
+            "2.5Gbps (实机跑满)",
+            "2.5Gbps ~ 10Gbps"
+          ]
+        },
+        {
+          "label": "特殊敏感期抗封锁能力",
+          "values": [
+            "中等 (偶有波动)",
+            "极高 (物理专线不过GFW)",
+            "99.99% 高可用容灾"
           ]
         }
       ]
     },
     {
-      "title": "Memory & AI",
+      "title": "流媒体与前沿 AI 解锁",
       "rows": [
         {
-          "label": "Memory",
-          "values": [
-            "30 days",
-            "Forever",
-            "Forever"
-          ]
-        },
-        {
-          "label": "Shared team memory",
-          "values": [
-            false,
-            false,
-            true
-          ]
-        },
-        {
-          "label": "Research mode",
-          "values": [
-            false,
-            true,
-            true
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Workflows",
-      "rows": [
-        {
-          "label": "Email + calendar workflows",
+          "label": "YouTube 4K / 8K 秒开",
           "values": [
             true,
             true,
@@ -831,15 +927,15 @@
           ]
         },
         {
-          "label": "Workflow templates",
+          "label": "Netflix / Disney+ 原生库解锁",
           "values": [
-            "Basic",
-            "All templates",
-            "All templates"
+            "基础部分解锁",
+            "全绿原生解锁",
+            "原生独享住宅 IP"
           ]
         },
         {
-          "label": "Custom workflows",
+          "label": "ChatGPT 4o / Claude 3.5 无风控",
           "values": [
             false,
             true,
@@ -847,7 +943,7 @@
           ]
         },
         {
-          "label": "Automations",
+          "label": "TikTok 直播推流与跨境运营",
           "values": [
             false,
             true,
@@ -857,38 +953,67 @@
       ]
     },
     {
-      "title": "Team",
+      "title": "客户端与使用体验",
       "rows": [
         {
-          "label": "Team members",
-          "values": [
-            "One",
-            "One",
-            "Unlimited"
-          ]
-        },
-        {
-          "label": "Role-based access",
+          "label": "自研免配置客户端",
           "values": [
             false,
-            false,
+            true,
             true
           ]
         },
         {
-          "label": "Admin dashboard",
+          "label": "Clash / Shadowrocket / v2rayN 订阅",
           "values": [
-            false,
-            false,
+            true,
+            true,
             true
           ]
         },
         {
-          "label": "Centralized billing",
+          "label": "同时在线设备限制",
+          "values": [
+            "限制 2~3 台",
+            "不限设备数量",
+            "不限设备数量"
+          ]
+        },
+        {
+          "label": "永久不限时套餐可选",
+          "values": [
+            true,
+            "支持 (147永久套餐)",
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "title": "技术服务与保障",
+      "rows": [
+        {
+          "label": "专属永久优惠码支持",
           "values": [
             false,
+            "支持 (码: AMM)",
+            "支持协议客制化"
+          ]
+        },
+        {
+          "label": "节点自动故障热切",
+          "values": [
             false,
+            true,
             true
+          ]
+        },
+        {
+          "label": "工单客服响应时效",
+          "values": [
+            "24 小时内",
+            "15 分钟极速响应",
+            "一对一专属客户经理"
           ]
         }
       ]
@@ -896,35 +1021,35 @@
   ],
   "comparisonPlans": [
     {
-      "name": "Solo",
-      "blurb": "Ideal for AI beginners. No credit card needed."
+      "name": "入门尝鲜 / 备用包",
+      "blurb": "适合学生党、轻度查阅资料及长期防失联备用"
     },
     {
-      "name": "Pro",
-      "blurb": "Full Parley for pros seeking a real AI partner."
+      "name": "主力旗舰 / IEPL专线",
+      "blurb": "晚高峰 0 丢包，2.5Gbps 物理专线，全绿解锁 AI (主推)"
     },
     {
-      "name": "Teams",
-      "blurb": "For teams needing shared insights"
+      "name": "企业出海 / 独享带宽",
+      "blurb": "为跨境电商、外贸团队、TikTok 直播推流设计"
     }
   ],
   "contactMethods": [
     {
       "icon": "mail",
-      "title": "Email us directly",
-      "desc": "For sales, partnerships, or anything sensitive. Goes to a small inbox - not a queue",
-      "value": "hello@example.com"
+      "title": "测速投稿与反馈",
+      "desc": "提交新机场测速需求、纠错反馈或网络质量投稿，专人每日跟进",
+      "value": "contact@missavaivpn.blog"
     },
     {
       "icon": "press",
-      "title": "Press & partnerships",
-      "desc": "Coverage, integrations, co-marketing, or a story you think we should hear.",
-      "value": "press@example.com"
+      "title": "商务合作与收录",
+      "desc": "品牌入库申请、测速节点赞助对接与出海业务咨询",
+      "value": "support@missavaivpn.blog"
     },
     {
       "icon": "pin",
-      "title": "San Francisco",
-      "desc": "100 Example Street, Suite 200, San Francisco, CA, United States",
+      "title": "实验室实机测速节点",
+      "desc": "华南（深圳电信千兆）、华东（上海联通千兆）、华南（广州移动500M）三地实机部署",
       "value": ""
     }
   ],
@@ -944,127 +1069,55 @@
   ],
   "termsIntro": [
     {
-      "text": "These Terms & Conditions (\"Terms\") govern your access to and use of the Parley platform, website, APIs, and related services (together, the \"Service\") operated by Parley, Inc. (\"Parley,\" \"we,\" \"us,\" or \"our\"). By creating an account, clicking \"I agree,\" or using the Service, you agree to these Terms. If you're agreeing on behalf of a company, you confirm you have authority to bind it. If you don't agree, don't use the Service."
+      "text": "欢迎访问 missavaiVPN 评测实验室 (missavaivpn.blog)。本条款与免责声明旨在阐明本站的定位、评测数据的中立性、赞助推广返利（Affiliate）声明以及用户合规义务。访问或使用本站即代表您已知悉并同意本条款。"
     }
   ],
   "termsSections": [
     {
-      "num": "1",
-      "title": "The plain-English version",
+      "num": "01",
+      "title": "平台性质与中立定位",
       "blocks": [
         {
           "type": "p",
-          "text": "We give you software that automates workflows — enriching leads, triaging tickets, drafting replies, and similar work. You bring your data and your accounts. We process them to run the workflows you configure. You own your data; we don't sell it, and we don't train shared models on it. You pay for what you use. Either side can leave. The rest of this document is the careful version."
+          "text": "missavaiVPN 仅作为第三方独立网络性能测评、网络知识普及及客户端配置指南分享平台。本站本身不开发、不销售、不运营、不托管任何翻墙梯子或代理服务器，亦不提供任何直接的跨境代理连接服务。"
         }
       ]
     },
     {
-      "num": "2",
-      "title": "Eligibility & account",
+      "num": "02",
+      "title": "测速数据客观性与波动说明",
       "blocks": [
         {
-          "type": "li",
-          "text": "You must be at least 18 and able to form a binding contract."
+          "type": "p",
+          "text": "本站收录的 42 家机场测速图表、延迟指标及流媒体/AI 解锁数据，均基于 missavaiVPN 实验室在特定时间段（如晚高峰 20:30-22:30）、特定地理位置及特定运营商宽带（深圳电信、上海联通、广州移动等）下的真实实机压测。"
         },
         {
-          "type": "li",
-          "text": "You're responsible for everything that happens under your account, including activity by your team members and any API keys you issue."
-        },
-        {
-          "type": "li",
-          "text": "Keep your credentials secure. Tell us promptly at security@example.com if you suspect unauthorized access."
-        },
-        {
-          "type": "li",
-          "text": "You must provide accurate account information and keep it current."
+          "type": "p",
+          "text": "由于国际互联网络受骨干网路由波动、局部运营商 QoS 策略以及服务商节点维护等不可控因素影响，不同用户在不同时段的实际体验可能存在合理差异，测速数据仅作为选型参考依据。"
         }
       ]
     },
     {
-      "num": "3",
-      "title": "The Service & acceptable use",
+      "num": "03",
+      "title": "赞助推广与返利链接声明 (Affiliate Disclosure)",
       "blocks": [
         {
           "type": "p",
-          "text": "You may use the Service only for lawful purposes and in line with these Terms. You agree not to:"
-        },
-        {
-          "type": "li",
-          "text": "Break any law, regulation, or third party's rights;"
-        },
-        {
-          "type": "li",
-          "text": "Send spam, run unsolicited bulk outreach, or violate anti-spam laws (e.g. CAN-SPAM, GDPR, CASL);"
-        },
-        {
-          "type": "li",
-          "text": "Reverse engineer, scrape, or extract source code, except where this restriction is prohibited by law;"
-        },
-        {
-          "type": "li",
-          "text": "Resell, sublicense, or operate the Service as a competing product;"
-        },
-        {
-          "type": "li",
-          "text": "Upload malware or probe, scan, or test the security of any system without our written consent;"
-        },
-        {
-          "type": "li",
-          "text": "Use the Service to make automated decisions about individuals with legal or similarly significant effects without appropriate human review;"
-        },
-        {
-          "type": "li",
-          "text": "Exceed rate limits or circumvent usage controls."
+          "text": "为了维持实验室高昂的千兆网络带宽开销、多平台真机测试设备折旧及付费节点采购费用，本站对部分第三方品牌官网链接添加了推广返利代码（如光速云优惠码 AMM）。"
         },
         {
           "type": "p",
-          "text": "We may suspend or limit access if your use threatens the Service, other customers, or anyone's safety — we'll give notice where practical."
+          "text": "用户通过本站专属链接购买通常可享受专属折扣，本站可能会获得少额技术赞助返利。我们郑重承诺：商业合作绝不干预评测结论，对存在严重跑路风险、恶意虚标或长时间失联的品牌，我们将严格给予降级、差评或列入黑名单警示。"
         }
       ]
     },
     {
-      "num": "4",
-      "title": "Your data & content",
+      "num": "04",
+      "title": "用户法律合规与使用边界",
       "blocks": [
         {
           "type": "p",
-          "text": "You own your data. You retain all rights to the content, records, leads, tickets, messages, and other materials you submit (\"Customer Data\")."
-        },
-        {
-          "type": "p",
-          "text": "License to us. You grant Parley a limited, worldwide, non-exclusive license to host, process, and transmit Customer Data solely to provide and improve the Service for you, as instructed by your configuration."
-        },
-        {
-          "type": "p",
-          "text": "No shared-model training. We do not use your Customer Data to train models shared across customers. Each account is logically isolated."
-        },
-        {
-          "type": "p",
-          "text": "Your responsibility. You're responsible for having the rights and lawful basis (including any required consent) to submit Customer Data and have us process it — including personal data of third parties such as your leads or end users."
-        },
-        {
-          "type": "p",
-          "text": "Aggregated data. We may use de-identified, aggregated data that doesn't identify you or any individual to operate and improve the Service."
-        }
-      ]
-    },
-    {
-      "num": "5",
-      "title": "Third-party services & integrations",
-      "blocks": [
-        {
-          "type": "p",
-          "text": "The Service connects to third-party tools you authorize (e.g. CRMs, helpdesks, Slack, data providers). Your use of those tools is governed by their own terms. We're not responsible for third-party services, their availability, or what they do with data once it leaves the Service at your direction."
-        }
-      ]
-    },
-    {
-      "num": "6",
-      "title": "Intellectual property",
-      "blocks": [
-        {
-          "type": "p",
-          "text": "The Service, including its software, models, design, and documentation, is owned by Parley and its licensors and protected by intellectual-property laws. We grant you a limited, non-exclusive, non-transferable right to use the Service during your subscription. We own all feedback you give us and may use it without obligation."
+          "text": "用户通过第三方客户端及网络服务进行境外网络访问时，必须严格遵守所在国家与地区的法律法规，合理合法用于跨境外贸、跨境电商、学术文献检索、开源代码学习及合规外网通讯，严禁利用任何代理工具从事破坏网络安全、侵犯他人权益或危害公共利益的违法活动。"
         }
       ]
     }

@@ -2,58 +2,17 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Parley",
-    "url": "https://parley.startfrom.co",
-    "logo": "https://parley.startfrom.co/assets/favicon.png",
-    "description": "Parley is an AI agent Astro template for SaaS startups, automation products, and agent-led workflow tools."
+    "name": "missavaiVPN 评测实验室",
+    "alternateName": "MissAvAi VPN",
+    "url": "https://missavaivpn.blog",
+    "logo": "https://missavaivpn.blog/assets/favicon.png",
+    "description": "全球 42 家机场晚高峰测速、IEPL 物理专线评测与出海科学上网知识避坑权威实验室。"
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Parley AI Agent Astro Template",
-    "url": "https://parley.startfrom.co",
-    "description": "A polished Astro template for AI agent startups, SaaS teams, and automation products."
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Parley - AI Agent Astro Template",
-    "brand": {
-      "@type": "Brand",
-      "name": "Parley"
-    },
-    "category": "Astro template",
-    "description": "An Astro website template for AI agent startups with pages for workflows, pricing, blog content, waitlists, and customer conversion.",
-    "url": "https://parley.startfrom.co"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is Parley?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Parley is an Astro website template for AI agent startups, SaaS teams, automation products, and workflow-focused software."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Who is the Parley template for?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Parley is designed for founders, product teams, and agencies building websites for AI agents, automation platforms, and SaaS products."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What pages are included?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The template includes homepage, blog, pricing, workflows, workflow detail pages, waitlist, contact, thank you, and legal pages."
-        }
-      }
-    ]
+    "name": "missavaiVPN 评测实验室",
+    "url": "https://missavaivpn.blog",
+    "description": "客观真实的出海网络专线测速评测、机场跑路预警与全平台客户端配置知识库。"
   }
 ]

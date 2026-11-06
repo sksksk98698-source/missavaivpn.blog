@@ -12,19 +12,30 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
+
+const dateStr = typeof d.date === 'string' ? d.date : new Date(d.date).toISOString().split('T')[0];
+const authorOrg = !d.authorOrg ? 'missavaiVPN 评测实验室' : d.authorOrg;
 ---
 <Base
-  title={`${d.title} | Parley AI Agent Astro Template`}
-  description={`Read ${d.title} from the Parley AI agent Astro template blog, featuring practical articles for AI agents, automation workflows, product updates, and SaaS teams.`}
+  title={`${d.title} | missavaiVPN 评测实验室`}
+  description={d.excerpt || `${d.title} - 查阅 missavaiVPN 评测实验室最新的晚高峰测速跑分、节点配置与出海专线选型指南。`}
   path={`/blog/${post.id}`}
   ogImage={d.ogImage ?? d.cover}
   cta={false}
+  articleMeta={{
+    datePublished: dateStr,
+    author: d.author,
+    category: d.category,
+  }}
 >
   <article class="article">
-    <a class="article__back" href="/blog">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5 9 12l5.5 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Blog
-    </a>
+    <nav class="article__breadcrumbs" aria-label="面包屑导航" style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--grey-600); margin-bottom: 24px;">
+      <a href="/" style="color: var(--grey-700); text-decoration: none;">首页</a>
+      <span>/</span>
+      <a href="/blog" style="color: var(--grey-700); text-decoration: none;">技术专栏</a>
+      <span>/</span>
+      <span style="color: var(--grey-900); font-weight: 500;">{d.title}</span>
+    </nav>
 
     <header class="article__head">
       <p class="badge">{d.category}</p>
@@ -33,7 +44,7 @@ const d = post.data;
       <div class="article__author">
         {d.avatar && <img class="article__avatar" src={d.avatar} alt="" width="40" height="40" />}
         <p class="article__name">{d.author}</p>
-        <p class="article__role">{d.authorOrg} <span aria-hidden="true">•</span> {d.authorRole}</p>
+        <p class="article__role">{authorOrg} <span aria-hidden="true">•</span> {d.authorRole}</p>
       </div>
     </header>
 

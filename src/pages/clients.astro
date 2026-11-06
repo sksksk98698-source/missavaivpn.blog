@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+import clientsData from '../content/clients.json';
+
+const schemaJson = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "全平台代理客户端下载与机场订阅导入配置教程",
+  "description": "详细讲解 Windows、macOS、iOS、Android 及软路由主流客户端（Clash Verge、Shadowrocket、v2rayN）的正版下载与配置流程。",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "步骤一：获取机场订阅链接",
+      "text": "登录机场后台（例如光速云用户中心），找到「便捷导入」或「复制 Clash 订阅链接」。"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "步骤二：下载安装对应系统客户端",
+      "text": "根据你的操作系统选择客户端：Windows/macOS 推荐 Clash Verge Rev，iOS 推荐 Shadowrocket，Android 推荐 Clash Meta。"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "步骤三：导入订阅并更新节点",
+      "text": "在客户端配置/订阅管理中粘贴订阅 URL，点击下载更新，即可同步全部节点。"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "步骤四：选择规则分流模式并开启系统代理",
+      "text": "建议选择「Rule 规则模式」，大陆境内网站直连，境外网站自动走节点代理，开启系统代理即可畅游网络。"
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://missavaivpn.blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "全平台代理客户端下载与配置中心",
+      "item": "https://missavaivpn.blog/clients"
+    }
+  ]
+};
+---
+
+<Base
+  title="全平台代理客户端下载与配置中心 (Windows/Mac/iOS/Android/软路由) | missavaiVPN"
+  description="精选 2026 主流正版翻墙客户端：Clash Verge Rev、v2rayN、Shadowrocket 小火箭、Surge、sing-box 下载地址与保姆级图文订阅导入教程。"
+  path="/clients"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaJson)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="ap-header">
+    <p class="badge">MissAvAi VPN 软件中心</p>
+    <h1 class="ap-header__title">全平台正版客户端<em>下载与配置中心</em></h1>
+    <p class="ap-header__desc">
+      精选适配 Windows、macOS、iOS、Android、Linux 及 OpenWrt 软路由的现代化开源客户端。杜绝第三方投毒修改版，提供官方安全发布渠道。
+    </p>
+
+    <div class="ap-filters">
+      <a href="#windows" class="ap-pill is-active">Windows (PC)</a>
+      <a href="#macos" class="ap-pill">macOS (苹果电脑)</a>
+      <a href="#ios" class="ap-pill">iOS (iPhone / iPad)</a>
+      <a href="#android" class="ap-pill">Android (安卓)</a>
+      <a href="#linux-openwrt" class="ap-pill">Linux / 软路由</a>
+    </div>
+  </div>
+
+  <!-- Platform Cards Grid -->
+  <div style="display: flex; flex-direction: column; gap: 40px; margin-bottom: 60px;">
+    {clientsData.map((plat) => {
+      const anchorId = plat.platform.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+      return (
+        <section class="ap-section" id={anchorId}>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <h2 style="font-family: var(--font-display); font-size: 26px; font-weight: 600; margin: 0; color: var(--grey-900);">
+                {plat.platform} 平台
+              </h2>
+              <span class="ap-tag ap-tag--highlight">{plat.badge}</span>
+            </div>
+            <span style="font-size: 13px; color: var(--grey-600);">{plat.tag}</span>
+          </div>
+
+          <p style="font-size: 14px; color: var(--grey-800); margin: 0 0 20px; line-height: 1.6;">
+            {plat.summary}
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px;">
+            {plat.apps.map((app) => (
+              <div style="background: var(--footer); border: 1px solid var(--grey-200); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                  <h3 style="font-size: 17px; font-weight: 600; margin: 0; color: var(--grey-900);">
+                    {app.name}
+                  </h3>
+                  <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--white); color: var(--grey-800); border: 1px solid var(--grey-300);">
+                    {app.badge}
+                  </span>
+                </div>
+
+                <div style="font-size: 11px; color: var(--grey-600); margin-bottom: 8px;">
+                  内核: <span style="font-weight: 500; color: var(--grey-800);">{app.core}</span>
+                </div>
+
+                <p style="font-size: 13px; line-height: 1.5; color: var(--grey-800); margin: 0 0 12px; flex: 1;">
+                  {app.desc}
+                </p>
+
+                <div style="font-size: 11px; color: var(--grey-600); margin-bottom: 14px;">
+                  <strong>适用：</strong>{app.suitable}
+                </div>
+
+                <a
+                  href={app.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ap-btn-aff"
+                  style="text-align: center; font-size: 13px; padding: 8px 12px;"
+                >
+                  官方下载 / Releases →
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+
+  <!-- Step-by-Step Tutorial -->
+  <section class="ap-section" style="background: linear-gradient(180deg, var(--white) 0%, var(--footer) 100%);">
+    <h2 class="ap-section__title">保姆级四步通用配置教程 (以 Clash Verge Rev 为例)</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 20px;">
+      <div style="background: var(--white); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--grey-200);">
+        <div style="font-size: 28px; font-family: var(--font-display); font-weight: 700; color: var(--brand-500); margin-bottom: 8px;">01.</div>
+        <h4 style="margin: 0 0 6px; font-size: 16px;">获取机场订阅 URL</h4>
+        <p style="font-size: 13px; color: var(--grey-800); line-height: 1.5; margin: 0;">
+          在已购买的机场后台（推荐 <a href="/airports/guangsu" style="color: var(--brand-500); font-weight: 600;">光速云</a>）点击「一键订阅」或复制 Clash 订阅链接。
+        </p>
+      </div>
+
+      <div style="background: var(--white); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--grey-200);">
+        <div style="font-size: 28px; font-family: var(--font-display); font-weight: 700; color: var(--brand-500); margin-bottom: 8px;">02.</div>
+        <h4 style="margin: 0 0 6px; font-size: 16px;">导入订阅并保存</h4>
+        <p style="font-size: 13px; color: var(--grey-800); line-height: 1.5; margin: 0;">
+          打开 Clash Verge Rev，进入「订阅 / Profiles」页面，粘贴刚才复制的 URL 并点击「导入」，等待配置下载完成。
+        </p>
+      </div>
+
+      <div style="background: var(--white); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--grey-200);">
+        <div style="font-size: 28px; font-family: var(--font-display); font-weight: 700; color: var(--brand-500); margin-bottom: 8px;">03.</div>
+        <h4 style="margin: 0 0 6px; font-size: 16px;">选择规则分流模式</h4>
+        <p style="font-size: 13px; color: var(--grey-800); line-height: 1.5; margin: 0;">
+          在「代理」界面选择「规则模式 (Rule)」，这样国内应用访问百度/淘宝走直连省流量，外网 Google/YouTube 自动走节点。
+        </p>
+      </div>
+
+      <div style="background: var(--white); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--grey-200);">
+        <div style="font-size: 28px; font-family: var(--font-display); font-weight: 700; color: var(--brand-500); margin-bottom: 8px;">04.</div>
+        <h4 style="margin: 0 0 6px; font-size: 16px;">开启系统代理 / TUN</h4>
+        <p style="font-size: 13px; color: var(--grey-800); line-height: 1.5; margin: 0;">
+          勾选「系统代理」开关即可！对于 Telegram 桌面版或游戏，可开启「TUN 模式」接管全部应用网卡流量。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notice -->
+  <aside class="ap-disclosure">
+    <p style="margin: 0 0 6px; font-weight: 600; color: var(--grey-900);">客户端安全性声明：</p>
+    <p style="margin: 0;">
+      missavaiVPN 严格拒绝收录任何未经代码审计的闭源修改版或破解版客户端。建议所有用户直接通过 GitHub 官方发布页（Releases）或 Apple App Store / Google Play 官方应用商店下载正版软件，以防私钥和敏感数据外泄。
+    </p>
+  </aside>
+</Base>

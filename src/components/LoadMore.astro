@@ -5,7 +5,7 @@
  * which removes itself entirely once there is nothing left to load.
  */
 export interface Props { label?: string; state?: 'default' | 'loading' | 'hidden' }
-const { label = 'Load More', state = 'default' } = Astro.props;
+const { label = '加载更多', state = 'default' } = Astro.props;
 ---
 <button class={`loadmore is-${state}`} type="button" data-load-more aria-busy="false">
   <span class="loadmore__label">{label}</span>
